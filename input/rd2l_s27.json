@@ -1,0 +1,53 @@
+{
+    "name": "RD2L EU",
+	"region": "Europe West",
+    "id": 0,
+    "seasons": [
+        {
+            "name": "Season 27",
+            "id": 0,
+			"start-date": 0,
+			"end-date": 0,
+            "leagues": [
+                {
+                    "name": "Sunday",
+                    "id": 15331,
+                    "type": "auction",
+                    "divisions": [
+                        {
+                            "name": "Division 1",
+                            "id": 1,
+                            "teamsheet": "https://docs.google.com/spreadsheets/d/1aA7E890Ett8hgQ5UjkqFKtjYL38O859calOQnhA_YXc/edit#gid=98635696",
+							"draftsheet": "https://docs.google.com/spreadsheets/d/1aA7E890Ett8hgQ5UjkqFKtjYL38O859calOQnhA_YXc/edit#gid=1298448049"
+                        },
+                        {
+                            "name": "Division 2",
+                            "id": 2,
+                            "teamsheet": "https://docs.google.com/spreadsheets/d/1aA7E890Ett8hgQ5UjkqFKtjYL38O859calOQnhA_YXc/edit#gid=811469601",
+							"draftsheet": "https://docs.google.com/spreadsheets/d/1aA7E890Ett8hgQ5UjkqFKtjYL38O859calOQnhA_YXc/edit#gid=1298448049"
+                        },
+                        {
+                            "name": "Division 3",
+                            "id": 3,
+                            "teamsheet": "https://docs.google.com/spreadsheets/d/1aA7E890Ett8hgQ5UjkqFKtjYL38O859calOQnhA_YXc/edit#gid=1082882170",
+							"draftsheet": "https://docs.google.com/spreadsheets/d/1aA7E890Ett8hgQ5UjkqFKtjYL38O859calOQnhA_YXc/edit#gid=1298448049"
+                        }
+                    ]
+                },
+                {
+                    "name": "Wednesday",
+                    "id": 15332,
+                    "type": "linear",
+                    "divisions": [
+                        {
+                            "name": "Division 1",
+                            "id": 1,
+                            "teamsheet": "https://docs.google.com/spreadsheets/d/1ics0mmNjU1VajFLEZ1afdiFA31p_TGmJtAlfucsYqbY/edit#gid=98635696",
+							"draftsheet": "https://docs.google.com/spreadsheets/d/1ics0mmNjU1VajFLEZ1afdiFA31p_TGmJtAlfucsYqbY/edit#gid=1298448049"
+                        }
+                    ]
+                }
+            ]
+        }
+	]
+}
