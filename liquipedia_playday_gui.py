@@ -10,10 +10,9 @@ from kivymd.uix.menu import MDDropdownMenu
 from kivymd.uix.dropdownitem.dropdownitem import MDDropDownItem
 from kivymd.uix.dialog import MDDialog
 
-from gui.kivymd_extra import menu_manager
+from gui.kivymd_extra import menu_manager, add_label
 
-import pandas as pd
-import time
+import time, datetime, zoneinfo
 
 # https://kivy.org/doc/stable/api-kivy.uix.gridlayout.html#kivy.uix.gridlayout.GridLayout
 # https://kivymd.readthedocs.io/en/1.0.0/components/menu/index.html
@@ -34,42 +33,68 @@ import time
 # https://docs.python.org/3/library/zoneinfo.html#zoneinfo.available_timezones
 # https://pytz.sourceforge.net/#helpers
 
-def add_label(widgets, text, pos = 'left', grid_args = {}, **kwargs):
-    """Place widgets in a grid with a label"""
-    if hasattr(widgets, '__len__'):
-        n = len(widgets)
-        items = [i for i in widgets]
+
+# note:
+#   in general pytz handles special cases better (ex: daylight saving)
+#   and is used by pandas, but here we don't need to be very precise
+def timezone_to_short(timezone):
+    """Convert TZ_database name to local short aberviation"""
+    return zoneinfo.ZoneInfo(timezone).tzname(datetime.datetime.now())
+def timezone_validate(timezone, default = None):
+    """Check if timezone is a valid TZ database name or abberviation to one, returning the TZ identifier"""
+    try:
+        # timezone is a valid TZ database name
+        zoneinfo.ZoneInfo(timezone)
+        return timezone
+    except zoneinfo.ZoneInfoNotFoundError:
+        now = datetime.datetime.now()
+        # not great, not terrible
+        n = 2
+        times = [now + datetime.timedelta(days = i * 365.249 / n) for i in range(n)]
+        for tz in zoneinfo.available_timezones():
+            for t in times:
+                short = zoneinfo.ZoneInfo(tz).tzname(t)
+                if timezone == short:
+                    # timezone is a TZ database abbreviation
+                    return tz
+        return default
+
+def is_weekday(s):
+    return s.lower() in ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday']
+
+def datetime_nearest(dt, day_of_week = 'Monday', when = 'before'):
+    #weekdays = [datetime.date(2001, 1, 1 + i).strftime('%A').lower() for i in range(7)] # that day was a monday
+    weekdays = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday']
+    dow = weekdays.index(day_of_week.lower())
+    if when == 'before':
+        return dt - datetime.timedelta(days = (dt.weekday() - dow) % 7)
+    elif when == 'after':
+        return dt + datetime.timedelta(days = (dow - dt.weekday()) % 7)
     else:
-        n = 1
-        items = [widgets]
-    grid_order = list(range(n))
-    if pos in ['top', 'up', 'above']:
-        grid_params = {'cols': 1, 'rows': n + 1}
-        grid_order.insert(0, n) # index 0 item n
-    elif pos in ['down', 'bottom', 'below']:
-        grid_params = {'cols': 1, 'rows': n + 1}
-        grid_order.insert(n, n)
-    elif pos in ['left', 'before']:
-        grid_params = {'cols': n + 1, 'rows': 1}
-        grid_order.insert(0, n)
-    elif pos in ['right', 'after']:
-        grid_params = {'cols': n + 1, 'rows': 1}
-        grid_order.insert(n, n)
-    else:
-        raise TypeError("add_label() got an unexpected value for argument 'pos'")
-    grid_params.update(grid_args)
-    grid = MDGridLayout(**grid_params)
-    label = MDLabel(text = text, **kwargs)
-    items += [label]
-    for idx in grid_order:
-        grid.add_widget(items[idx])
-    return grid
+        raise ValueError("Argument when must be 'before' or 'after', got '{}'".format(when))
+
+## input box dialog (popup window)
+class input_box(BoxLayout):
+    def __init__(self, title = '', hint = '', *args, **kwargs):
+        # add some defaults
+        kwargs_ = {
+            'orientation': 'vertical',
+            'size_hint_y': None,
+            }
+        kwargs_.update(kwargs)
+        super().__init__(*args, **kwargs_)
+        if title != '':
+            label = MDLabel(text = title)
+            self.add_widget(label)
+        self.text_input = MDTextField(hint_text = hint)
+        self.add_widget(self.text_input)
+    def get_data(self):
+        return self.text_input.text
 
 
 
 ## TODO: fetch from github or use kivy.uix.filechooser
 import os, json
-import pandas as pd
 import numpy as np
 team_info_path = os.path.join('output', 'rd2l_s27_utf16.json')
 with open(team_info_path, encoding = 'utf-16') as f:
@@ -77,15 +102,16 @@ with open(team_info_path, encoding = 'utf-16') as f:
 
 
 
-# creating Demo Class(base class)
-class Demo(MDApp):
+## main application
+class demo_app(MDApp):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
         self.screen = Screen()
         self.mm = menu_manager() # menu manager
-        
+
+        # refs
         self.date_start_button = None
         self.date_end_button = None
         self.date_dialog = None
@@ -95,7 +121,7 @@ class Demo(MDApp):
 
         main_grid = MDGridLayout(rows = 5)
 
-        ## league selector
+        ## row 1: league selector
         league_label = MDLabel(text = 'Pick:')
 
         # orgs
@@ -136,7 +162,7 @@ class Demo(MDApp):
         league_grid.add_widget(league_division_button)
         main_grid.add_widget(league_grid)
 
-        ## date selector
+        ## row 2: date selector
 
         # date input
         # TODO: find last wednesday
@@ -145,29 +171,18 @@ class Demo(MDApp):
         self.date_end_button = MDRectangleFlatButton(text = '19/01/2038')
 
         # timezone picker
-        date_timezone_list = ['CET', 'CEST', 'EET', 'EEST', 'GMT', '...']
-        date_timezone_button = MDRectangleFlatButton(text = 'CET', id = 'date_timezone')
+        date_timezone_list = ['CET', 'GMT', 'EDT', 'PDT', 'EET', '...']
+        date_timezone_button = MDRectangleFlatButton(id = 'date_timezone')
         self.mm.menu_populate(date_timezone_button, date_timezone_list)
 
         # popup for custom timezones
         def date_timezone_handler():
             if self.mm.menu_get_item('date_timezone') == '...':
-                # prepare popup layout class
-                class input_box(BoxLayout):
-                    def __init__(self, title = '', hint = '', *args, **kwargs):
-                        super().__init__(*args, **kwargs)
-                        if title != '':
-                            label = MDLabel(text = title)
-                            self.add_widget(label)
-                        self.text_input = MDTextField(hint_text = hint)
-                        self.add_widget(self.text_input)
-                    def get_data(self):
-                        return self.text_input.text
                 # create popup layout
-                self.date_timezone_input = input_box(title = 'Choose another timezone',
-                                                     hint = 'ex: Australia/Melbourne',
-                                                     orientation = 'vertical',
-                                                     size_hint_y = None)
+                self.date_timezone_input = input_box(
+                    title = 'Choose another timezone',
+                    hint = 'ex: Australia/Melbourne EEST +08',
+                    )
                 # add submit button callback
                 def input_dialog_callback(obj):
                     data = self.date_timezone_input.get_data()
@@ -178,16 +193,26 @@ class Demo(MDApp):
                     title = '',
                     type = 'custom',
                     content_cls = self.date_timezone_input,
-                    buttons = [MDFlatButton(
-                        text = 'Submit',
-                        on_release = input_dialog_callback,
-                        )]
+                    buttons = [
+                        MDFlatButton(
+                            text = 'Save',
+                            on_release = input_dialog_callback,
+                            )
+                        ]
                     )
                 pop.open()
                 # set list to default in case dialog is dismissed
                 self.mm.menu_set('date_timezone', 0)
         self.mm.menu_callbacks_add('date_timezone', date_timezone_handler, which = 'post')
+        self.mm.menu_callbacks_add('date_timezone', self.date_RD2L_autoset, which = 'post') # FIXME timezone dialog
 
+        # RD2L specific, set start and end date depending on league
+        self.mm.menu_callbacks_add('league_org', self.date_RD2L_autoset, which = 'post')
+        self.mm.menu_callbacks_add('league_season', self.date_RD2L_autoset, which = 'post')
+        self.mm.menu_callbacks_add('league_league', self.date_RD2L_autoset, which = 'post')
+        self.mm.menu_callbacks_add('league_division', self.date_RD2L_autoset, which = 'post')
+        self.date_RD2L_autoset()
+        
         # layout
         date_grid = MDGridLayout(cols = 4)
         date_grid.add_widget(date_label)
@@ -196,7 +221,7 @@ class Demo(MDApp):
         date_grid.add_widget(date_timezone_button)
         main_grid.add_widget(date_grid)
 
-        ##        
+        ## row 3:
         # defining label with all the parameters
         label = MDLabel(
             text="HI PEOPLE!", halign='center',
@@ -231,10 +256,21 @@ class Demo(MDApp):
     def btnfunc(self, obj):
         print("button is pressed!!")
 
+    def date_RD2L_autoset(self):
+        timezone = self.mm.menu_get_item('date_timezone')
+        tz = timezone_validate(timezone, 'CET')
+        now = datetime.datetime.now().astimezone(zoneinfo.ZoneInfo(tz))
+        # RD2L specific
+        league = self.mm.menu_get_item('league_league')
+        if is_weekday(league):
+            # ex: Sunday or Wednesday
+            start_date = datetime_nearest(now, league, when = 'before')
+            self.date_start_button.text = start_date.strftime('%d/%m/%Y')
+            self.date_end_button.text = now.strftime('%d/%m/%Y')
+
+
     # date picker
     def date_picker_show(self):
-        timezone = self
-        now = pd.to_datetime(time.time(), unit = 's').tz_localize('UTC').tz_convert('CET')
         self.date_dialog = MDDatePicker()
         self.date_dialog.bind(on_save = self.date_picker_save, on_cancel = self.date_picker_cancel)
         self.date_dialog.open()
@@ -244,6 +280,6 @@ class Demo(MDApp):
         pass
 
 if __name__ == "__main__":
-    app = Demo()
+    app = demo_app()
     app.run()
     

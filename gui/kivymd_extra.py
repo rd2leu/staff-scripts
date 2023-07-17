@@ -1,5 +1,39 @@
+from kivymd.uix.gridlayout import MDGridLayout
+from kivymd.uix.label import MDLabel
 from kivymd.uix.menu import MDDropdownMenu
 from kivymd.uix.dropdownitem.dropdownitem import MDDropDownItem
+
+def add_label(widgets, text, pos = 'left', grid_args = {}, **kwargs):
+    """Place widgets in a grid with a label"""
+    if hasattr(widgets, '__len__'):
+        n = len(widgets)
+        items = [i for i in widgets]
+    else:
+        n = 1
+        items = [widgets]
+    grid_order = list(range(n))
+    if pos in ['top', 'up', 'above']:
+        grid_params = {'cols': 1, 'rows': n + 1}
+        grid_order.insert(0, n) # index 0 item n
+    elif pos in ['down', 'bottom', 'below']:
+        grid_params = {'cols': 1, 'rows': n + 1}
+        grid_order.insert(n, n)
+    elif pos in ['left', 'before']:
+        grid_params = {'cols': n + 1, 'rows': 1}
+        grid_order.insert(0, n)
+    elif pos in ['right', 'after']:
+        grid_params = {'cols': n + 1, 'rows': 1}
+        grid_order.insert(n, n)
+    else:
+        raise TypeError("add_label() got an unexpected value for argument 'pos'")
+    grid_params.update(grid_args)
+    grid = MDGridLayout(**grid_params)
+    label = MDLabel(text = text, **kwargs)
+    items += [label]
+    for idx in grid_order:
+        grid.add_widget(items[idx])
+    return grid
+
 
 # TODO: logging
 # TODO: menu item object (and copying mechanism)
