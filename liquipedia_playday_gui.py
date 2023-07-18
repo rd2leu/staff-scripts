@@ -2,13 +2,16 @@ from kivymd.app import MDApp
 from kivymd.uix.screen import Screen
 from kivymd.uix.label import MDLabel
 from kivymd.uix.textfield import MDTextField
-from kivymd.uix.button import MDRectangleFlatButton, MDFlatButton
+from kivymd.uix.button import MDRectangleFlatButton, MDFlatButton, MDIconButton
 from kivymd.uix.boxlayout import BoxLayout
 from kivymd.uix.gridlayout import MDGridLayout
 from kivymd.uix.pickers import MDDatePicker
 from kivymd.uix.menu import MDDropdownMenu
 from kivymd.uix.dropdownitem.dropdownitem import MDDropDownItem
 from kivymd.uix.dialog import MDDialog
+from kivymd.uix.list import OneLineListItem, OneLineRightIconListItem
+from kivymd.uix.list import IconRightWidget
+from kivymd.uix.card import MDCard, MDCardSwipe, MDCardSwipeLayerBox, MDCardSwipeFrontBox
 
 from gui.kivymd_extra import menu_manager, add_label
 
@@ -114,15 +117,15 @@ class demo_app(MDApp):
         # refs
         self.date_start_button = None
         self.date_end_button = None
-        self.date_dialog = None
         self.date_timezone_input = None
+        self.result = None
 
     def build(self):
 
-        main_grid = MDGridLayout(rows = 5)
+        main_grid = MDGridLayout(rows = 6)
 
         ## row 1: league selector
-        league_label = MDLabel(text = 'Pick:')
+        league_label = MDLabel(text = 'League:')
 
         # orgs
         league_org_button = MDDropDownItem(id = 'league_org') # using a menu item as a button, so that it looks the same
@@ -166,9 +169,9 @@ class demo_app(MDApp):
 
         # date input
         # TODO: find last wednesday
-        date_label = MDLabel(text = 'Date:')
-        self.date_start_button = MDRectangleFlatButton(text = '01/01/1970')
-        self.date_end_button = MDRectangleFlatButton(text = '19/01/2038')
+        date_label = MDLabel(text = 'Search dates:')
+        self.date_start_button = MDRectangleFlatButton(id = 'date_start', on_release = self.date_picker_show)
+        self.date_end_button = MDRectangleFlatButton(id = 'date_end', on_release = self.date_picker_show)
 
         # timezone picker
         date_timezone_list = ['CET', 'GMT', 'EDT', 'PDT', 'EET', '...']
@@ -204,7 +207,7 @@ class demo_app(MDApp):
                 # set list to default in case dialog is dismissed
                 self.mm.menu_set('date_timezone', 0)
         self.mm.menu_callbacks_add('date_timezone', date_timezone_handler, which = 'post')
-        self.mm.menu_callbacks_add('date_timezone', self.date_RD2L_autoset, which = 'post') # FIXME timezone dialog
+        #self.mm.menu_callbacks_add('date_timezone', self.date_RD2L_autoset, which = 'post') # FIXME: trigger on timezone input dialog
 
         # RD2L specific, set start and end date depending on league
         self.mm.menu_callbacks_add('league_org', self.date_RD2L_autoset, which = 'post')
@@ -221,40 +224,75 @@ class demo_app(MDApp):
         date_grid.add_widget(date_timezone_button)
         main_grid.add_widget(date_grid)
 
-        ## row 3:
-        # defining label with all the parameters
-        label = MDLabel(
-            text="HI PEOPLE!", halign='center',
-            theme_text_color="Custom",
-            text_color=(0.5, 0, 0.5, 1),
-            font_style='Caption',
-            pos_hint={'center_x': 0.5, 'center_y': 0.3})
-         
-        # defining Text field with all the parameters
-        name = MDTextField(text="Enter name", pos_hint={
-                           'center_x': 0.8, 'center_y': 0.8},
-                           size_hint_x=None, width=100)
+        ## row 3: other parameters
 
-        # defining Button with all the parameters
-        btn = MDRectangleFlatButton(text="Submit", pos_hint={
-                                    'center_x': 0.5, 'center_y': 0.3},
-                                    on_release=self.btnfunc)
+        # best of selector
+        other_bestof_label = MDLabel(text = 'Best of:')
+        other_bestof_list = ['1', '2', '3', '5']
+        other_bestof_button = MDRectangleFlatButton(id = 'other_bestof')
+        self.mm.menu_populate(other_bestof_button, other_bestof_list)
 
-        main_grid.add_widget(add_label([name], 'name label left', pos = 'left'))
-        main_grid.add_widget(add_label(btn, 'name label top', pos = 'top'))
-        main_grid.add_widget(add_label(label, 'name label bottom', pos = 'bottom'))
+        # cached
+        other_cached_label = MDLabel(text = 'Cached:')
+        other_cached_list = ['Yes', 'No']
+        other_cached_button = MDRectangleFlatButton(id = 'other_cached')
+        self.mm.menu_populate(other_cached_button, other_cached_list)
 
-        # adding widgets to screen
+        # layout
+        other_grid = MDGridLayout(cols = 4)
+        other_grid.add_widget(other_bestof_label)
+        other_grid.add_widget(other_bestof_button)
+        other_grid.add_widget(other_cached_label)
+        other_grid.add_widget(other_cached_button)
+        main_grid.add_widget(other_grid)
+
+        ## row 4: match picker
+        def match_team_list_names():
+            org = self.mm.menu_get_selected(league_org_button.id)
+            season = self.mm.menu_get_selected(league_season_button.id)
+            league = self.mm.menu_get_selected(league_league_button.id)
+            division = self.mm.menu_get_selected(league_division_button.id)
+            print(org, season, league, division)
+            return [t['name'] for t in season_info['seasons'][season]['leagues'][league]['divisions'][division]['teams']]
+
+        team_list = match_team_list_names()
+        match_list_n = int(len(team_list) / 2)
+        match_list = MDGridLayout(cols = 3) # rows = match_list_n + 1, 
+        match_team_buttons = []
+        match_ctrl_buttons = []
+        for i in range(match_list_n):
+            for j in range(2):
+                # add team selection buttons
+                k = 2 * i + j
+                b = MDRectangleFlatButton(id = 'match_team_{}'.format(k))
+                self.mm.menu_populate(b, match_team_list_names, parent_id = league_division_button.id)
+                self.mm.menu_set(b.id, k)
+                match_list.add_widget(b)
+                match_team_buttons += [b]
+            # button to add or remove matches
+            b = MDRectangleFlatButton(text = '-', id = 'match_ctrl_{}'.format(i))
+            match_list.add_widget(b)
+            match_ctrl_buttons += [b]
+        # button to add or remove matches
+        b = MDRectangleFlatButton(text = '+', id = 'match_ctrl_{}'.format(match_list_n + 1))
+        match_list.add_widget(b)
+        match_ctrl_buttons += [b]
+
+        # layout
+        #match_grid = MDGridLayout(rows = 1)
+        #match_grid.add_widget(match_list)
+        #match_grid.add_widget(match_add_remove)
+        #main_grid.add_widget(match_grid)
+        main_grid.add_widget(match_list)
+
+        ## row 5, 6: run
+        submit_button = MDRectangleFlatButton(text = 'Submit', id = 'submit', on_release = self.submit)
+        self.result = MDLabel(text = 'Result', id = 'result')         
+        main_grid.add_widget(submit_button)
+        main_grid.add_widget(self.result)
         self.screen.add_widget(main_grid)
 
-        # returning the screen
         return self.screen
-
-
-    # defining a btnfun() for the button to
-    # call when clicked on it
-    def btnfunc(self, obj):
-        print("button is pressed!!")
 
     def date_RD2L_autoset(self):
         timezone = self.mm.menu_get_item('date_timezone')
@@ -265,19 +303,26 @@ class demo_app(MDApp):
         if is_weekday(league):
             # ex: Sunday or Wednesday
             start_date = datetime_nearest(now, league, when = 'before')
-            self.date_start_button.text = start_date.strftime('%d/%m/%Y')
-            self.date_end_button.text = now.strftime('%d/%m/%Y')
-
+            self.date_start_button.text = start_date.strftime('%Y-%m-%d')
+            self.date_end_button.text = now.strftime('%Y-%m-%d')
 
     # date picker
-    def date_picker_show(self):
-        self.date_dialog = MDDatePicker()
-        self.date_dialog.bind(on_save = self.date_picker_save, on_cancel = self.date_picker_cancel)
-        self.date_dialog.open()
-    def date_picker_save(self, instance, value, date_range):
-        pass
-    def date_picker_cancel(self, instance, value):
-        pass
+    def date_picker_show(self, obj):
+        if obj.id == 'date_start':
+            title = 'Start date'
+            date = datetime.datetime.strptime(self.date_start_button.text, '%Y-%m-%d')
+        elif obj.id == 'date_end':
+            title = 'End date'
+            date = datetime.datetime.strptime(self.date_end_button.text, '%Y-%m-%d')
+        date_dialog = MDDatePicker(year = date.year, month = date.month, day = date.day, title_input = title) # TODO: change this to range picker
+        date_dialog.bind(on_save = lambda inst, val, rng: self.date_picker_save(val, obj))
+        date_dialog.open()
+    def date_picker_save(self, value, obj):
+        obj.text = value.strftime('%Y-%m-%d')
+
+    def submit(self, obj):
+        self.result.text = 'working ...'
+
 
 if __name__ == "__main__":
     app = demo_app()
