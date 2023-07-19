@@ -3,19 +3,22 @@ from kivymd.uix.screen import Screen
 from kivymd.uix.label import MDLabel
 from kivymd.uix.textfield import MDTextField
 from kivymd.uix.button import MDRectangleFlatButton, MDFlatButton, MDIconButton
-from kivymd.uix.boxlayout import BoxLayout
+from kivymd.uix.boxlayout import MDBoxLayout
 from kivymd.uix.gridlayout import MDGridLayout
 from kivymd.uix.pickers import MDDatePicker
 from kivymd.uix.menu import MDDropdownMenu
 from kivymd.uix.dropdownitem.dropdownitem import MDDropDownItem
 from kivymd.uix.dialog import MDDialog
-from kivymd.uix.list import OneLineListItem, OneLineRightIconListItem
-from kivymd.uix.list import IconRightWidget
+from kivymd.uix.list import OneLineListItem, OneLineRightIconListItem, OneLineAvatarIconListItem, OneLineIconListItem
+from kivymd.uix.list import * #IconRightWidget, ILeftBodyTouch, ILeftBody, IRightBodyTouch, IconLeftWidget
 from kivymd.uix.card import MDCard, MDCardSwipe, MDCardSwipeLayerBox, MDCardSwipeFrontBox
 
 from gui.kivymd_extra import menu_manager, add_label
 
 import time, datetime, zoneinfo
+
+# kivymd.__version__ == '1.1.1'
+# kivy.__version__ == '2.1.0'
 
 # https://kivy.org/doc/stable/api-kivy.uix.gridlayout.html#kivy.uix.gridlayout.GridLayout
 # https://kivymd.readthedocs.io/en/1.0.0/components/menu/index.html
@@ -77,7 +80,7 @@ def datetime_nearest(dt, day_of_week = 'Monday', when = 'before'):
         raise ValueError("Argument when must be 'before' or 'after', got '{}'".format(when))
 
 ## input box dialog (popup window)
-class input_box(BoxLayout):
+class input_box(MDBoxLayout):
     def __init__(self, title = '', hint = '', *args, **kwargs):
         # add some defaults
         kwargs_ = {
@@ -114,7 +117,11 @@ class demo_app(MDApp):
         self.screen = Screen()
         self.mm = menu_manager() # menu manager
 
+        # match list
+        self.lm = list_manager() # list manager
+
         # refs
+        self.main_grid = None
         self.date_start_button = None
         self.date_end_button = None
         self.date_timezone_input = None
@@ -122,7 +129,7 @@ class demo_app(MDApp):
 
     def build(self):
 
-        main_grid = MDGridLayout(rows = 6)
+        self.main_grid = MDGridLayout(rows = 6)
 
         ## row 1: league selector
         league_label = MDLabel(text = 'League:')
@@ -163,7 +170,7 @@ class demo_app(MDApp):
         league_grid.add_widget(league_season_button)
         league_grid.add_widget(league_league_button)
         league_grid.add_widget(league_division_button)
-        main_grid.add_widget(league_grid)
+        self.main_grid.add_widget(league_grid)
 
         ## row 2: date selector
 
@@ -222,7 +229,7 @@ class demo_app(MDApp):
         date_grid.add_widget(self.date_start_button)
         date_grid.add_widget(self.date_end_button)
         date_grid.add_widget(date_timezone_button)
-        main_grid.add_widget(date_grid)
+        self.main_grid.add_widget(date_grid)
 
         ## row 3: other parameters
 
@@ -244,7 +251,7 @@ class demo_app(MDApp):
         other_grid.add_widget(other_bestof_button)
         other_grid.add_widget(other_cached_label)
         other_grid.add_widget(other_cached_button)
-        main_grid.add_widget(other_grid)
+        self.main_grid.add_widget(other_grid)
 
         ## row 4: match picker
         def match_team_list_names():
@@ -255,42 +262,56 @@ class demo_app(MDApp):
             print(org, season, league, division)
             return [t['name'] for t in season_info['seasons'][season]['leagues'][league]['divisions'][division]['teams']]
 
-        team_list = match_team_list_names()
-        match_list_n = int(len(team_list) / 2)
-        match_list = MDGridLayout(cols = 3) # rows = match_list_n + 1, 
+        class GridContainer(ILeftBodyTouch, MDGridLayout):
+            adaptive_width = True
+
+        match_grid = MDGridLayout(cols = 1)
         match_team_buttons = []
-        match_ctrl_buttons = []
-        for i in range(match_list_n):
+        for i in range(2): # FIXME: number of matches
+            # add a list item for each match
+            match_list_item_id = 'match_list_item_{}'.format(i)
+            #match_list_item = OneLineAvatarIconListItem(
+            match_list_item = OneLineAvatarListItem(
+                IconLeftWidget(
+                    icon = 'minus'
+                    #on_release = lambda x: self.
+                    ),
+                GridContainer(
+                    rows = 1,
+                    id = match_list_item_id,
+                    ),
+                #IconRightWidget(icon = 'minus'),
+                )
             for j in range(2):
                 # add team selection buttons
                 k = 2 * i + j
                 b = MDRectangleFlatButton(id = 'match_team_{}'.format(k))
                 self.mm.menu_populate(b, match_team_list_names, parent_id = league_division_button.id)
                 self.mm.menu_set(b.id, k)
-                match_list.add_widget(b)
                 match_team_buttons += [b]
-            # button to add or remove matches
-            b = MDRectangleFlatButton(text = '-', id = 'match_ctrl_{}'.format(i))
-            match_list.add_widget(b)
-            match_ctrl_buttons += [b]
+                match_list_item.ids[match_list_item_id].add_widget(b)
+                #match_list_item.remove_widget('_left_container')
+            # set action for the minus button
+            match_list_item._touchable_widgets[0].on_release = lambda: match_grid.remove_widget(match_list_item)
+            match_grid.add_widget(match_list_item)
+            #match_list_item
+            
         # button to add or remove matches
-        b = MDRectangleFlatButton(text = '+', id = 'match_ctrl_{}'.format(match_list_n + 1))
-        match_list.add_widget(b)
-        match_ctrl_buttons += [b]
+        #match_list_item = OneLineRightIconListItem(IconRightWidget(icon = 'plus'))
+        match_list_item = OneLineAvatarListItem(IconLeftWidget(icon = 'plus'))
+        match_grid.add_widget(match_list_item)
+        #match_grid.remove_widget('tony')
+        #app.main_grid.children[-4].children[-1].children[0].children = row 4, list item 1, gridcontainer and icon
 
         # layout
-        #match_grid = MDGridLayout(rows = 1)
-        #match_grid.add_widget(match_list)
-        #match_grid.add_widget(match_add_remove)
-        #main_grid.add_widget(match_grid)
-        main_grid.add_widget(match_list)
+        self.main_grid.add_widget(match_grid)
 
         ## row 5, 6: run
         submit_button = MDRectangleFlatButton(text = 'Submit', id = 'submit', on_release = self.submit)
         self.result = MDLabel(text = 'Result', id = 'result')         
-        main_grid.add_widget(submit_button)
-        main_grid.add_widget(self.result)
-        self.screen.add_widget(main_grid)
+        self.main_grid.add_widget(submit_button)
+        self.main_grid.add_widget(self.result)
+        self.screen.add_widget(self.main_grid)
 
         return self.screen
 
