@@ -9,11 +9,8 @@ from kivymd.uix.pickers import MDDatePicker
 from kivymd.uix.menu import MDDropdownMenu
 from kivymd.uix.dropdownitem.dropdownitem import MDDropDownItem
 from kivymd.uix.dialog import MDDialog
-from kivymd.uix.list import OneLineListItem, OneLineRightIconListItem, OneLineAvatarIconListItem, OneLineIconListItem
-from kivymd.uix.list import * #IconRightWidget, ILeftBodyTouch, ILeftBody, IRightBodyTouch, IconLeftWidget
-from kivymd.uix.card import MDCard, MDCardSwipe, MDCardSwipeLayerBox, MDCardSwipeFrontBox
 
-from gui.kivymd_extra import menu_manager, add_label
+from gui.kivymd_extra import menu_manager, managed_list, add_label
 
 import time, datetime, zoneinfo
 
@@ -38,7 +35,9 @@ import time, datetime, zoneinfo
 # https://kivymd.readthedocs.io/en/1.1.1/components/dialog/index.html
 # https://docs.python.org/3/library/zoneinfo.html#zoneinfo.available_timezones
 # https://pytz.sourceforge.net/#helpers
-
+# https://github.com/kivymd/KivyMD/blob/master/kivymd/uix/list/list.py
+# https://github.com/kivymd/KivyMD/blob/master/kivymd/uix/list/list.kv
+# https://kivymd.readthedocs.io/en/1.1.1/components/list/index.html#custom-list-item
 
 # note:
 #   in general pytz handles special cases better (ex: daylight saving)
@@ -118,7 +117,7 @@ class demo_app(MDApp):
         self.mm = menu_manager() # menu manager
 
         # match list
-        self.lm = list_manager() # list manager
+        self.lm = managed_list() # list manager
 
         # refs
         self.main_grid = None
@@ -259,52 +258,27 @@ class demo_app(MDApp):
             season = self.mm.menu_get_selected(league_season_button.id)
             league = self.mm.menu_get_selected(league_league_button.id)
             division = self.mm.menu_get_selected(league_division_button.id)
-            print(org, season, league, division)
+            #print(org, season, league, division)
             return [t['name'] for t in season_info['seasons'][season]['leagues'][league]['divisions'][division]['teams']]
 
-        class GridContainer(ILeftBodyTouch, MDGridLayout):
-            adaptive_width = True
+        def match_add():
+            idx = self.lm.add_row()
+            b1 = MDRectangleFlatButton(id = 'match_{}_team_1'.format(idx))
+            self.lm.add_item(idx, b1)
+            vs = MDLabel(text = 'vs', id = 'match_{}_vs')
+            self.lm.add_item(idx, vs)
+            b2 = MDRectangleFlatButton(id = 'match_{}_team_2'.format(idx))
+            self.lm.add_item(idx, b2)
+            self.mm.menu_populate(b1, match_team_list_names, parent_id = league_division_button.id)
+            self.mm.menu_populate(b2, match_team_list_names, parent_id = league_division_button.id)
 
-        match_grid = MDGridLayout(cols = 1)
-        match_team_buttons = []
-        for i in range(2): # FIXME: number of matches
+        self.lm.set_callback(0, match_add)
+        for i in range(len(match_team_list_names()) // 2):
             # add a list item for each match
-            match_list_item_id = 'match_list_item_{}'.format(i)
-            #match_list_item = OneLineAvatarIconListItem(
-            match_list_item = OneLineAvatarListItem(
-                IconLeftWidget(
-                    icon = 'minus'
-                    #on_release = lambda x: self.
-                    ),
-                GridContainer(
-                    rows = 1,
-                    id = match_list_item_id,
-                    ),
-                #IconRightWidget(icon = 'minus'),
-                )
-            for j in range(2):
-                # add team selection buttons
-                k = 2 * i + j
-                b = MDRectangleFlatButton(id = 'match_team_{}'.format(k))
-                self.mm.menu_populate(b, match_team_list_names, parent_id = league_division_button.id)
-                self.mm.menu_set(b.id, k)
-                match_team_buttons += [b]
-                match_list_item.ids[match_list_item_id].add_widget(b)
-                #match_list_item.remove_widget('_left_container')
-            # set action for the minus button
-            match_list_item._touchable_widgets[0].on_release = lambda: match_grid.remove_widget(match_list_item)
-            match_grid.add_widget(match_list_item)
-            #match_list_item
-            
-        # button to add or remove matches
-        #match_list_item = OneLineRightIconListItem(IconRightWidget(icon = 'plus'))
-        match_list_item = OneLineAvatarListItem(IconLeftWidget(icon = 'plus'))
-        match_grid.add_widget(match_list_item)
-        #match_grid.remove_widget('tony')
-        #app.main_grid.children[-4].children[-1].children[0].children = row 4, list item 1, gridcontainer and icon
+            match_add()
 
         # layout
-        self.main_grid.add_widget(match_grid)
+        self.main_grid.add_widget(self.lm)
 
         ## row 5, 6: run
         submit_button = MDRectangleFlatButton(text = 'Submit', id = 'submit', on_release = self.submit)
