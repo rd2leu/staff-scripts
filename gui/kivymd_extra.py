@@ -1,9 +1,8 @@
 from kivymd.uix.gridlayout import MDGridLayout
 from kivymd.uix.label import MDLabel
 from kivymd.uix.menu import MDDropdownMenu
-from kivymd.uix.dropdownitem.dropdownitem import MDDropDownItem
-from kivymd.uix.list import MDList
-from kivymd.uix.list import IconLeftWidget, ILeftBodyTouch, OneLineAvatarListItem
+from kivymd.uix.dropdownitem import MDDropDownItem
+from kivymd.uix.button import MDIconButton
 from kivy.metrics import dp
 
 def add_label(widgets, text, pos = 'left', grid_args = {}, **kwargs):
@@ -67,7 +66,7 @@ class menu_manager:
         family = []
         queue = [(menu_id, c) for c in self.menu_data[menu_id]['children']]
         cnt = 0
-        recur_lim = 10
+        recur_lim = 20
         while queue and cnt < recur_lim:
             parent_id, child_id = queue.pop(0)
             family.append((parent_id, child_id))
@@ -204,89 +203,79 @@ class menu_manager:
         if which in ['post', 'both']:
             self.menu_data[menu_id]['post_callbacks'] = []
 
-class GridContainer(ILeftBodyTouch, MDGridLayout):
-    adaptive_width = True
-
-class managed_list(MDList):
+class managed_list(MDGridLayout):
     
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        
-        self.items = {} # the list item rows (by row index)
+        self.cols = 1
+        self.padding = (0, dp(8))
+        #self.adaptive_height = True
+
+        self._n = -1 # uid counter
+        self.items = {} # the list item rows
         self.row_items = {} # objects within the grid container of a row
-        self._cuids = {} # callback uid TODO: fbind unbind
-        self._n = -1
 
         # build
         self.add_row(icon = 'plus')
-        #self.set_callback(0, lambda caller: self.add_row)
         self.set_callback(0, self.add_row)
 
-    # FIXME: why this? don't need uid here yo
-    def _next(self):
+    def _next_id(self):
         self._n += 1
         return self._n
 
-    #TODO: __get_item__ __iter__ __len__
     def __getitem__(self, index):
+        """override: get by index, not by uid"""
+        ids = list(self.items.keys())
         if isinstance(index, int):
-            return list(self)[index]
+            return self.items[ids[index]]
         elif isinstance(index, tuple):
-            return list(self)[index[0]][index[1]]
+            return list(self.row_items[ids[index[0]]].values())[index[1]]
         elif isinstance(index, list):
-            return [self[i] for i in index]
+            return [list(self.row_items[ids[i]].values()) for i in index]
         else:
-            raise IndexError("Index not in [int, tuple]")
+            raise IndexError("Index not [int, tuple, list]")
     def __iter__(self):
-        for i in self.items:
-            if i in self.row_items:
-                yield list(self.row_items[i].values())
-            else:
-                yield []
+        for i in self.items.keys():
+            yield list(self.row_items[i].values())
     def __len__(self):
         return len(self.items)
 
     def add_row(self, icon = 'minus'):
         """Add empty row with left side icon"""
-        idx = self._next()
+        idx = self._next_id()
         print('add_row', idx, icon)
-        item = OneLineAvatarListItem(
-            IconLeftWidget(icon = icon,
-                           #on_release = lambda caller: print(caller),
-                           id = 'a{}'.format(idx),
-                           ),
-            GridContainer(
-                rows = 1,
-                id = 'g{}'.format(idx),
-                size_hint = (None, 1),
+        item = MDGridLayout(
+            MDIconButton(
+                icon = icon,
+                id = 'a{}'.format(idx),
+                pos_hint = {'center_y': 0.5},
                 ),
-            id = 'i{}'.format(idx),
+            adaptive_width = True,
+            rows = 1,
+            id = 'g{}'.format(idx),
+            size_hint = (None, 1),
             )
-        item.remove_widget(item.ids['_text_container'])
         self.add_widget(item)
         self.items[idx] = item
-        #self.set_callback(idx, lambda caller, i = idx: self.remove_row(i))
+        self.row_items[idx] = {}
         self.set_callback(idx, lambda i = idx: self.remove_row(i))
         return idx
 
     def remove_row(self, idx):
         print('remove_row', idx)
+        # empty items in row
+        for item_id in self.get_item_ids(idx):
+            self.remove_item(idx, item_id)
+        # remove row
+        self.row_items.pop(idx)
         item = self.items.pop(idx)
         self.remove_widget(item)
-        self._cuids.pop(idx)
 
     def set_callback(self, idx, callback, *args, **kwargs):
         """Set custom callback for left side icon"""
         print('set_callback', idx)
         icon = self.items[idx].ids['a{}'.format(idx)]
-        # check if callback already exists
-        # https://kivy.org/doc/stable/api-kivy.event.html#kivy.event.EventDispatcher.unbind_uid
-        #if idx in self._cuids:
-        #    icon.unbind_uid('on_release', self._cuids[idx])
-        # set callback and save uid
-        #self._cuids[idx] = icon.fbind('on_release', callback, *args, **kwargs)
         icon.on_release = callback
-        self._cuids[idx] = idx
 
     def add_item(self, idx, obj):
         """Add items to a row"""
@@ -294,20 +283,20 @@ class managed_list(MDList):
         if not hasattr(obj, 'id') or obj.id == '':
             raise TypeError("object must have an ID")
         item_id = obj.id
-        if item_id in self.items:
+        if item_id in self.row_items[idx]:
             raise KeyError("object with id '{}' already in list".format(item_id))
-
-        self.row_items[idx] = {}
         self.row_items[idx][item_id] = obj
-        self.items[idx].ids['g{}'.format(idx)].add_widget(obj)
+        self.items[idx].add_widget(obj)
         
     def remove_item(self, idx, item_id):
         """Remove items from a row"""
         print('add_item', idx, item_id)
         obj = self.row_items[idx].pop(item_id)
-        self.items[idx].ids['g{}'.format(idx)].remove_widget(obj)
+        self.items[idx].remove_widget(obj)
 
-
+    def get_item_ids(self, idx):
+        return list(self.row_items[idx].keys())
+    
 # demo
 
 if __name__ == '__main__':
@@ -399,7 +388,7 @@ if __name__ == '__main__':
             idx = self.lm.add_row()
             self.lm.add_item(idx, MDLabel(
                 text = text,
-                id = str(idx),
+                id = 'cart{}'.format(idx),
                 size_hint = (None, 1),
                 ))
         
