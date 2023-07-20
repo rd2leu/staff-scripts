@@ -2,6 +2,9 @@ from kivymd.uix.gridlayout import MDGridLayout
 from kivymd.uix.label import MDLabel
 from kivymd.uix.menu import MDDropdownMenu
 from kivymd.uix.dropdownitem.dropdownitem import MDDropDownItem
+from kivymd.uix.list import MDList
+from kivymd.uix.list import IconLeftWidget, ILeftBodyTouch, OneLineAvatarListItem
+from kivy.metrics import dp
 
 def add_label(widgets, text, pos = 'left', grid_args = {}, **kwargs):
     """Place widgets in a grid with a label"""
@@ -144,7 +147,13 @@ class menu_manager:
         # create the drop down menu
         menu_args = {
             'position': 'bottom',
+            'ver_growth': 'down',
+            'hor_growth': 'right',
+            'opening_time': 0.1,
             #'bg_color': '',
+            'max_height': dp(224),
+            'border_margin': dp(24),
+            #'border_margin': dp(4),
             'width_mult': '3',
             }
         menu_args.update(kwargs)
@@ -195,6 +204,110 @@ class menu_manager:
         if which in ['post', 'both']:
             self.menu_data[menu_id]['post_callbacks'] = []
 
+class GridContainer(ILeftBodyTouch, MDGridLayout):
+    adaptive_width = True
+
+class managed_list(MDList):
+    
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        
+        self.items = {} # the list item rows (by row index)
+        self.row_items = {} # objects within the grid container of a row
+        self._cuids = {} # callback uid TODO: fbind unbind
+        self._n = -1
+
+        # build
+        self.add_row(icon = 'plus')
+        #self.set_callback(0, lambda caller: self.add_row)
+        self.set_callback(0, self.add_row)
+
+    # FIXME: why this? don't need uid here yo
+    def _next(self):
+        self._n += 1
+        return self._n
+
+    #TODO: __get_item__ __iter__ __len__
+    def __getitem__(self, index):
+        if isinstance(index, int):
+            return list(self)[index]
+        elif isinstance(index, tuple):
+            return list(self)[index[0]][index[1]]
+        elif isinstance(index, list):
+            return [self[i] for i in index]
+        else:
+            raise IndexError("Index not in [int, tuple]")
+    def __iter__(self):
+        for i in self.items:
+            if i in self.row_items:
+                yield list(self.row_items[i].values())
+            else:
+                yield []
+    def __len__(self):
+        return len(self.items)
+
+    def add_row(self, icon = 'minus'):
+        """Add empty row with left side icon"""
+        idx = self._next()
+        print('add_row', idx, icon)
+        item = OneLineAvatarListItem(
+            IconLeftWidget(icon = icon,
+                           #on_release = lambda caller: print(caller),
+                           id = 'a{}'.format(idx),
+                           ),
+            GridContainer(
+                rows = 1,
+                id = 'g{}'.format(idx),
+                size_hint = (None, 1),
+                ),
+            id = 'i{}'.format(idx),
+            )
+        item.remove_widget(item.ids['_text_container'])
+        self.add_widget(item)
+        self.items[idx] = item
+        #self.set_callback(idx, lambda caller, i = idx: self.remove_row(i))
+        self.set_callback(idx, lambda i = idx: self.remove_row(i))
+        return idx
+
+    def remove_row(self, idx):
+        print('remove_row', idx)
+        item = self.items.pop(idx)
+        self.remove_widget(item)
+        self._cuids.pop(idx)
+
+    def set_callback(self, idx, callback, *args, **kwargs):
+        """Set custom callback for left side icon"""
+        print('set_callback', idx)
+        icon = self.items[idx].ids['a{}'.format(idx)]
+        # check if callback already exists
+        # https://kivy.org/doc/stable/api-kivy.event.html#kivy.event.EventDispatcher.unbind_uid
+        #if idx in self._cuids:
+        #    icon.unbind_uid('on_release', self._cuids[idx])
+        # set callback and save uid
+        #self._cuids[idx] = icon.fbind('on_release', callback, *args, **kwargs)
+        icon.on_release = callback
+        self._cuids[idx] = idx
+
+    def add_item(self, idx, obj):
+        """Add items to a row"""
+        print('add_item', idx, obj.id)
+        if not hasattr(obj, 'id') or obj.id == '':
+            raise TypeError("object must have an ID")
+        item_id = obj.id
+        if item_id in self.items:
+            raise KeyError("object with id '{}' already in list".format(item_id))
+
+        self.row_items[idx] = {}
+        self.row_items[idx][item_id] = obj
+        self.items[idx].ids['g{}'.format(idx)].add_widget(obj)
+        
+    def remove_item(self, idx, item_id):
+        """Remove items from a row"""
+        print('add_item', idx, item_id)
+        obj = self.row_items[idx].pop(item_id)
+        self.items[idx].ids['g{}'.format(idx)].remove_widget(obj)
+
+
 # demo
 
 if __name__ == '__main__':
@@ -207,7 +320,7 @@ if __name__ == '__main__':
     
     data = {
         'fruits': {
-            'apple': {'red': 20, 'green': 30},
+            'apple': {'yellow-brown': '15', 'red': 20, 'green': 30},
             'orange': {'small': 30, 'medium': 35, 'large': 40},
             'banana': {'green': 25, 'yellow': 30, 'ripe': 20},
             },
@@ -223,10 +336,12 @@ if __name__ == '__main__':
             self.label_1 = None
             self.label_2 = None
             self.mm = menu_manager()
+            self.lm = managed_list()
+            self.lm.remove_row(0)
             
         def build(self):
             screen = Screen()
-            grid = MDGridLayout(cols = 1, rows = 6)
+            grid = MDGridLayout(cols = 1)
 
             # menu level 1
             list_1 = list(data.keys())
@@ -249,13 +364,14 @@ if __name__ == '__main__':
             self.mm.menu_populate(button_3, list_3, parent_id = 'list_2')
 
             # button
-            button = MDFlatButton(text = 'checkout', on_release = self.checkout)
+            button_4 = MDFlatButton(text = 'add', on_release = self.add)
+            button_5 = MDFlatButton(text = 'checkout', on_release = self.checkout)
 
             # label
             self.label_1 = MDLabel()
             self.label_2 = MDLabel()
 
-            # add extra menu callback on the fly
+            # add extra menu callback
             def update():
                 value = self._get_selected_value()
                 self.label_1.text = 'selected: {}'.format(value)
@@ -267,11 +383,25 @@ if __name__ == '__main__':
             grid.add_widget(button_1)
             grid.add_widget(button_2)
             grid.add_widget(button_3)
-            grid.add_widget(button)
+            grid.add_widget(button_4)
+            grid.add_widget(button_5)
             grid.add_widget(self.label_1)
             grid.add_widget(self.label_2)
+            grid.add_widget(self.lm)
+
             screen.add_widget(grid)
             return screen
+
+        def add(self, obj):
+            thing = self._get_selected_item()
+            price = self._get_selected_value()
+            text = '{}: {}'.format(thing, price)
+            idx = self.lm.add_row()
+            self.lm.add_item(idx, MDLabel(
+                text = text,
+                id = str(idx),
+                size_hint = (None, 1),
+                ))
         
         def _get_selected_value(self):
             pick_1 = self.mm.menu_get_item('list_1')
@@ -279,9 +409,14 @@ if __name__ == '__main__':
             pick_3 = self.mm.menu_get_item('list_3')
             return data[pick_1][pick_2][pick_3]
 
+        def _get_selected_item(self):
+            pick_2 = self.mm.menu_get_item('list_2')
+            pick_3 = self.mm.menu_get_item('list_3')
+            return '{} {}'.format(pick_3, pick_2)
+
         def checkout(self, obj):
-            value = self._get_selected_value()
-            self.label_2.text = 'price: {}'.format(value)
+            total = sum([int(t.text.split(': ')[1]) for r in self.lm for t in r])
+            self.label_2.text = 'price: {}'.format(total)
 
     app = Demo()
     app.run()
