@@ -9,12 +9,13 @@ from sklearn.cluster import DBSCAN as DBS
 
 INPUT_PATH = 'input'
 OUTPUT_PATH = 'output'
+FNAME = 'rd2l_m14'
 
 def read_google_sheet(url):
     url2 = url[:url.index('/edit')] + '/export?format=csv&' + url[url.index('gid='):]
     return pd.read_csv(url2)
 
-with open(os.path.join(INPUT_PATH, 'rd2l_s27.json'), 'r') as f:
+with open(os.path.join(INPUT_PATH, FNAME + '.json'), 'r') as f:
     rd2l = json.load(f)
 
 for season in rd2l['seasons']:
@@ -24,8 +25,17 @@ for season in rd2l['seasons']:
             
             # parse draft sheet
             draft = read_google_sheet(division['draftsheet'])
-            draft['account_id'] = draft['Dotabuff link'].apply(extract_account_id2)
-            draft['alts'] = draft['Please list your alternate accounts'].apply(extract_account_ids)
+
+            if 'dsparser' not in division or division['dsparser'] == 1:
+                # Owl sheets
+                draft['account_id'] = draft['Dotabuff link'].apply(extract_account_id2)
+                draft['alts'] = draft['Please list your alternate accounts'].apply(extract_account_ids)
+            elif division['dsparser'] == 2:
+                # Moggoblin sheets
+                draft['account_id'] = draft['Dotabuff Link'].apply(extract_account_id2)
+                draft['alts'] = draft[['Second account', 'Third account']].apply(list, axis = 1).astype(str).apply(extract_account_ids)
+                draft = draft[draft['Activity check'] == 'Yes'].copy()
+
             draft['accounts'] = draft.apply(lambda x: x['alts'] + [x['account_id']], axis = 1)
 
             pos_idx = draft.columns.searchsorted('Pos 1')
@@ -43,7 +53,9 @@ for season in rd2l['seasons']:
                         p = draft[draft['account_id'] == accs[0]].iloc[0]
                         info['mmr'] = int(p['MMR'])
                         info['discord'] = p['Discord ID']
-                        info['pos_pref'] = p[pos_idx + 1: pos_idx + 6].values.astype(int).tolist()
+                        #info['pos_pref'] = p[pos_idx + 1: pos_idx + 6].values.astype(int).tolist()
+                        # FIXME: why +1?
+                        info['pos_pref'] = p[pos_idx: pos_idx + 5].values.astype(int).tolist()
                         info['alts'] = p['alts']
 
                         # top 3 heroes
@@ -86,9 +98,9 @@ for season in rd2l['seasons']:
 
 
 # save data
-with open(os.path.join(OUTPUT_PATH, 'rd2l_s27_utf8.json'), 'w') as f:
+with open(os.path.join(OUTPUT_PATH, FNAME + '_utf8.json'), 'w', encoding = 'utf-8') as f:
     json.dump(rd2l, f, indent = 4)
-with open(os.path.join(OUTPUT_PATH, 'rd2l_s27_utf16.json'), 'w', encoding = 'utf-16') as f:
+with open(os.path.join(OUTPUT_PATH, FNAME + '_utf16.json'), 'w', encoding = 'utf-16') as f:
     json.dump(rd2l, f, indent = 4, ensure_ascii = False)
 
 
@@ -113,7 +125,7 @@ def liquipedia_teams_str(teams, template):
         for player in team['players']:
             frmt += [player['country'], player['name'], player['account_id']]
         out += [template.format(*frmt)]
-    out = '{{box|break|padding=2em}}\n'.join(out)
+    out = '\n{{box|break|padding=2em}}\n'.join(out)
     return out
 
 for season in rd2l['seasons']:
