@@ -7,7 +7,7 @@ from d2tools.utilities import *
 
 hero_stats_path = os.path.join('input', 'hero_stats2.csv')
 
-def gen_map_text(match_id, **team):
+def gen_map_text(match_id, force = False, **team):
     """
     generate liquipedia match "Map" summary
 
@@ -37,7 +37,7 @@ def gen_map_text(match_id, **team):
     check = (len(team) == 0) or any([(key in checks) and team[key] == checks[key] for key in team])
     check = int(check)
 
-    data = get_match(match_id)
+    data = get_match(match_id, force = force)
     draft = pd.DataFrame(data['picks_bans']).groupby(['team', 'is_pick']).agg(list)
 
     def pb_names(team = 0):
@@ -68,5 +68,5 @@ def gen_map_text(match_id, **team):
     return template.format(*names1, *names2, shorttime(data['duration']), win)
 
 if __name__ == '__main__':
-    match_id = 7072916133
+    match_id = 7563379119
     print(gen_map_text(match_id, team1 = 'dire'))

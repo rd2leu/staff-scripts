@@ -9,7 +9,7 @@ from sklearn.cluster import DBSCAN as DBS
 
 INPUT_PATH = 'input'
 OUTPUT_PATH = 'output'
-FNAME = 'rd2l_m14'
+FNAME = 'rd2l_s28'
 
 def read_google_sheet(url):
     url2 = url[:url.index('/edit')] + '/export?format=csv&' + url[url.index('gid='):]
@@ -30,7 +30,7 @@ for season in rd2l['seasons']:
                 # Owl sheets
                 draft['account_id'] = draft['Dotabuff link'].apply(extract_account_id2)
                 draft['alts'] = draft['Please list your alternate accounts'].apply(extract_account_ids)
-            elif division['dsparser'] == 2:
+            elif division['dsparser'] >= 2:
                 # Moggoblin sheets
                 draft['account_id'] = draft['Dotabuff Link'].apply(extract_account_id2)
                 draft['alts'] = draft[['Second account', 'Third account']].apply(list, axis = 1).astype(str).apply(extract_account_ids)
@@ -82,7 +82,7 @@ for season in rd2l['seasons']:
                             info['name'] = sheet.iloc[i, j - 2]
                             info['coins'] = coins
                         elif league['type'] == 'linear':
-                            info['name'] = sheet.iloc[i, j - 1]
+                            info['name'] = sheet.iloc[i, j - 2] # - 1 usually but -2 cz s28 spatzatura
                         players[(i, j)] = info
 
             if players:

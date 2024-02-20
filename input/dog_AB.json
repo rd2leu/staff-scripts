@@ -1,0 +1,29 @@
+{
+    "name": "Dogcup",
+    "region": "Europe West",
+    "id": 0,
+    "seasons": [
+        {
+            "name": "Autumn Blues",
+            "id": 0,
+            "start-date": 0,
+            "end-date": 0,
+            "leagues": [
+                {
+                    "name": "",
+                    "id": 19999,
+                    "type": "auction",
+                    "divisions": [
+                        {
+                            "name": "Division 1",
+                            "id": 1,
+                            "teamsheet": "https://docs.google.com/spreadsheets/d/1LvIpCzDN8VVaiBc-VwbGHlOCkRq9Ml7WN6AH25ldVcw/edit#gid=2098857522",
+                            "draftsheet": "https://docs.google.com/spreadsheets/d/1LvIpCzDN8VVaiBc-VwbGHlOCkRq9Ml7WN6AH25ldVcw/edit#gid=1084441303",
+                            "dsparser": 1
+                        },
+                    ]
+                }
+            ]
+        }
+	]
+}

@@ -6,12 +6,12 @@ from d2tools.utilities import *
 from liquipedia_map import gen_map_text
 
 ## input
-search = {'season': '27',
+search = {'season': '28',
           'league': 'Sunday', # Sunday Wednesday
-          'division': '3'}
+          'division': '1'}
 
 timezone = 'CET'
-start_time_str = 'June 25 2023 - 19:00'
+start_time_str = 'February 18 2024 - 16:00'
 start_time = datetoseconds(start_time_str, 'CET')
 end_time = 2000000000
 
@@ -20,19 +20,20 @@ force = True
 
 # TODO: automate filling this
 series_scheduled = [
-    ('Jam!', 'officer andres'),
-    ('Eeshie', 'canin'),
-    ('dimes', 'Pappila'),
+    ('Oxygen', 'Raffie/Cumdalf'),
+    ('Fumblegod', 'Light'),
+    ('Fantasmal', 'Sonsa'),
+    ('Denden', 'Gains'),
     ]
 
 # teams
-# div 1: KTZ deniz Dunkin BarryBeeDespair
-# div 2: Mog Owl Sonsa KayTD
-# div 3: Jam! Eeshie dimes officer andres canin Pappila
-# wed: Jemobulas Maff iggy HungryBrowny dgavec KhezuC
-# wed: Pharmar Marosh Lekandor Ernie *Jesus*Aka#Mohammed
+# div 1: Oxygen Gains Fantasmal Fumblegod Denden Sonsa Light Raffie/Cumdalf
+# div 2: owley canin Epona greenman hfbvm Supersaian Cristina
+# Kanto/Farro/Tom/Cursed One
+# wed: Cvaekt Rinku Regurgitard chutoy Fumblegod G0nd4r
+# wed: Reddydas hungrybrowny hfbvm Blackjack Dandi Quickshot
 
-team_info_path = os.path.join('output', 'rd2l_s27_utf16.json')
+team_info_path = os.path.join('output', 'rd2l_s28_utf16.json')
 
 
 ## main
@@ -87,7 +88,7 @@ sides = {0: 'radiant', 1: 'dire'}
 for i in range(len(matches)):
     for k, v in sides.items():
         try:
-            name = find_team(players[i][k], 3)['name']
+            name = find_team(players[i][k], 2)['name']
         except:
             continue
 
@@ -191,3 +192,12 @@ for ss in series_scheduled:
 print('\n\n\n')
 for i, txt in enumerate(series_texts):
     print("|M{0}header=\n|M{0}=".format(i + 1) + txt)
+
+# save data
+fname = 's{}_{}_div{}_{}.csv'.format(
+    search['season'],
+    search['league'][:3].lower(),
+    search['division'],
+    datestr(start_time, frmt = '%Y-%m-%d')
+    )
+data.to_csv(os.path.join('playday', fname))
