@@ -1,0 +1,3 @@
+[submodule "d2tools"]
+	path = d2tools
+	url = git@github.com:rd2leu/d2tools.git
