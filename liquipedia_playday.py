@@ -8,22 +8,22 @@ from liquipedia_map import gen_map_text
 ## input
 search = {'season': '28',
           'league': 'Sunday', # Sunday Wednesday
-          'division': '1'}
+          'division': '2'}
 
 timezone = 'CET'
-start_time_str = 'February 18 2024 - 16:00'
+start_time_str = 'March 10 2024 - 16:00'
 start_time = datetoseconds(start_time_str, 'CET')
 end_time = 2000000000
 
-bestof = 2
+bestof = 3
 force = True
 
 # TODO: automate filling this
 series_scheduled = [
-    ('Oxygen', 'Raffie/Cumdalf'),
-    ('Fumblegod', 'Light'),
-    ('Fantasmal', 'Sonsa'),
-    ('Denden', 'Gains'),
+    ('Kanto/Farro/Tom/Cursed One', 'Epona'),
+    ('canin', 'hfbvm'),
+    ('Cristina', 'Supersaian'),
+    ('greenman', 'owley'),
     ]
 
 # teams
@@ -191,7 +191,8 @@ for ss in series_scheduled:
 # print it
 print('\n\n\n')
 for i, txt in enumerate(series_texts):
-    print("|M{0}header=\n|M{0}=".format(i + 1) + txt)
+    #print("|M{0}header=\n|M{0}=".format(i + 1) + txt)
+    print("|R1M{0}=".format(i + 1) + txt)
 
 # save data
 fname = 's{}_{}_div{}_{}.csv'.format(
