@@ -11,7 +11,7 @@ search = {'season': '28',
           'division': '2'}
 
 timezone = 'CET'
-start_time_str = 'March 10 2024 - 16:00'
+start_time_str = 'March 17 2024 - 16:00'
 start_time = datetoseconds(start_time_str, 'CET')
 end_time = 2000000000
 
@@ -20,10 +20,8 @@ force = True
 
 # TODO: automate filling this
 series_scheduled = [
-    ('Kanto/Farro/Tom/Cursed One', 'Epona'),
-    ('canin', 'hfbvm'),
-    ('Cristina', 'Supersaian'),
-    ('greenman', 'owley'),
+    ('Kanto/Farro/Tom/Cursed One', 'hfbvm'),
+    ('Cristina', 'greenman'),
     ]
 
 # teams
@@ -192,7 +190,7 @@ for ss in series_scheduled:
 print('\n\n\n')
 for i, txt in enumerate(series_texts):
     #print("|M{0}header=\n|M{0}=".format(i + 1) + txt)
-    print("|R1M{0}=".format(i + 1) + txt)
+    print("|R2M{0}=".format(i + 1) + txt)
 
 # save data
 fname = 's{}_{}_div{}_{}.csv'.format(
