@@ -7,11 +7,11 @@ from liquipedia_map import gen_map_text
 
 ## input
 search = {'season': '28',
-          'league': 'Sunday', # Sunday Wednesday
-          'division': '2'}
+          'league': 'Wednesday', # Sunday Wednesday
+          'division': '1'}
 
 timezone = 'CET'
-start_time_str = 'March 17 2024 - 16:00'
+start_time_str = 'March 20 2024 - 16:00'
 start_time = datetoseconds(start_time_str, 'CET')
 end_time = 2000000000
 
@@ -20,8 +20,8 @@ force = True
 
 # TODO: automate filling this
 series_scheduled = [
-    ('Kanto/Farro/Tom/Cursed One', 'hfbvm'),
-    ('Cristina', 'greenman'),
+    ('hfbvm', 'G0nd4r'),
+    ('hungrybrowny', 'Blackjack'),
     ]
 
 # teams
