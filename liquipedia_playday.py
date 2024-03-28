@@ -17,6 +17,7 @@ end_time = 2000000000
 
 bestof = 3
 force = True
+save = True
 
 # TODO: automate filling this
 series_scheduled = [
@@ -30,8 +31,9 @@ series_scheduled = [
 # wed: Cvaekt Rinku Regurgitard chutoy Fumblegod G0nd4r
 # wed: Reddydas hungrybrowny hfbvm Blackjack Dandi Quickshot
 
-team_info_path = os.path.join('output', 'rd2l_s28_utf16.json')
+team_info_path = os.path.join('draft', 'rd2l_s28_utf16.json')
 
+n_players = 2 # identify teams with at least this many of the original players
 
 ## main
 def find_matching(array, substring, lower = True, sep = ' '):
@@ -85,7 +87,7 @@ sides = {0: 'radiant', 1: 'dire'}
 for i in range(len(matches)):
     for k, v in sides.items():
         try:
-            name = find_team(players[i][k], 2)['name']
+            name = find_team(players[i][k], n_players)['name']
         except:
             continue
 
@@ -189,13 +191,14 @@ for ss in series_scheduled:
 print('\n\n\n')
 for i, txt in enumerate(series_texts):
     #print("|M{0}header=\n|M{0}=".format(i + 1) + txt)
-    print("|R2M{0}=".format(i + 1) + txt)
+    print("|M{0}=".format(i + 1) + txt)
 
 # save data
-fname = 's{}_{}_div{}_{}.csv'.format(
-    search['season'],
-    search['league'][:3].lower(),
-    search['division'],
-    datestr(start_time, frmt = '%Y-%m-%d')
-    )
-data.to_csv(os.path.join('playday', fname))
+if save:
+    fname = 's{}_{}_div{}_{}.csv'.format(
+        search['season'],
+        search['league'][:3].lower(),
+        search['division'],
+        datestr(start_time, frmt = '%Y-%m-%d')
+        )
+    data.to_csv(os.path.join('playday', fname))
