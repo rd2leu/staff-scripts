@@ -18,7 +18,7 @@ end_time = 2000000000
 bestof = 3
 force = False
 
-team_info_path = os.path.join('output', 'rd2l_s28_utf16.json')
+team_info_path = os.path.join('draft', 'rd2l_s28_utf16.json')
 
 ## main
 def find_matching(array, substring, lower = True, sep = ' '):

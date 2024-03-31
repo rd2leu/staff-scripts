@@ -1,0 +1,157 @@
+import os, json
+import pandas as pd
+import numpy as np
+import scipy.stats as st
+from d2tools.api import *
+from d2tools.utilities import *
+
+## input
+search = {
+    'org': 'rd2l',
+    'season': '28',
+    'league': 'Sunday', # Sunday Wednesday
+    'division': '2'
+    }
+
+encoding = 'utf-16'
+encoding2 = 'utf16' # FIXME
+
+## main
+def find_matching(array, substring, lower = True, sep = ' '):
+    if lower:
+        arr = np.array([v.lower() for v in array])
+        sub = str(substring).lower()
+    else:
+        arr = np.array(array)
+        sub = str(substring)
+    idx = len(arr)
+    for i, s in enumerate(arr):
+        s_ = s.split(sep)
+        if all([k in s_ for k in sub.split(sep)]):
+            idx = i
+            break
+    return idx
+
+# find league player info
+team_info_str = search['org'], search['season'], encoding2
+team_info_path = os.path.join('draft', '{}_s{}_{}.json'.format(*team_info_str))
+
+with open(team_info_path, encoding = encoding) as f:
+    season_info = json.load(f)
+
+seasons = [s['name'] for s in season_info['seasons']]
+s_idx = find_matching(seasons, search['season'])
+
+leagues = [l['name'] for l in season_info['seasons'][s_idx]['leagues']]
+l_idx = find_matching(leagues, search['league'])
+league_id = season_info['seasons'][s_idx]['leagues'][l_idx]['id'] # 14871
+
+divisions = [d['name'] for d in season_info['seasons'][s_idx]['leagues'][l_idx]['divisions']]
+d_idx = find_matching(divisions, search['division'])
+
+teams = season_info['seasons'][s_idx]['leagues'][l_idx]['divisions'][d_idx]['teams']
+team_acc = {t['name']: [a for p in t['players'] for a in [p['account_id']] + p['alts']] for t in teams}
+
+players = pd.DataFrame([p | {'team': t['name']} for t in teams for p in t['players']])
+
+# read stats
+stats_str = 's{}_{}_div{}'.format(search['season'], search['league'][:3].lower(), search['division'])
+stats_path = [p for p in os.listdir('stats') if p.startswith(stats_str)][-1]
+stats = pd.read_csv(os.path.join('stats', stats_path), index_col = 0)
+
+## generate best-of stats
+
+def get_player_name(account_id):
+    try:
+        return players[players['account_id'] == str(account_id)]['name'].values[0]
+    except:
+        return str(account_id)
+
+def plot_overall_stats(title, account_ids, values):
+    print(title)
+    for i, (a, v) in enumerate(zip(account_ids, values)):
+        print('rank', i + 1, get_player_name(a), v)
+    print()
+
+# most total sum of player things
+things = [
+    'obs_placed', 'sen_placed', 'camps_stacked', 'rune_pickups',
+    'firstblood_claimed', 'towers_killed', 'roshans_killed', 'stuns', 'pings',
+    'kills', 'deaths', 'assists', 'last_hits', 'denies',
+    'net_worth', 'hero_damage', 'tower_damage', 'hero_healing',
+    'neutral_kills', 'courier_kills', 'observer_kills',
+    'buyback_count', 'life_state_dead', 'bought_rapier', 'bought_consumables',
+    'used_blood_grenade', 'used_enchanted_mango', 'used_smoke_of_deceit',
+    'used_blink', 'used_armlet', 'used_revenants_brooch', 'used_pirate_hat',
+    'trees_quelled', 'runes_bounty', 'runes_wisdom', 'runes_6min',
+    'blood_inflicted', 'lotuses_stolen', 'uses_high_five',
+    #'uses_portal', # bugged
+    'cosmetics_count', 'cosmetics_immortals'
+    ]
+things = ['life_state_dead']
+    
+for thing in things:
+    ids = stats.groupby('account_id')[thing].sum().sort_values(ascending = False)[:4]
+    plot_overall_stats('Most {}'.format(thing), ids.keys(), ids.values)
+    
+# most player thing in a game
+things = [
+    'duration', 'obs_placed', 'sen_placed', 'camps_stacked', 'rune_pickups',
+    'firstblood_claimed', 'teamfight_participation', 'towers_killed',
+    'roshans_killed', 'stuns', 'pings', 'hero_id', 'kills', 'deaths',
+    'assists', 'last_hits', 'denies', 'gold_per_min', 'xp_per_min',
+    'net_worth', 'hero_damage', 'tower_damage', 'hero_healing', 'kda',
+    'neutral_kills', 'courier_kills', 'observer_kills', 'ancient_kills',
+    'buyback_count', 'life_state_dead', 'max_hero_hit', 'max_mins_no_lh',
+    'avg_obs_dur', 'repeated_obs', 'bought_rapier', 'bought_consumables',
+    'used_blood_grenade', 'used_enchanted_mango', 'used_smoke_of_deceit',
+    'used_blink', 'used_armlet', 'used_revenants_brooch', 'used_pirate_hat',
+    'trees_quelled', 'runes_bounty', 'runes_wisdom', 'runes_6min',
+    'kill_streak', 'blood_inflicted', 'lotuses_stolen', 'uses_high_five',
+    'cosmetics_count', 'cosmetics_immortals'
+    ]
+things = []
+
+for thing in things:
+    print('Game with most', thing)
+    top = stats.loc[stats[thing].sort_values(ascending = False)[:5].index]
+    top['name'] = top['account_id'].apply(get_player_name)
+    print(top[['match_id', 'name', 'series_name', 'win', thing]], end = '\n\n')
+
+# game with most things
+things = [
+    'duration', 'obs_placed', 'sen_placed', 'camps_stacked',
+    'roshans_killed', 'bought_rapier', 'kill_streak'
+    ]
+things = ['kill_streak']
+
+for thing in things:
+    print('Game with most', thing)
+    grp = stats.groupby('match_id')
+    top = grp[thing].max().sort_values(ascending = False)[:3]
+    res = grp[['series_name', 'account_id', 'win', 'dire_team_name', 'radiant_team_name', 'isRadiant']].first().loc[top.index]
+    res[thing] = top
+    res['win'] = res['win'].astype(bool)
+    res['name'] = res['account_id'].apply(get_player_name)
+    res['winner'] = res.apply(lambda x: x['dire_team_name'] if (x['isRadiant'] ^ x['win']) else x['radiant_team_name'], axis = 1)
+    #print(res[['series_name', 'account_id', 'winner', thing]], end = '\n\n')
+    print(res[['name', 'win', thing]], end = '\n\n')
+
+# game with most total things
+things = [
+    'duration', 'obs_placed', 'sen_placed', 'camps_stacked',
+    'roshans_killed', 'bought_rapier', 'kill_streak', 'courier_kills',
+    'lotuses_stolen', 'uses_high_five',
+    'cosmetics_count', 'cosmetics_immortals'
+    ]
+things = []
+
+for thing in things:
+    print('Game with most total', thing)
+    grp = stats.groupby('match_id')
+    top = grp[thing].sum().sort_values(ascending = False)[:3]
+    res = grp[['series_name', 'win', 'dire_team_name', 'radiant_team_name', 'isRadiant']].first().loc[top.index]
+    res[thing] = top
+    res['win'] = res['win'].astype(bool)
+    res['winner'] = res.apply(lambda x: x['dire_team_name'] if (x['isRadiant'] ^ x['win']) else x['radiant_team_name'], axis = 1)
+    print(res[['series_name', 'winner', thing]], end = '\n\n')
