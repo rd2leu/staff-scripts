@@ -15,12 +15,11 @@ template = """{{{{TeamCard
 |preview=
 |ref=
 |image=Ti9 teamcard logo.png
-{}
-|inotes={}
+{}{}
 }}}}"""
 
-px = '|p{0}flag={1}|p{0}={2}|p{0}id={3}'
-db = '{{{{cite web|url=https://www.dotabuff.com/players/{}|title={}}}}}'
+px = '|p{0}flag={1}|p{0}={2}|p{0}id={3}|p{0}preview=https://www.dotabuff.com/players/{3}'
+db = '{{{{cite web|url=https://www.dotabuff.com/players/{}|title={} {}}}}}'
 
 teamsep = '\n{{box|break|padding=2em}}\n'
 
@@ -56,11 +55,15 @@ def liquipedia_team_str(team):
     for role in range(5):
         player = team['players'][roles[role]]
         px_fill += [px.format(role + 1, player['country'], player['name'], player['account_id'])]
-        db_fill += [
-            db.format(player['account_id'], player['name']) +
-            ''.join([db.format(a, k + 2) for k, a in enumerate(player['alts'])])
-            ]
-    return template.format(team['name'], '\n'.join(px_fill), ' '.join(db_fill))
+        db_text = ''
+        for k, a in enumerate(player['alts']):
+            db_text += db.format(a, player['name'], k + 2)
+        if db_text != '':
+            db_fill += [db_text]
+    inotes = ''
+    if len(db_fill) > 0:
+        inotes = '\n|inotes=' + ' '.join(db_fill)
+    return template.format(team['name'], '\n'.join(px_fill), inotes)
 
 def liquipedia_teams_str(teams):
     return teamsep.join([liquipedia_team_str(team) for team in teams])
