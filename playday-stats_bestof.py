@@ -4,6 +4,7 @@ import numpy as np
 import scipy.stats as st
 from d2tools.api import *
 from d2tools.utilities import *
+from utilities import *
 
 ## input
 search = {
@@ -17,39 +18,15 @@ encoding = 'utf-16'
 encoding2 = 'utf16' # FIXME
 
 ## main
-def find_matching(array, substring, lower = True, sep = ' '):
-    if lower:
-        arr = np.array([v.lower() for v in array])
-        sub = str(substring).lower()
-    else:
-        arr = np.array(array)
-        sub = str(substring)
-    idx = len(arr)
-    for i, s in enumerate(arr):
-        s_ = s.split(sep)
-        if all([k in s_ for k in sub.split(sep)]):
-            idx = i
-            break
-    return idx
 
-# find league player info
+# read league info
 team_info_str = search['org'], search['season'], encoding2
 team_info_path = os.path.join('draft', '{}_s{}_{}.json'.format(*team_info_str))
 
 with open(team_info_path, encoding = encoding) as f:
     season_info = json.load(f)
 
-seasons = [s['name'] for s in season_info['seasons']]
-s_idx = find_matching(seasons, search['season'])
-
-leagues = [l['name'] for l in season_info['seasons'][s_idx]['leagues']]
-l_idx = find_matching(leagues, search['league'])
-league_id = season_info['seasons'][s_idx]['leagues'][l_idx]['id'] # 14871
-
-divisions = [d['name'] for d in season_info['seasons'][s_idx]['leagues'][l_idx]['divisions']]
-d_idx = find_matching(divisions, search['division'])
-
-teams = season_info['seasons'][s_idx]['leagues'][l_idx]['divisions'][d_idx]['teams']
+teams = season_info_get_teams(season_info, **search)
 team_acc = {t['name']: [a for p in t['players'] for a in [p['account_id']] + p['alts']] for t in teams}
 
 players = pd.DataFrame([p | {'team': t['name']} for t in teams for p in t['players']])

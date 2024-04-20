@@ -4,11 +4,15 @@ import numpy as np
 from d2tools.api import *
 from d2tools.utilities import *
 from liquipedia_map import gen_map_text
+from utilities import *
 
 ## input
-search = {'season': '28',
-          'league': 'Sunday', # Sunday Wednesday
-          'division': '2'}
+search = {
+    'org': 'rd2l',
+    'season': '28',
+    'league': 'Sunday',
+    'division': '2'
+    }
 
 timezone = 'CET'
 start_time_str = 'March 24 2024 - 16:00'
@@ -31,41 +35,20 @@ series_scheduled = [
 # wed: Cvaekt Rinku Regurgitard chutoy Fumblegod G0nd4r
 # wed: Reddydas hungrybrowny hfbvm Blackjack Dandi Quickshot
 
-team_info_path = os.path.join('draft', 'rd2l_s28_utf16.json')
-
-n_players = 2 # identify teams with at least this many of the original players
+encoding = 'utf-16'
+encoding2 = 'utf16' # FIXME
 
 ## main
-def find_matching(array, substring, lower = True, sep = ' '):
-    if lower:
-        arr = np.array([v.lower() for v in array])
-        sub = str(substring).lower()
-    else:
-        arr = np.array(array)
-        sub = str(substring)
-    idx = len(arr)
-    for i, s in enumerate(arr):
-        s_ = s.split(sep)
-        if all([k in s_ for k in sub.split(sep)]):
-            idx = i
-            break
-    return idx
 
-# find league info
-with open(team_info_path, encoding = 'utf-16') as f:
+# read league info
+team_info_str = search['org'], search['season'], encoding2
+team_info_path = os.path.join('draft', '{}_s{}_{}.json'.format(*team_info_str))
+
+with open(team_info_path, encoding = encoding) as f:
     season_info = json.load(f)
 
-seasons = [s['name'] for s in season_info['seasons']]
-s_idx = find_matching(seasons, search['season'])
-
-leagues = [l['name'] for l in season_info['seasons'][s_idx]['leagues']]
-l_idx = find_matching(leagues, search['league'])
-league_id = season_info['seasons'][s_idx]['leagues'][l_idx]['id'] # 14871
-
-divisions = [d['name'] for d in season_info['seasons'][s_idx]['leagues'][l_idx]['divisions']]
-d_idx = find_matching(divisions, search['division'])
-
-teams = season_info['seasons'][s_idx]['leagues'][l_idx]['divisions'][d_idx]['teams']
+league_id = season_info_get(season_info, seasons = search['season'], leagues = search['league'])['id']
+teams = season_info_get_teams(season_info, **search)
 team_acc = {t['name']: [a for p in t['players'] for a in [p['account_id']] + p['alts']] for t in teams}
 
 # get league matches
@@ -86,19 +69,26 @@ filtered = []
 sides = {0: 'radiant', 1: 'dire'}
 for i in range(len(matches)):
     for k, v in sides.items():
-        try:
-            name = find_team(players[i][k], n_players)['name']
-        except:
-            continue
 
         data[i]['{}_team_accs'.format(v)] = ', '.join(str(a) for a in players[i][k])
+
+        try:
+            name = find_team(players[i][k], 3)['name']
+        except:
+            try:
+                name = find_team(players[i][k], 2)['name']
+            except:
+                try:
+                    name = find_team(players[i][k], 1)['name'] # despair
+                except:
+                    continue
+
         data[i]['{}_team_name'.format(v)] = name
         filtered += [i]
 
 # group matches by date and teams
 data = pd.DataFrame(np.array(data)[np.unique(filtered)].tolist())
 data = data[(data['start_time'] > start_time) & (data['start_time'] < end_time)]
-
 data['series_name'] = data.apply(lambda x: ', '.join(sorted([x['radiant_team_name'], x['dire_team_name']])), axis = 1)
 
 # generate list of series that were actually played
