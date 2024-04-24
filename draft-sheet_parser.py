@@ -4,6 +4,7 @@ import numpy as np
 
 from d2tools.api import *
 from d2tools.utilities import *
+from utilities import *
 
 from sklearn.cluster import DBSCAN as DBS
 
@@ -21,10 +22,14 @@ with open(os.path.join(INPUT_PATH, FNAME + '.json'), 'r') as f:
 for season in rd2l['seasons']:
     for league in season['leagues']:
         for division in league['divisions']:
-            sheet = read_google_sheet(division['teamsheet'])
             
             # parse draft sheet
-            draft = read_google_sheet(division['draftsheet'])
+            if 'dsparser' not in division or division['dsparser'] < 3:
+                sheet = read_google_sheet(division['teamsheet'])
+                draft = read_google_sheet(division['draftsheet'])
+            else:                
+                sheet = read_google_sheet(division['teamsheet'], resolve_links = True)
+                draft = read_google_sheet(division['draftsheet'], resolve_links = True)
 
             if 'dsparser' not in division or division['dsparser'] == 1:
                 # Owl sheets

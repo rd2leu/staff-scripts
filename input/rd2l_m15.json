@@ -1,0 +1,38 @@
+{
+    "name": "RD2L EU",
+	"region": "Europe West",
+    "id": 0,
+    "seasons": [
+        {
+            "name": "Mini 15",
+            "id": 0,
+			"start-date": 0,
+			"end-date": 0,
+            "leagues": [
+                {
+                    "name": "",
+                    "id": 16460,
+                    "type": "auction",
+                    "divisions": [
+                        {
+                            "name": "Division 1",
+                            "id": 1,
+                            "teamsheet": "https://docs.google.com/spreadsheets/d/1mJSguYpi0PjY6tyTNIC-4c3QnPhiV_cdxoj6Ja3Zyds/edit#gid=522669012",
+							"draftsheet_": "https://docs.google.com/spreadsheets/d/1mJSguYpi0PjY6tyTNIC-4c3QnPhiV_cdxoj6Ja3Zyds/edit#gid=1298448049",
+							"draftsheet": "https://docs.google.com/spreadsheets/d/1mJSguYpi0PjY6tyTNIC-4c3QnPhiV_cdxoj6Ja3Zyds/edit#gid=721784153",
+							"dsparser": 3
+                        },
+                        {
+                            "name": "Division 2",
+                            "id": 2,
+                            "teamsheet": "https://docs.google.com/spreadsheets/d/1mJSguYpi0PjY6tyTNIC-4c3QnPhiV_cdxoj6Ja3Zyds/edit#gid=1582815903",
+							"draftsheet_": "https://docs.google.com/spreadsheets/d/1mJSguYpi0PjY6tyTNIC-4c3QnPhiV_cdxoj6Ja3Zyds/edit#gid=1298448049",
+							"draftsheet": "https://docs.google.com/spreadsheets/d/1mJSguYpi0PjY6tyTNIC-4c3QnPhiV_cdxoj6Ja3Zyds/edit#gid=721784153",
+							"dsparser": 3
+                        }
+                    ]
+                }
+            ]
+        }
+	]
+}

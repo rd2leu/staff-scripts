@@ -4,6 +4,7 @@ import numpy as np
 
 from d2tools.api import *
 from d2tools.utilities import *
+from utilities import *
 
 from nltk.corpus import stopwords
 from sklearn.feature_extraction.text import TfidfVectorizer
@@ -12,22 +13,17 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 
 INPUT_PATH = 'input'
 OUTPUT_PATH = 'sheets'
-FNAME = 'rd2l_s28'
+FNAME = 'rd2l_m15'
 
 # match history search parameters
 params = {'date': 180} # last 6 months
 # TODO: put a date in the cache for opendota requests
 
-update_mmrs = False
-update_info = False
+update_mmrs = True
+update_info = True
 retry = True
 save = True
 
-## utilities
-
-def read_google_sheet(url):
-    url2 = url[:url.index('/edit')] + '/export?format=csv&' + url[url.index('gid='):]
-    return pd.read_csv(url2)
 
 # hero stats
 hero_stats_path = os.path.join(INPUT_PATH, 'hero_stats2.csv')
@@ -51,13 +47,21 @@ with open(os.path.join(INPUT_PATH, FNAME + '.json'), 'r') as f:
 
 for season in rd2l['seasons']:
     for league in season['leagues']:
-        draft = read_google_sheet(league['divisions'][0]['draftsheet'])
+        division = league['divisions'][0]
+
+        if 'dsparser' not in division or division['dsparser'] < 3:
+            draft = read_google_sheet(division['draftsheet'])
+        else:
+            # dotabuff links are now hyperlinks
+            # https://github.com/pandas-dev/pandas/issues/13439
+            draft = read_google_sheet(division['draftsheet'], resolve_links = True)
 
         draft['account_id'] = draft['Dotabuff Link'].apply(extract_account_id2)
         draft['alts'] = draft[['Second account', 'Third account']].apply(list, axis = 1).astype(str).apply(extract_account_ids)
         draft['accounts'] = draft.apply(lambda x: x['alts'] + [x['account_id']], axis = 1)
         draft = draft[draft['Activity check'] == 'Yes'].reset_index(drop = True)
         draft = draft[['Timestamp', 'Discord ID', 'Name', 'account_id', 'alts', 'accounts', 'MMR']].copy()
+
 
         cols = [
             'mmr_estimate', 'mmr_estimate_2', 'nb_solo', 'nb_matches',
@@ -70,7 +74,7 @@ for season in rd2l['seasons']:
         draft[cols] = None
 
         # average rank of last 20 solo ranked games
-        for i, player in list(draft.iterrows())[4:]:
+        for i, player in list(draft.iterrows())[:]:
 
             accs = player['accounts']
             print(i + 1, '/', len(draft), ':', accs)

@@ -1,5 +1,10 @@
 import os, json
+import pandas as pd
 import numpy as np
+
+import openpyxl
+from io import BytesIO
+from urllib.request import urlopen
 
 def _partial_in(array, sub):
     for a in array:
@@ -66,6 +71,45 @@ def season_info_get_teams(info, season = None, league = None, division = None, *
     search = {'seasons': season, 'leagues': league, 'divisions': division}
     division = season_info_get(info, **search)
     return division['teams']
+
+def read_google_sheet(url, resolve_links = False):
+    spreadsheet_id = url[url.index('/d/') + 3: url.index('/edit')]
+    sheet_id = url[url.index('gid=') + 4:]
+    export_frmt = 'https://docs.google.com/spreadsheets/d/{}/export?format={}&gid={}'
+    if not resolve_links:
+        export_url = export_frmt.format(spreadsheet_id, 'csv', sheet_id)
+        return pd.read_csv(export_url)
+    else:
+        export_url = export_frmt.format(spreadsheet_id, 'xlsx', sheet_id)
+        raw = BytesIO(urlopen(export_url).read())
+        data = pd.read_excel(raw)
+        workbook = openpyxl.load_workbook(raw)
+        sheetname = workbook.sheetnames[0]
+        sheet = workbook[sheetname]
+        # get column names from header
+        header = []
+        for cell in next(sheet.rows):
+            c = cell.value
+            if hasattr(c, 'text'):
+                c = c.text.split('"')[1] # Moggoblin's formula thing
+            header += [c]
+        # update dataframe with hyperlinks when found
+        col_names = ['Dotabuff Link', 'Second account', 'Third account']
+        for col_name in col_names:
+            col_idx = header.index(col_name)
+            col = next(c for i, c in enumerate(sheet.columns) if i == col_idx) # seek
+            col_data = []
+            for c in col:
+                d = c.value
+                if hasattr(c, 'hyperlink'):
+                    if hasattr(c.hyperlink, 'target'):
+                        # ask for permission
+                        d = c.hyperlink.target
+                col_data += [d]
+            col_data = col_data[1:] # drop header
+            data[col_name] = col_data
+        data.dropna(how = 'all', inplace = True)
+        return data
 
 # find league info
 if __name__ == '__main__':
