@@ -43,6 +43,14 @@
                                         },
                                         {
                                             "account_id": "31966955",
+                                            "mmr": 7300,
+                                            "discord": "sm5le",
+                                            "alts": [],
+                                            "country": null,
+                                            "name": "Sm5le",
+                                        },
+                                        {
+                                            "account_id": "31966955",
                                             "mmr": 8044,
                                             "discord": "ivz_",
                                             "pos_pref": [
@@ -2592,22 +2600,22 @@
                                     ]
                                 },
                                 {
-                                    "name": "ClemFandango",
+                                    "name": "Bot Linda",
                                     "players": [
                                         {
-                                            "account_id": "112287360",
-                                            "mmr": 5626,
-                                            "discord": "sam05911",
+                                            "account_id": "1102469941",
+                                            "mmr": 2391,
+                                            "discord": "poslednibuh",
                                             "pos_pref": [
-                                                4,
-                                                4,
                                                 5,
                                                 3,
-                                                1
+                                                2,
+                                                2,
+                                                2
                                             ],
                                             "alts": [],
-                                            "country": "GB",
-                                            "name": "ClemFandango"
+                                            "country": null,
+                                            "name": "Bot Linda"
                                         },
                                         {
                                             "account_id": "86719611",
@@ -2655,19 +2663,12 @@
                                             "name": "Cunny"
                                         },
                                         {
-                                            "account_id": "1102469941",
-                                            "mmr": 2391,
-                                            "discord": "poslednibuh",
-                                            "pos_pref": [
-                                                5,
-                                                3,
-                                                2,
-                                                2,
-                                                2
-                                            ],
+                                            "account_id": "143214129",
+                                            "mmr": 5700,
+                                            "discord": "philip.fortnite",
                                             "alts": [],
                                             "country": null,
-                                            "name": "Bot Linda"
+                                            "name": "Elnino"
                                         }
                                     ]
                                 },
