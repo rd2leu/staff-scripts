@@ -74,7 +74,7 @@ def season_info_get_teams(info, season = None, league = None, division = None, *
 
 def read_google_sheet(url, resolve_links = False):
     spreadsheet_id = url[url.index('/d/') + 3: url.index('/edit')]
-    sheet_id = url[url.index('gid=') + 4:]
+    sheet_id = url[url.rindex('gid=') + 4:]
     export_frmt = 'https://docs.google.com/spreadsheets/d/{}/export?format={}&gid={}'
     if not resolve_links:
         export_url = export_frmt.format(spreadsheet_id, 'csv', sheet_id)
@@ -83,6 +83,7 @@ def read_google_sheet(url, resolve_links = False):
         export_url = export_frmt.format(spreadsheet_id, 'xlsx', sheet_id)
         raw = BytesIO(urlopen(export_url).read())
         data = pd.read_excel(raw)
+        n = len(data)
         workbook = openpyxl.load_workbook(raw)
         sheetname = workbook.sheetnames[0]
         sheet = workbook[sheetname]
@@ -106,6 +107,9 @@ def read_google_sheet(url, resolve_links = False):
                         # ask for permission
                         d = c.hyperlink.target
                 col_data += [d]
+                if len(col_data) == n + 1:
+                    # no more player rows
+                    break
             col_data = col_data[1:] # drop header
             data[col_name] = col_data
         data.dropna(how = 'all', inplace = True)

@@ -10,11 +10,15 @@ from sklearn.cluster import DBSCAN as DBS
 
 INPUT_PATH = 'input'
 OUTPUT_PATH = 'draft'
-FNAME = 'rd2l_s28'
+FNAME = 'rd2l_s29'
 
-def read_google_sheet(url):
-    url2 = url[:url.index('/edit')] + '/export?format=csv&' + url[url.index('gid='):]
-    return pd.read_csv(url2)
+"""
+Sheet styles:
+0 unspecified, assume Owl sheets
+1 Owl sheets: < S27: no hyperlinks, alts in a single cell
+2 Moggoblin sheets: M14 S28: no hyperlinks, alts in "2nd account" "3rd account"
+3 Moggoblin sheets: M15 S29: dotabuff urls hyperlinked, alts in "2nd account" "3rd account"
+"""
 
 with open(os.path.join(INPUT_PATH, FNAME + '.json'), 'r') as f:
     rd2l = json.load(f)
@@ -22,64 +26,63 @@ with open(os.path.join(INPUT_PATH, FNAME + '.json'), 'r') as f:
 for season in rd2l['seasons']:
     for league in season['leagues']:
         for division in league['divisions']:
-            
+
+            dsparser = 0
+            if 'dsparser' in division:
+                dsparser = division['dsparser']
+            if dsparser > 3:
+                raise NotImplementedError('no parser for sheet style')
+                # crash here
+
+            sheet = read_google_sheet(division['teamsheet'])
             # parse draft sheet
-            if 'dsparser' not in division or division['dsparser'] < 3:
-                sheet = read_google_sheet(division['teamsheet'])
+            if dsparser in [0, 1, 2]:
                 draft = read_google_sheet(division['draftsheet'])
-            else:                
-                sheet = read_google_sheet(division['teamsheet'], resolve_links = True)
+            elif dsparser in [3]:
+                # hyperlinked cells for account url
                 draft = read_google_sheet(division['draftsheet'], resolve_links = True)
 
-            if 'dsparser' not in division or division['dsparser'] == 1:
+            if dsparser in [0, 1]:
                 # Owl sheets
                 draft['account_id'] = draft['Dotabuff link'].apply(extract_account_id2)
                 draft['alts'] = draft['Please list your alternate accounts'].apply(extract_account_ids)
-            elif division['dsparser'] >= 2:
+            elif dsparser in [2, 3]:
                 # Moggoblin sheets
                 draft['account_id'] = draft['Dotabuff Link'].apply(extract_account_id2)
                 draft['alts'] = draft[['Second account', 'Third account']].apply(list, axis = 1).astype(str).apply(extract_account_ids)
-                draft = draft[draft['Activity check'] == 'Yes'].copy()
+                draft = draft[draft['Activity check'].isin(['Yes', 'yes'])].copy()
 
             draft['accounts'] = draft.apply(lambda x: x['alts'] + [x['account_id']], axis = 1)
 
-            pos_idx = draft.columns.searchsorted('Pos 1')
+            pos_idx = draft.columns.searchsorted('Pos 1') + 1
             
-            # search sheet for player cells
+            # search teamsheet for player cells
             players = {}
             for i, row in sheet.iterrows():
                 for j, val in enumerate(row.iloc):
+                    
+                    if j < 3:
+                        # skip first 3 columns
+                        continue
+                    
                     accs = extract_account_ids2(val)
                     if accs:
-                        # row contains a dotabuff link, save info
+                        # cell contains a dotabuff link, save info
                         info = {'account_id': accs[0]}
 
                         # basic info
                         p = draft[draft['account_id'] == accs[0]].iloc[0]
                         info['mmr'] = int(p['MMR'])
                         info['discord'] = p['Discord ID']
-                        #info['pos_pref'] = p[pos_idx + 1: pos_idx + 6].values.astype(int).tolist()
-                        # FIXME: why +1?
                         info['pos_pref'] = p[pos_idx: pos_idx + 5].values.astype(int).tolist()
                         info['alts'] = p['alts']
-
-                        # top 3 heroes
-                        params = {
-                            'date': 90,
-                            # add 'significant': 0 to include turbo games
-                            }
-                        matches = [m for a in accs for m in get_player_matches(a, **params)]
-                        matches = [m for m in matches if m != 'error']
-                        matches = sorted(matches, key = lambda x: x['start_time'], reverse = True)
-                        heroes = [m['hero_id'] for m in matches]
-                        u, c = np.unique(heroes, return_counts = True)
-                        info['top3'] = u[np.argsort(c)][::-1][:3].tolist()
 
                         # country
                         info['country'] = get_player_data(p['account_id'])['country']
 
                         if league['type'] == 'auction':
-                            coins = sheet.iloc[i, j - 1]
+                            #coins = sheet.iloc[i, j - 1]
+                            coins = sheet.iloc[i, j + 1] # everybody's changing and I don't feel the same
                             try:
                                 coins = int(coins)
                             except:

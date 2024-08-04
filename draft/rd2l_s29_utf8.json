@@ -1,0 +1,3087 @@
+{
+    "name": "RD2L EU",
+    "region": "Europe West",
+    "id": 0,
+    "seasons": [
+        {
+            "name": "Season 29",
+            "id": 0,
+            "start-date": 0,
+            "end-date": 0,
+            "leagues": [
+                {
+                    "name": "Sunday",
+                    "id": 16887,
+                    "type": "auction",
+                    "divisions": [
+                        {
+                            "name": "Division 1",
+                            "id": 1,
+                            "teamsheet": "https://docs.google.com/spreadsheets/d/1MVP5HpivjYKcmmLEUcEYrUgcCTYWM_dZezFMKNJVeuc/edit?gid=522669012#gid=522669012",
+                            "draftsheet_": "https://docs.google.com/spreadsheets/d/1MVP5HpivjYKcmmLEUcEYrUgcCTYWM_dZezFMKNJVeuc/edit?gid=1298448049#gid=1298448049",
+                            "draftsheet": "https://docs.google.com/spreadsheets/d/1MVP5HpivjYKcmmLEUcEYrUgcCTYWM_dZezFMKNJVeuc/edit?gid=721784153#gid=721784153",
+                            "dsparser": 3,
+                            "teams": [
+                                {
+                                    "name": "Johannespassion",
+                                    "players": [
+                                        {
+                                            "account_id": "892573045",
+                                            "mmr": 7166,
+                                            "discord": "johannespassion",
+                                            "pos_pref": [
+                                                5,
+                                                5,
+                                                3,
+                                                4,
+                                                5
+                                            ],
+                                            "alts": [],
+                                            "country": null,
+                                            "name": "Johannespassion",
+                                            "coins": 94
+                                        },
+                                        {
+                                            "account_id": "31966955",
+                                            "mmr": 8044,
+                                            "discord": "ivz_",
+                                            "pos_pref": [
+                                                3,
+                                                1,
+                                                3,
+                                                5,
+                                                5
+                                            ],
+                                            "alts": [],
+                                            "country": "DK",
+                                            "name": "Ivz",
+                                            "coins": 28
+                                        },
+                                        {
+                                            "account_id": "40625516",
+                                            "mmr": 6757,
+                                            "discord": "raytoran",
+                                            "pos_pref": [
+                                                4,
+                                                3,
+                                                5,
+                                                3,
+                                                3
+                                            ],
+                                            "alts": [],
+                                            "country": null,
+                                            "name": "Raytoran",
+                                            "coins": 20
+                                        },
+                                        {
+                                            "account_id": "61904034",
+                                            "mmr": 6173,
+                                            "discord": "Lekandor#3777",
+                                            "pos_pref": [
+                                                5,
+                                                5,
+                                                4,
+                                                1,
+                                                1
+                                            ],
+                                            "alts": [],
+                                            "country": "DE",
+                                            "name": "Lekandor",
+                                            "coins": 5
+                                        }
+                                    ]
+                                },
+                                {
+                                    "name": "play",
+                                    "players": [
+                                        {
+                                            "account_id": "113312766",
+                                            "mmr": 8790,
+                                            "discord": "playplayplayplay",
+                                            "pos_pref": [
+                                                5,
+                                                5,
+                                                5,
+                                                5,
+                                                5
+                                            ],
+                                            "alts": [
+                                                "913000758",
+                                                "222036729",
+                                                "1248511897"
+                                            ],
+                                            "country": "DK",
+                                            "name": "play",
+                                            "coins": 67
+                                        },
+                                        {
+                                            "account_id": "75376818",
+                                            "mmr": 7422,
+                                            "discord": "whonoobnow",
+                                            "pos_pref": [
+                                                1,
+                                                1,
+                                                5,
+                                                1,
+                                                1
+                                            ],
+                                            "alts": [],
+                                            "country": "GB",
+                                            "name": "whonoobnow",
+                                            "coins": 23
+                                        },
+                                        {
+                                            "account_id": "65159250",
+                                            "mmr": 6026,
+                                            "discord": "leiya",
+                                            "pos_pref": [
+                                                5,
+                                                1,
+                                                2,
+                                                1,
+                                                2
+                                            ],
+                                            "alts": [],
+                                            "country": "NO",
+                                            "name": "Leiya",
+                                            "coins": 21
+                                        },
+                                        {
+                                            "account_id": "161284532",
+                                            "mmr": 7460,
+                                            "discord": "zaop4",
+                                            "pos_pref": [
+                                                1,
+                                                1,
+                                                2,
+                                                5,
+                                                1
+                                            ],
+                                            "alts": [],
+                                            "country": null,
+                                            "name": "Zaop",
+                                            "coins": 10
+                                        },
+                                        {
+                                            "account_id": "121439102",
+                                            "mmr": 7080,
+                                            "discord": "jesus6382",
+                                            "pos_pref": [
+                                                1,
+                                                1,
+                                                1,
+                                                5,
+                                                1
+                                            ],
+                                            "alts": [],
+                                            "country": "DE",
+                                            "name": "*Jesus*Aka#Mohammed",
+                                            "coins": 13
+                                        }
+                                    ]
+                                },
+                                {
+                                    "name": "heheheha",
+                                    "players": [
+                                        {
+                                            "account_id": "135425789",
+                                            "mmr": 6700,
+                                            "discord": "valakii",
+                                            "pos_pref": [
+                                                5,
+                                                5,
+                                                4,
+                                                1,
+                                                1
+                                            ],
+                                            "alts": [
+                                                "394354622"
+                                            ],
+                                            "country": "HU",
+                                            "name": "heheheha",
+                                            "coins": 101
+                                        },
+                                        {
+                                            "account_id": "243172458",
+                                            "mmr": 7904,
+                                            "discord": "myangelnico",
+                                            "pos_pref": [
+                                                1,
+                                                5,
+                                                3,
+                                                5,
+                                                4
+                                            ],
+                                            "alts": [
+                                                "435608240"
+                                            ],
+                                            "country": "SE",
+                                            "name": "MyAngelNico",
+                                            "coins": 36
+                                        },
+                                        {
+                                            "account_id": "167275877",
+                                            "mmr": 6700,
+                                            "discord": "443801708854902786",
+                                            "pos_pref": [
+                                                5,
+                                                5,
+                                                5,
+                                                5,
+                                                5
+                                            ],
+                                            "alts": [],
+                                            "country": "DE",
+                                            "name": "Mango",
+                                            "coins": 23
+                                        },
+                                        {
+                                            "account_id": "132180151",
+                                            "mmr": 6084,
+                                            "discord": "muesli__",
+                                            "pos_pref": [
+                                                2,
+                                                1,
+                                                5,
+                                                1,
+                                                1
+                                            ],
+                                            "alts": [],
+                                            "country": null,
+                                            "name": "muesli_",
+                                            "coins": 4
+                                        },
+                                        {
+                                            "account_id": "397171029",
+                                            "mmr": 6831,
+                                            "discord": "yonaka321",
+                                            "pos_pref": [
+                                                3,
+                                                2,
+                                                3,
+                                                5,
+                                                2
+                                            ],
+                                            "alts": [],
+                                            "country": "MH",
+                                            "name": "yonaka",
+                                            "coins": 38
+                                        }
+                                    ]
+                                },
+                                {
+                                    "name": "Leo",
+                                    "players": [
+                                        {
+                                            "account_id": "1549023925",
+                                            "mmr": 11000,
+                                            "discord": "massacre9146",
+                                            "pos_pref": [
+                                                2,
+                                                3,
+                                                5,
+                                                5,
+                                                4
+                                            ],
+                                            "alts": [
+                                                "68308368"
+                                            ],
+                                            "country": null,
+                                            "name": "Leo",
+                                            "coins": 53
+                                        },
+                                        {
+                                            "account_id": "6243191",
+                                            "mmr": 5816,
+                                            "discord": "Spetch",
+                                            "pos_pref": [
+                                                1,
+                                                4,
+                                                4,
+                                                5,
+                                                4
+                                            ],
+                                            "alts": [],
+                                            "country": null,
+                                            "name": "Spetch",
+                                            "coins": 1
+                                        },
+                                        {
+                                            "account_id": "81378038",
+                                            "mmr": 7430,
+                                            "discord": "gracdoto",
+                                            "pos_pref": [
+                                                1,
+                                                5,
+                                                1,
+                                                1,
+                                                1
+                                            ],
+                                            "alts": [
+                                                "273506268"
+                                            ],
+                                            "country": "EE",
+                                            "name": "Grac-",
+                                            "coins": 5
+                                        },
+                                        {
+                                            "account_id": "125155223",
+                                            "mmr": 7006,
+                                            "discord": "calli_dx",
+                                            "pos_pref": [
+                                                1,
+                                                1,
+                                                1,
+                                                5,
+                                                1
+                                            ],
+                                            "alts": [],
+                                            "country": "TH",
+                                            "name": "calli_dx",
+                                            "coins": 27
+                                        },
+                                        {
+                                            "account_id": "104614661",
+                                            "mmr": 6322,
+                                            "discord": "Sherez965",
+                                            "pos_pref": [
+                                                5,
+                                                2,
+                                                2,
+                                                1,
+                                                1
+                                            ],
+                                            "alts": [],
+                                            "country": "GB",
+                                            "name": "Sherez965",
+                                            "coins": 18
+                                        }
+                                    ]
+                                },
+                                {
+                                    "name": "Rapdis",
+                                    "players": [
+                                        {
+                                            "account_id": "104389218",
+                                            "mmr": 7070,
+                                            "discord": "rapdis",
+                                            "pos_pref": [
+                                                1,
+                                                5,
+                                                1,
+                                                5,
+                                                3
+                                            ],
+                                            "alts": [],
+                                            "country": "LV",
+                                            "name": "Rapdis",
+                                            "coins": 96
+                                        },
+                                        {
+                                            "account_id": "148115333",
+                                            "mmr": 8989,
+                                            "discord": "actuallyrtz",
+                                            "pos_pref": [
+                                                5,
+                                                3,
+                                                3,
+                                                1,
+                                                1
+                                            ],
+                                            "alts": [],
+                                            "country": "IL",
+                                            "name": "Bahoi",
+                                            "coins": 74
+                                        },
+                                        {
+                                            "account_id": "311078326",
+                                            "mmr": 6557,
+                                            "discord": "existanciel",
+                                            "pos_pref": [
+                                                3,
+                                                1,
+                                                5,
+                                                1,
+                                                1
+                                            ],
+                                            "alts": [],
+                                            "country": "FR",
+                                            "name": "Exy-",
+                                            "coins": 2
+                                        },
+                                        {
+                                            "account_id": "183938343",
+                                            "mmr": 7129,
+                                            "discord": "backwardshello",
+                                            "pos_pref": [
+                                                2,
+                                                5,
+                                                4,
+                                                1,
+                                                1
+                                            ],
+                                            "alts": [],
+                                            "country": "GB",
+                                            "name": "backwardshello",
+                                            "coins": 16
+                                        },
+                                        {
+                                            "account_id": "177572049",
+                                            "mmr": 6224,
+                                            "discord": "Spicy#6291",
+                                            "pos_pref": [
+                                                1,
+                                                1,
+                                                4,
+                                                5,
+                                                1
+                                            ],
+                                            "alts": [],
+                                            "country": "DE",
+                                            "name": "Spicy",
+                                            "coins": 4
+                                        }
+                                    ]
+                                },
+                                {
+                                    "name": "Blackjack",
+                                    "players": [
+                                        {
+                                            "account_id": "198261415",
+                                            "mmr": 6450,
+                                            "discord": "LookAtYou#2312",
+                                            "pos_pref": [
+                                                3,
+                                                3,
+                                                5,
+                                                2,
+                                                3
+                                            ],
+                                            "alts": [],
+                                            "country": null,
+                                            "name": "Blackjack",
+                                            "coins": 103
+                                        },
+                                        {
+                                            "account_id": "421257589",
+                                            "mmr": 9257,
+                                            "discord": "ritired",
+                                            "pos_pref": [
+                                                2,
+                                                5,
+                                                1,
+                                                1,
+                                                1
+                                            ],
+                                            "alts": [],
+                                            "country": "PK",
+                                            "name": "ri",
+                                            "coins": 87
+                                        },
+                                        {
+                                            "account_id": "160241329",
+                                            "mmr": 6300,
+                                            "discord": "Mev4916",
+                                            "pos_pref": [
+                                                3,
+                                                2,
+                                                2,
+                                                5,
+                                                5
+                                            ],
+                                            "alts": [],
+                                            "country": "GB",
+                                            "name": "Mev",
+                                            "coins": 14
+                                        },
+                                        {
+                                            "account_id": "86719611",
+                                            "mmr": 6100,
+                                            "discord": "imbasargarepa",
+                                            "pos_pref": [
+                                                1,
+                                                1,
+                                                3,
+                                                5,
+                                                5
+                                            ],
+                                            "alts": [],
+                                            "country": "RS",
+                                            "name": "imbasargarepa",
+                                            "coins": 1
+                                        },
+                                        {
+                                            "account_id": "148339920",
+                                            "mmr": 6145,
+                                            "discord": "lennathousand",
+                                            "pos_pref": [
+                                                4,
+                                                1,
+                                                5,
+                                                4,
+                                                4
+                                            ],
+                                            "alts": [],
+                                            "country": "DE",
+                                            "name": "LennAThousand",
+                                            "coins": 1
+                                        }
+                                    ]
+                                },
+                                {
+                                    "name": "Aty",
+                                    "players": [
+                                        {
+                                            "account_id": "465095630",
+                                            "mmr": 6380,
+                                            "discord": "atyvk",
+                                            "pos_pref": [
+                                                4,
+                                                1,
+                                                1,
+                                                5,
+                                                2
+                                            ],
+                                            "alts": [],
+                                            "country": null,
+                                            "name": "Aty",
+                                            "coins": 107
+                                        },
+                                        {
+                                            "account_id": "854684906",
+                                            "mmr": 7400,
+                                            "discord": "drunkennsailor",
+                                            "pos_pref": [
+                                                1,
+                                                1,
+                                                5,
+                                                1,
+                                                1
+                                            ],
+                                            "alts": [],
+                                            "country": null,
+                                            "name": "Drunkenn Sailor",
+                                            "coins": 24
+                                        },
+                                        {
+                                            "account_id": "152273237",
+                                            "mmr": 8020,
+                                            "discord": "cory__",
+                                            "pos_pref": [
+                                                3,
+                                                1,
+                                                5,
+                                                1,
+                                                1
+                                            ],
+                                            "alts": [],
+                                            "country": "GB",
+                                            "name": "cory",
+                                            "coins": 43
+                                        },
+                                        {
+                                            "account_id": "110881046",
+                                            "mmr": 6400,
+                                            "discord": "jihapse",
+                                            "pos_pref": [
+                                                4,
+                                                4,
+                                                5,
+                                                1,
+                                                1
+                                            ],
+                                            "alts": [],
+                                            "country": "GB",
+                                            "name": "jihapse",
+                                            "coins": 37
+                                        },
+                                        {
+                                            "account_id": "129193405",
+                                            "mmr": 5733,
+                                            "discord": "keb`#1974",
+                                            "pos_pref": [
+                                                3,
+                                                2,
+                                                3,
+                                                4,
+                                                5
+                                            ],
+                                            "alts": [],
+                                            "country": null,
+                                            "name": "keb`",
+                                            "coins": 3
+                                        }
+                                    ]
+                                },
+                                {
+                                    "name": "Mini",
+                                    "players": [
+                                        {
+                                            "account_id": "84268143",
+                                            "mmr": 7500,
+                                            "discord": "minitv",
+                                            "pos_pref": [
+                                                1,
+                                                1,
+                                                1,
+                                                1,
+                                                5
+                                            ],
+                                            "alts": [],
+                                            "country": "GB",
+                                            "name": "Mini",
+                                            "coins": 87
+                                        },
+                                        {
+                                            "account_id": "81952474",
+                                            "mmr": 8300,
+                                            "discord": "oka__.",
+                                            "pos_pref": [
+                                                1,
+                                                1,
+                                                3,
+                                                5,
+                                                1
+                                            ],
+                                            "alts": [],
+                                            "country": "ES",
+                                            "name": "Bonjwa",
+                                            "coins": 50
+                                        },
+                                        {
+                                            "account_id": "278230172",
+                                            "mmr": 6232,
+                                            "discord": "! . ? )~;]{~d &\"*&$\"*! !",
+                                            "pos_pref": [
+                                                4,
+                                                5,
+                                                3,
+                                                2,
+                                                1
+                                            ],
+                                            "alts": [],
+                                            "country": "TD",
+                                            "name": "TripleS",
+                                            "coins": 15
+                                        },
+                                        {
+                                            "account_id": "196399854",
+                                            "mmr": 7086,
+                                            "discord": "_raikiri",
+                                            "pos_pref": [
+                                                1,
+                                                1,
+                                                5,
+                                                3,
+                                                1
+                                            ],
+                                            "alts": [
+                                                "186066282"
+                                            ],
+                                            "country": "BD",
+                                            "name": "RxKiri",
+                                            "coins": 3
+                                        },
+                                        {
+                                            "account_id": "184601350",
+                                            "mmr": 7800,
+                                            "discord": "fmega_",
+                                            "pos_pref": [
+                                                4,
+                                                4,
+                                                4,
+                                                1,
+                                                1
+                                            ],
+                                            "alts": [],
+                                            "country": "IE",
+                                            "name": "f",
+                                            "coins": 19
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "name": "Division 2",
+                            "id": 2,
+                            "teamsheet": "https://docs.google.com/spreadsheets/d/1MVP5HpivjYKcmmLEUcEYrUgcCTYWM_dZezFMKNJVeuc/edit?gid=1582815903#gid=1582815903",
+                            "draftsheet": "https://docs.google.com/spreadsheets/d/1MVP5HpivjYKcmmLEUcEYrUgcCTYWM_dZezFMKNJVeuc/edit?gid=721784153#gid=721784153",
+                            "dsparser": 3,
+                            "teams": [
+                                {
+                                    "name": "canin",
+                                    "players": [
+                                        {
+                                            "account_id": "78114459",
+                                            "mmr": 4973,
+                                            "discord": "canin.",
+                                            "pos_pref": [
+                                                3,
+                                                2,
+                                                5,
+                                                1,
+                                                1
+                                            ],
+                                            "alts": [],
+                                            "country": "DK",
+                                            "name": "canin",
+                                            "coins": 90
+                                        },
+                                        {
+                                            "account_id": "235385167",
+                                            "mmr": 5728,
+                                            "discord": "jetamo38",
+                                            "pos_pref": [
+                                                1,
+                                                5,
+                                                1,
+                                                3,
+                                                1
+                                            ],
+                                            "alts": [],
+                                            "country": "CZ",
+                                            "name": "jetamo",
+                                            "coins": 45
+                                        },
+                                        {
+                                            "account_id": "287978960",
+                                            "mmr": 5700,
+                                            "discord": "Cvaekt ",
+                                            "pos_pref": [
+                                                5,
+                                                1,
+                                                1,
+                                                1,
+                                                1
+                                            ],
+                                            "alts": [],
+                                            "country": "FO",
+                                            "name": "Cvaekt ",
+                                            "coins": 32
+                                        },
+                                        {
+                                            "account_id": "252657179",
+                                            "mmr": 4960,
+                                            "discord": "ruski2",
+                                            "pos_pref": [
+                                                1,
+                                                1,
+                                                1,
+                                                5,
+                                                3
+                                            ],
+                                            "alts": [],
+                                            "country": "GB",
+                                            "name": "Ruski",
+                                            "coins": 11
+                                        },
+                                        {
+                                            "account_id": "28888813",
+                                            "mmr": 3165,
+                                            "discord": "vade54777",
+                                            "pos_pref": [
+                                                1,
+                                                1,
+                                                1,
+                                                4,
+                                                5
+                                            ],
+                                            "alts": [],
+                                            "country": "GB",
+                                            "name": "Vade",
+                                            "coins": 2
+                                        }
+                                    ]
+                                },
+                                {
+                                    "name": "mash",
+                                    "players": [
+                                        {
+                                            "account_id": "253571081",
+                                            "mmr": 5023,
+                                            "discord": "mashadoo",
+                                            "pos_pref": [
+                                                5,
+                                                4,
+                                                3,
+                                                2,
+                                                1
+                                            ],
+                                            "alts": [
+                                                "185482839"
+                                            ],
+                                            "country": "FR",
+                                            "name": "mash",
+                                            "coins": 88
+                                        },
+                                        {
+                                            "account_id": "27997450",
+                                            "mmr": 5500,
+                                            "discord": ".mikel.",
+                                            "pos_pref": [
+                                                1,
+                                                1,
+                                                5,
+                                                1,
+                                                1
+                                            ],
+                                            "alts": [],
+                                            "country": "SE",
+                                            "name": "Mikel",
+                                            "coins": 38
+                                        },
+                                        {
+                                            "account_id": "111886427",
+                                            "mmr": 5555,
+                                            "discord": "viy_",
+                                            "pos_pref": [
+                                                1,
+                                                1,
+                                                1,
+                                                1,
+                                                3
+                                            ],
+                                            "alts": [],
+                                            "country": "VA",
+                                            "name": "Nappa",
+                                            "coins": 15
+                                        },
+                                        {
+                                            "account_id": "376256780",
+                                            "mmr": 5150,
+                                            "discord": "lightning_01",
+                                            "pos_pref": [
+                                                4,
+                                                5,
+                                                1,
+                                                1,
+                                                1
+                                            ],
+                                            "alts": [],
+                                            "country": "IS",
+                                            "name": "Lightning",
+                                            "coins": 27
+                                        },
+                                        {
+                                            "account_id": "279050958",
+                                            "mmr": 4666,
+                                            "discord": "Boo",
+                                            "pos_pref": [
+                                                1,
+                                                5,
+                                                1,
+                                                1,
+                                                1
+                                            ],
+                                            "alts": [],
+                                            "country": "ZW",
+                                            "name": "Boo",
+                                            "coins": 8
+                                        }
+                                    ]
+                                },
+                                {
+                                    "name": "Epona",
+                                    "players": [
+                                        {
+                                            "account_id": "256487232",
+                                            "mmr": 4623,
+                                            "discord": "eponamina",
+                                            "pos_pref": [
+                                                1,
+                                                1,
+                                                1,
+                                                4,
+                                                5
+                                            ],
+                                            "alts": [],
+                                            "country": "CH",
+                                            "name": "Epona",
+                                            "coins": 99
+                                        },
+                                        {
+                                            "account_id": "56404086",
+                                            "mmr": 6178,
+                                            "discord": "dominics",
+                                            "pos_pref": [
+                                                1,
+                                                1,
+                                                5,
+                                                1,
+                                                1
+                                            ],
+                                            "alts": [],
+                                            "country": "GB",
+                                            "name": "Dominic",
+                                            "coins": 49
+                                        },
+                                        {
+                                            "account_id": "80749349",
+                                            "mmr": 4734,
+                                            "discord": "cudapunyad",
+                                            "pos_pref": [
+                                                3,
+                                                3,
+                                                5,
+                                                4,
+                                                2
+                                            ],
+                                            "alts": [],
+                                            "country": "GB",
+                                            "name": "Cunny",
+                                            "coins": 5
+                                        },
+                                        {
+                                            "account_id": "146542636",
+                                            "mmr": 5627,
+                                            "discord": "Reddydas",
+                                            "pos_pref": [
+                                                5,
+                                                1,
+                                                1,
+                                                1,
+                                                1
+                                            ],
+                                            "alts": [],
+                                            "country": "NL",
+                                            "name": "Reddydas",
+                                            "coins": 19
+                                        },
+                                        {
+                                            "account_id": "179205309",
+                                            "mmr": 5660,
+                                            "discord": "kodlap",
+                                            "pos_pref": [
+                                                3,
+                                                5,
+                                                3,
+                                                2,
+                                                2
+                                            ],
+                                            "alts": [],
+                                            "country": "SK",
+                                            "name": "kodlap",
+                                            "coins": 26
+                                        }
+                                    ]
+                                },
+                                {
+                                    "name": "greenman",
+                                    "players": [
+                                        {
+                                            "account_id": "73877347",
+                                            "mmr": 4800,
+                                            "discord": "spcgreenman",
+                                            "pos_pref": [
+                                                5,
+                                                3,
+                                                1,
+                                                1,
+                                                1
+                                            ],
+                                            "alts": [],
+                                            "country": "NL",
+                                            "name": "greenman",
+                                            "coins": 95
+                                        },
+                                        {
+                                            "account_id": "112651997",
+                                            "mmr": 5916,
+                                            "discord": "venando",
+                                            "pos_pref": [
+                                                2,
+                                                5,
+                                                3,
+                                                3,
+                                                1
+                                            ],
+                                            "alts": [],
+                                            "country": null,
+                                            "name": "Venando",
+                                            "coins": 39
+                                        },
+                                        {
+                                            "account_id": "265444200",
+                                            "mmr": 6026,
+                                            "discord": "dr.ardy8",
+                                            "pos_pref": [
+                                                4,
+                                                2,
+                                                5,
+                                                3,
+                                                4
+                                            ],
+                                            "alts": [],
+                                            "country": "GE",
+                                            "name": "Tora",
+                                            "coins": 43
+                                        },
+                                        {
+                                            "account_id": "110747155",
+                                            "mmr": 5578,
+                                            "discord": "jamesth007",
+                                            "pos_pref": [
+                                                5,
+                                                2,
+                                                2,
+                                                1,
+                                                1
+                                            ],
+                                            "alts": [],
+                                            "country": "DE",
+                                            "name": "Jamesth007",
+                                            "coins": 2
+                                        },
+                                        {
+                                            "account_id": "84712191",
+                                            "mmr": 5222,
+                                            "discord": "Regurgitard",
+                                            "pos_pref": [
+                                                2,
+                                                4,
+                                                3,
+                                                1,
+                                                1
+                                            ],
+                                            "alts": [],
+                                            "country": "SE",
+                                            "name": "Regurgitard",
+                                            "coins": 11
+                                        }
+                                    ]
+                                },
+                                {
+                                    "name": "The Queen",
+                                    "players": [
+                                        {
+                                            "account_id": "130098742",
+                                            "mmr": 5280,
+                                            "discord": "bertiemason",
+                                            "pos_pref": [
+                                                1,
+                                                3,
+                                                2,
+                                                1,
+                                                1
+                                            ],
+                                            "alts": [],
+                                            "country": "BI",
+                                            "name": "The Queen",
+                                            "coins": 84
+                                        },
+                                        {
+                                            "account_id": "17120982",
+                                            "mmr": 5708,
+                                            "discord": "Denden_dota",
+                                            "pos_pref": [
+                                                5,
+                                                3,
+                                                3,
+                                                2,
+                                                1
+                                            ],
+                                            "alts": [],
+                                            "country": null,
+                                            "name": "Denden",
+                                            "coins": 44
+                                        },
+                                        {
+                                            "account_id": "134600696",
+                                            "mmr": 4997,
+                                            "discord": "mm1909",
+                                            "pos_pref": [
+                                                2,
+                                                1,
+                                                2,
+                                                5,
+                                                4
+                                            ],
+                                            "alts": [],
+                                            "country": null,
+                                            "name": "Muko",
+                                            "coins": 3
+                                        },
+                                        {
+                                            "account_id": "322474716",
+                                            "mmr": 5179,
+                                            "discord": "olly1612",
+                                            "pos_pref": [
+                                                1,
+                                                5,
+                                                4,
+                                                3,
+                                                2
+                                            ],
+                                            "alts": [],
+                                            "country": "GB",
+                                            "name": "Olly",
+                                            "coins": 3
+                                        },
+                                        {
+                                            "account_id": "150522382",
+                                            "mmr": 4180,
+                                            "discord": "luke7792",
+                                            "pos_pref": [
+                                                2,
+                                                1,
+                                                3,
+                                                5,
+                                                5
+                                            ],
+                                            "alts": [],
+                                            "country": "DE",
+                                            "name": "Luke",
+                                            "coins": 34
+                                        }
+                                    ]
+                                },
+                                {
+                                    "name": "2Pac-",
+                                    "players": [
+                                        {
+                                            "account_id": "364675035",
+                                            "mmr": 4747,
+                                            "discord": "alecse28",
+                                            "pos_pref": [
+                                                3,
+                                                1,
+                                                4,
+                                                5,
+                                                5
+                                            ],
+                                            "alts": [],
+                                            "country": "RO",
+                                            "name": "2Pac-",
+                                            "coins": 95
+                                        },
+                                        {
+                                            "account_id": "181868156",
+                                            "mmr": 5496,
+                                            "discord": "Fantasmal_.",
+                                            "pos_pref": [
+                                                5,
+                                                1,
+                                                1,
+                                                1,
+                                                3
+                                            ],
+                                            "alts": [],
+                                            "country": "IE",
+                                            "name": "Fantasmal",
+                                            "coins": 27
+                                        },
+                                        {
+                                            "account_id": "409030114",
+                                            "mmr": 5691,
+                                            "discord": "picapau000",
+                                            "pos_pref": [
+                                                3,
+                                                3,
+                                                5,
+                                                1,
+                                                1
+                                            ],
+                                            "alts": [],
+                                            "country": null,
+                                            "name": "picapau",
+                                            "coins": 40
+                                        },
+                                        {
+                                            "account_id": "135738807",
+                                            "mmr": 4900,
+                                            "discord": ".samurice",
+                                            "pos_pref": [
+                                                2,
+                                                5,
+                                                1,
+                                                3,
+                                                1
+                                            ],
+                                            "alts": [],
+                                            "country": null,
+                                            "name": "samurice",
+                                            "coins": 3
+                                        },
+                                        {
+                                            "account_id": "139093519",
+                                            "mmr": 4600,
+                                            "discord": "farrokhai",
+                                            "pos_pref": [
+                                                5,
+                                                1,
+                                                1,
+                                                1,
+                                                1
+                                            ],
+                                            "alts": [],
+                                            "country": "GB",
+                                            "name": "Kanto",
+                                            "coins": 25
+                                        }
+                                    ]
+                                },
+                                {
+                                    "name": "Marty",
+                                    "players": [
+                                        {
+                                            "account_id": "88342733",
+                                            "mmr": 5444,
+                                            "discord": "martynasu10",
+                                            "pos_pref": [
+                                                5,
+                                                5,
+                                                3,
+                                                2,
+                                                1
+                                            ],
+                                            "alts": [],
+                                            "country": "GB",
+                                            "name": "Marty",
+                                            "coins": 81
+                                        },
+                                        {
+                                            "account_id": "104880759",
+                                            "mmr": 5701,
+                                            "discord": "falls2767",
+                                            "pos_pref": [
+                                                5,
+                                                3,
+                                                5,
+                                                3,
+                                                1
+                                            ],
+                                            "alts": [
+                                                "219085046"
+                                            ],
+                                            "country": "PK",
+                                            "name": "falls",
+                                            "coins": 25
+                                        },
+                                        {
+                                            "account_id": "125847008",
+                                            "mmr": 5620,
+                                            "discord": "rinku7684",
+                                            "pos_pref": [
+                                                2,
+                                                5,
+                                                1,
+                                                2,
+                                                3
+                                            ],
+                                            "alts": [],
+                                            "country": null,
+                                            "name": "Rinku",
+                                            "coins": 15
+                                        },
+                                        {
+                                            "account_id": "209854330",
+                                            "mmr": 5360,
+                                            "discord": "lpm08",
+                                            "pos_pref": [
+                                                3,
+                                                3,
+                                                4,
+                                                2,
+                                                5
+                                            ],
+                                            "alts": [],
+                                            "country": "DE",
+                                            "name": "Elora",
+                                            "coins": 20
+                                        },
+                                        {
+                                            "account_id": "903426658",
+                                            "mmr": 5200,
+                                            "discord": "willpowerssj",
+                                            "pos_pref": [
+                                                5,
+                                                3,
+                                                1,
+                                                5,
+                                                1
+                                            ],
+                                            "alts": [],
+                                            "country": null,
+                                            "name": "WILLPOWER",
+                                            "coins": 21
+                                        }
+                                    ]
+                                },
+                                {
+                                    "name": "Owl",
+                                    "players": [
+                                        {
+                                            "account_id": "188263974",
+                                            "mmr": 4791,
+                                            "discord": "sirowlofbooze",
+                                            "pos_pref": [
+                                                3,
+                                                5,
+                                                4,
+                                                1,
+                                                1
+                                            ],
+                                            "alts": [],
+                                            "country": "GB",
+                                            "name": "Owl",
+                                            "coins": 95
+                                        },
+                                        {
+                                            "account_id": "89873399",
+                                            "mmr": 4753,
+                                            "discord": "hungrybrowny",
+                                            "pos_pref": [
+                                                4,
+                                                4,
+                                                3,
+                                                4,
+                                                1
+                                            ],
+                                            "alts": [],
+                                            "country": "GB",
+                                            "name": "hungry",
+                                            "coins": 27
+                                        },
+                                        {
+                                            "account_id": "63351306",
+                                            "mmr": 5663,
+                                            "discord": "marcelin3",
+                                            "pos_pref": [
+                                                5,
+                                                1,
+                                                5,
+                                                5,
+                                                1
+                                            ],
+                                            "alts": [],
+                                            "country": "GB",
+                                            "name": "meow",
+                                            "coins": 26
+                                        },
+                                        {
+                                            "account_id": "102352451",
+                                            "mmr": 5640,
+                                            "discord": "Ben1",
+                                            "pos_pref": [
+                                                2,
+                                                1,
+                                                2,
+                                                4,
+                                                5
+                                            ],
+                                            "alts": [],
+                                            "country": null,
+                                            "name": "Ben1",
+                                            "coins": 40
+                                        },
+                                        {
+                                            "account_id": "133498685",
+                                            "mmr": 5116,
+                                            "discord": "Hackermann.me",
+                                            "pos_pref": [
+                                                5,
+                                                4,
+                                                4,
+                                                2,
+                                                3
+                                            ],
+                                            "alts": [
+                                                "312864204"
+                                            ],
+                                            "country": "DK",
+                                            "name": "Ordinary Banana",
+                                            "coins": 2
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "name": "Division 3",
+                            "id": 3,
+                            "teamsheet": "https://docs.google.com/spreadsheets/d/1MVP5HpivjYKcmmLEUcEYrUgcCTYWM_dZezFMKNJVeuc/edit?gid=638643751#gid=638643751",
+                            "draftsheet": "https://docs.google.com/spreadsheets/d/1MVP5HpivjYKcmmLEUcEYrUgcCTYWM_dZezFMKNJVeuc/edit?gid=721784153#gid=721784153",
+                            "dsparser": 3,
+                            "teams": [
+                                {
+                                    "name": "Hope-",
+                                    "players": [
+                                        {
+                                            "account_id": "95583731",
+                                            "mmr": 4260,
+                                            "discord": "hope1202",
+                                            "pos_pref": [
+                                                5,
+                                                1,
+                                                1,
+                                                1,
+                                                1
+                                            ],
+                                            "alts": [],
+                                            "country": "DE",
+                                            "name": "Hope-",
+                                            "coins": 75
+                                        },
+                                        {
+                                            "account_id": "96982592",
+                                            "mmr": 2750,
+                                            "discord": "hamma9240",
+                                            "pos_pref": [
+                                                1,
+                                                5,
+                                                3,
+                                                3,
+                                                3
+                                            ],
+                                            "alts": [],
+                                            "country": null,
+                                            "name": "Hamma",
+                                            "coins": 20
+                                        },
+                                        {
+                                            "account_id": "71904413",
+                                            "mmr": 3860,
+                                            "discord": "FredAstaire ",
+                                            "pos_pref": [
+                                                4,
+                                                2,
+                                                1,
+                                                4,
+                                                3
+                                            ],
+                                            "alts": [],
+                                            "country": "GB",
+                                            "name": "Fred Astaire (dead inside)",
+                                            "coins": 22
+                                        },
+                                        {
+                                            "account_id": "172386727",
+                                            "mmr": 3650,
+                                            "discord": "officerandres",
+                                            "pos_pref": [
+                                                1,
+                                                1,
+                                                5,
+                                                1,
+                                                1
+                                            ],
+                                            "alts": [],
+                                            "country": null,
+                                            "name": "officer andres",
+                                            "coins": 12
+                                        },
+                                        {
+                                            "account_id": "73466852",
+                                            "mmr": 2048,
+                                            "discord": "vercingetorix3956",
+                                            "pos_pref": [
+                                                4,
+                                                5,
+                                                3,
+                                                2,
+                                                1
+                                            ],
+                                            "alts": [],
+                                            "country": "TW",
+                                            "name": "vercingetorix",
+                                            "coins": 1
+                                        }
+                                    ]
+                                },
+                                {
+                                    "name": "Catnip",
+                                    "players": [
+                                        {
+                                            "account_id": "433060499",
+                                            "mmr": 4000,
+                                            "discord": "moonmoe",
+                                            "pos_pref": [
+                                                3,
+                                                4,
+                                                2,
+                                                5,
+                                                2
+                                            ],
+                                            "alts": [],
+                                            "country": "JP",
+                                            "name": "Catnip",
+                                            "coins": 78
+                                        },
+                                        {
+                                            "account_id": "149253098",
+                                            "mmr": 5130,
+                                            "discord": "jexin",
+                                            "pos_pref": [
+                                                1,
+                                                5,
+                                                3,
+                                                2,
+                                                2
+                                            ],
+                                            "alts": [],
+                                            "country": "SY",
+                                            "name": "Jeri",
+                                            "coins": 43
+                                        },
+                                        {
+                                            "account_id": "1061292669",
+                                            "mmr": 2953,
+                                            "discord": "maskil88",
+                                            "pos_pref": [
+                                                2,
+                                                3,
+                                                1,
+                                                5,
+                                                4
+                                            ],
+                                            "alts": [],
+                                            "country": "ZA",
+                                            "name": "Maskil",
+                                            "coins": 11
+                                        },
+                                        {
+                                            "account_id": "95966544",
+                                            "mmr": 2000,
+                                            "discord": "alkyy0513",
+                                            "pos_pref": [
+                                                5,
+                                                3,
+                                                3,
+                                                3,
+                                                4
+                                            ],
+                                            "alts": [],
+                                            "country": null,
+                                            "name": "Alkyy",
+                                            "coins": 2
+                                        },
+                                        {
+                                            "account_id": "16570127",
+                                            "mmr": 2374,
+                                            "discord": "destin.faroda",
+                                            "pos_pref": [
+                                                3,
+                                                1,
+                                                2,
+                                                5,
+                                                4
+                                            ],
+                                            "alts": [],
+                                            "country": null,
+                                            "name": "Destin",
+                                            "coins": 22
+                                        }
+                                    ]
+                                },
+                                {
+                                    "name": "VIKING",
+                                    "players": [
+                                        {
+                                            "account_id": "1240080323",
+                                            "mmr": 3239,
+                                            "discord": "viking_gotham",
+                                            "pos_pref": [
+                                                5,
+                                                3,
+                                                4,
+                                                2,
+                                                1
+                                            ],
+                                            "alts": [
+                                                "989426379"
+                                            ],
+                                            "country": "IN",
+                                            "name": "VIKING",
+                                            "coins": 96
+                                        },
+                                        {
+                                            "account_id": "207300381",
+                                            "mmr": 5340,
+                                            "discord": "AdaBagcibasi",
+                                            "pos_pref": [
+                                                1,
+                                                1,
+                                                5,
+                                                1,
+                                                1
+                                            ],
+                                            "alts": [],
+                                            "country": "RU",
+                                            "name": "AA",
+                                            "coins": 50
+                                        },
+                                        {
+                                            "account_id": "95578104",
+                                            "mmr": 2520,
+                                            "discord": "andyg14",
+                                            "pos_pref": [
+                                                2,
+                                                1,
+                                                5,
+                                                4,
+                                                4
+                                            ],
+                                            "alts": [],
+                                            "country": null,
+                                            "name": "G14",
+                                            "coins": 10
+                                        },
+                                        {
+                                            "account_id": "456760190",
+                                            "mmr": 3750,
+                                            "discord": "hammad2861",
+                                            "pos_pref": [
+                                                1,
+                                                2,
+                                                3,
+                                                5,
+                                                5
+                                            ],
+                                            "alts": [],
+                                            "country": "DE",
+                                            "name": "Baigan",
+                                            "coins": 17
+                                        },
+                                        {
+                                            "account_id": "69347241",
+                                            "mmr": 3200,
+                                            "discord": "GrimREapaaah#7725",
+                                            "pos_pref": [
+                                                4,
+                                                5,
+                                                3,
+                                                3,
+                                                1
+                                            ],
+                                            "alts": [],
+                                            "country": "GB",
+                                            "name": "GrimR",
+                                            "coins": 15
+                                        }
+                                    ]
+                                },
+                                {
+                                    "name": "Jh",
+                                    "players": [
+                                        {
+                                            "account_id": "99374795",
+                                            "mmr": 2226,
+                                            "discord": "jeromehage",
+                                            "pos_pref": [
+                                                3,
+                                                3,
+                                                3,
+                                                4,
+                                                5
+                                            ],
+                                            "alts": [],
+                                            "country": null,
+                                            "name": "Jh",
+                                            "coins": 125
+                                        },
+                                        {
+                                            "account_id": "167618363",
+                                            "mmr": 4697,
+                                            "discord": "pot8os6603",
+                                            "pos_pref": [
+                                                3,
+                                                1,
+                                                5,
+                                                4,
+                                                4
+                                            ],
+                                            "alts": [],
+                                            "country": null,
+                                            "name": "Trixxy",
+                                            "coins": 37
+                                        },
+                                        {
+                                            "account_id": "95617179",
+                                            "mmr": 4215,
+                                            "discord": "bleapo",
+                                            "pos_pref": [
+                                                2,
+                                                2,
+                                                5,
+                                                1,
+                                                3
+                                            ],
+                                            "alts": [],
+                                            "country": "GB",
+                                            "name": "Bleapo",
+                                            "coins": 30
+                                        },
+                                        {
+                                            "account_id": "26793089",
+                                            "mmr": 4100,
+                                            "discord": "Hynips",
+                                            "pos_pref": [
+                                                2,
+                                                1,
+                                                1,
+                                                5,
+                                                5
+                                            ],
+                                            "alts": [],
+                                            "country": null,
+                                            "name": "Hynips",
+                                            "coins": 35
+                                        },
+                                        {
+                                            "account_id": "1102469941",
+                                            "mmr": 2391,
+                                            "discord": "poslednibuh",
+                                            "pos_pref": [
+                                                5,
+                                                3,
+                                                2,
+                                                2,
+                                                2
+                                            ],
+                                            "alts": [],
+                                            "country": null,
+                                            "name": "Bot Linda",
+                                            "coins": 23
+                                        }
+                                    ]
+                                },
+                                {
+                                    "name": "furiousllama",
+                                    "players": [
+                                        {
+                                            "account_id": "72546781",
+                                            "mmr": 3112,
+                                            "discord": "fabrichter",
+                                            "pos_pref": [
+                                                2,
+                                                5,
+                                                4,
+                                                2,
+                                                1
+                                            ],
+                                            "alts": [],
+                                            "country": null,
+                                            "name": "furiousllama",
+                                            "coins": 99
+                                        },
+                                        {
+                                            "account_id": "317992803",
+                                            "mmr": 4027,
+                                            "discord": "Thanos_MadTitan",
+                                            "pos_pref": [
+                                                3,
+                                                3,
+                                                3,
+                                                5,
+                                                5
+                                            ],
+                                            "alts": [],
+                                            "country": null,
+                                            "name": "Sparto",
+                                            "coins": 36
+                                        },
+                                        {
+                                            "account_id": "142288025",
+                                            "mmr": 4823,
+                                            "discord": "mestari__",
+                                            "pos_pref": [
+                                                5,
+                                                4,
+                                                5,
+                                                3,
+                                                2
+                                            ],
+                                            "alts": [],
+                                            "country": "FI",
+                                            "name": "General V01D",
+                                            "coins": 47
+                                        },
+                                        {
+                                            "account_id": "886214980",
+                                            "mmr": 1818,
+                                            "discord": "shura5163",
+                                            "pos_pref": [
+                                                5,
+                                                1,
+                                                1,
+                                                4,
+                                                5
+                                            ],
+                                            "alts": [
+                                                "1152468234"
+                                            ],
+                                            "country": "SG",
+                                            "name": "Skoll",
+                                            "coins": 1
+                                        },
+                                        {
+                                            "account_id": "116775147",
+                                            "mmr": 3005,
+                                            "discord": "rchrdu#1337",
+                                            "pos_pref": [
+                                                1,
+                                                1,
+                                                1,
+                                                5,
+                                                5
+                                            ],
+                                            "alts": [],
+                                            "country": "LT",
+                                            "name": "rchrdu",
+                                            "coins": 15
+                                        }
+                                    ]
+                                },
+                                {
+                                    "name": "owey",
+                                    "players": [
+                                        {
+                                            "account_id": "159179884",
+                                            "mmr": 2900,
+                                            "discord": "owley",
+                                            "pos_pref": [
+                                                2,
+                                                3,
+                                                1,
+                                                5,
+                                                4
+                                            ],
+                                            "alts": [],
+                                            "country": "IE",
+                                            "name": "owey",
+                                            "coins": 112
+                                        },
+                                        {
+                                            "account_id": "127714243",
+                                            "mmr": 5469,
+                                            "discord": "shagbarks",
+                                            "pos_pref": [
+                                                4,
+                                                5,
+                                                3,
+                                                2,
+                                                2
+                                            ],
+                                            "alts": [],
+                                            "country": null,
+                                            "name": "tseMne",
+                                            "coins": 53
+                                        },
+                                        {
+                                            "account_id": "120430219",
+                                            "mmr": 4813,
+                                            "discord": "s1ght2201",
+                                            "pos_pref": [
+                                                5,
+                                                3,
+                                                3,
+                                                1,
+                                                1
+                                            ],
+                                            "alts": [],
+                                            "country": null,
+                                            "name": "S1ght/Retro",
+                                            "coins": 36
+                                        },
+                                        {
+                                            "account_id": "170319481",
+                                            "mmr": 3075,
+                                            "discord": "daj9202",
+                                            "pos_pref": [
+                                                4,
+                                                3,
+                                                5,
+                                                3,
+                                                3
+                                            ],
+                                            "alts": [],
+                                            "country": null,
+                                            "name": "FullTimeMMRDeliveryService",
+                                            "coins": 20
+                                        },
+                                        {
+                                            "account_id": "91974124",
+                                            "mmr": 1300,
+                                            "discord": "insalatina#2872",
+                                            "pos_pref": [
+                                                1,
+                                                1,
+                                                3,
+                                                4,
+                                                5
+                                            ],
+                                            "alts": [],
+                                            "country": "IT",
+                                            "name": "insalatissima",
+                                            "coins": 3
+                                        }
+                                    ]
+                                },
+                                {
+                                    "name": "Weak",
+                                    "players": [
+                                        {
+                                            "account_id": "181695259",
+                                            "mmr": 3872,
+                                            "discord": "Weak#5426",
+                                            "pos_pref": [
+                                                4,
+                                                5,
+                                                5,
+                                                2,
+                                                1
+                                            ],
+                                            "alts": [],
+                                            "country": "PK",
+                                            "name": "Weak",
+                                            "coins": 81
+                                        },
+                                        {
+                                            "account_id": "67300161",
+                                            "mmr": 3763,
+                                            "discord": ".__dan__.",
+                                            "pos_pref": [
+                                                5,
+                                                3,
+                                                2,
+                                                1,
+                                                1
+                                            ],
+                                            "alts": [],
+                                            "country": "GB",
+                                            "name": "Dan",
+                                            "coins": 21
+                                        },
+                                        {
+                                            "account_id": "349518239",
+                                            "mmr": 4400,
+                                            "discord": "Kakashi#7025",
+                                            "pos_pref": [
+                                                4,
+                                                5,
+                                                3,
+                                                3,
+                                                2
+                                            ],
+                                            "alts": [
+                                                "153283210"
+                                            ],
+                                            "country": "GB",
+                                            "name": "Kakashi",
+                                            "coins": 44
+                                        },
+                                        {
+                                            "account_id": "30428142",
+                                            "mmr": 4000,
+                                            "discord": "316646567207501824",
+                                            "pos_pref": [
+                                                1,
+                                                1,
+                                                1,
+                                                4,
+                                                4
+                                            ],
+                                            "alts": [],
+                                            "country": "MD",
+                                            "name": "lil og",
+                                            "coins": 16
+                                        },
+                                        {
+                                            "account_id": "23765698",
+                                            "mmr": 1000,
+                                            "discord": "bernardhumperdink",
+                                            "pos_pref": [
+                                                5,
+                                                3,
+                                                5,
+                                                5,
+                                                3
+                                            ],
+                                            "alts": [],
+                                            "country": "TD",
+                                            "name": "bernardhumperdink",
+                                            "coins": 0
+                                        }
+                                    ]
+                                },
+                                {
+                                    "name": "KayTD",
+                                    "players": [
+                                        {
+                                            "account_id": "39418347",
+                                            "mmr": 4000,
+                                            "discord": "KayTD",
+                                            "pos_pref": [
+                                                5,
+                                                2,
+                                                4,
+                                                5,
+                                                2
+                                            ],
+                                            "alts": [],
+                                            "country": "IN",
+                                            "name": "KayTD",
+                                            "coins": 78
+                                        },
+                                        {
+                                            "account_id": "94550441",
+                                            "mmr": 4437,
+                                            "discord": "eeshie",
+                                            "pos_pref": [
+                                                1,
+                                                5,
+                                                1,
+                                                1,
+                                                1
+                                            ],
+                                            "alts": [],
+                                            "country": "RU",
+                                            "name": "Eeshie",
+                                            "coins": 40
+                                        },
+                                        {
+                                            "account_id": "1010247178",
+                                            "mmr": 4100,
+                                            "discord": "seapanda19",
+                                            "pos_pref": [
+                                                1,
+                                                1,
+                                                5,
+                                                1,
+                                                1
+                                            ],
+                                            "alts": [],
+                                            "country": null,
+                                            "name": "SEAPANDA",
+                                            "coins": 8
+                                        },
+                                        {
+                                            "account_id": "366643158",
+                                            "mmr": 4150,
+                                            "discord": "KUBSKOUT",
+                                            "pos_pref": [
+                                                4,
+                                                1,
+                                                2,
+                                                5,
+                                                5
+                                            ],
+                                            "alts": [
+                                                "119288957"
+                                            ],
+                                            "country": "GB",
+                                            "name": "KUBSKOUT",
+                                            "coins": 23
+                                        },
+                                        {
+                                            "account_id": "111041999",
+                                            "mmr": 2783,
+                                            "discord": "canalguy",
+                                            "pos_pref": [
+                                                2,
+                                                1,
+                                                3,
+                                                5,
+                                                4
+                                            ],
+                                            "alts": [],
+                                            "country": "GB",
+                                            "name": "Canal Guy",
+                                            "coins": 7
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "name": "Wednesday",
+                    "id": 16888,
+                    "type": "linear",
+                    "divisions": [
+                        {
+                            "name": "Division 1",
+                            "id": 1,
+                            "teamsheet": "https://docs.google.com/spreadsheets/d/10pNpd-UWi54wIn-NWXVUGQkfaJgcib8q5ljaLGzUBgA/edit?gid=522669012#gid=522669012",
+                            "draftsheet_": "https://docs.google.com/spreadsheets/d/10pNpd-UWi54wIn-NWXVUGQkfaJgcib8q5ljaLGzUBgA/edit?gid=1298448049#gid=1298448049",
+                            "draftsheet": "https://docs.google.com/spreadsheets/d/10pNpd-UWi54wIn-NWXVUGQkfaJgcib8q5ljaLGzUBgA/edit?gid=721784153#gid=721784153",
+                            "dsparser": 3,
+                            "teams": [
+                                {
+                                    "name": "Xiniu",
+                                    "players": [
+                                        {
+                                            "account_id": "179070642",
+                                            "mmr": 8213,
+                                            "discord": "Xiniu",
+                                            "pos_pref": [
+                                                2,
+                                                2,
+                                                1,
+                                                5,
+                                                4
+                                            ],
+                                            "alts": [],
+                                            "country": "DE",
+                                            "name": "Xiniu"
+                                        },
+                                        {
+                                            "account_id": "256487232",
+                                            "mmr": 4623,
+                                            "discord": "eponamina",
+                                            "pos_pref": [
+                                                1,
+                                                1,
+                                                1,
+                                                4,
+                                                5
+                                            ],
+                                            "alts": [],
+                                            "country": "CH",
+                                            "name": "Epona"
+                                        },
+                                        {
+                                            "account_id": "23765698",
+                                            "mmr": 1000,
+                                            "discord": "bernardhumperdink",
+                                            "pos_pref": [
+                                                5,
+                                                3,
+                                                5,
+                                                5,
+                                                3
+                                            ],
+                                            "alts": [],
+                                            "country": "TD",
+                                            "name": "bernardhumperdink"
+                                        },
+                                        {
+                                            "account_id": "84712191",
+                                            "mmr": 5222,
+                                            "discord": "Regurgitard",
+                                            "pos_pref": [
+                                                2,
+                                                3,
+                                                4,
+                                                3,
+                                                1
+                                            ],
+                                            "alts": [],
+                                            "country": "SE",
+                                            "name": "Regurgitard"
+                                        },
+                                        {
+                                            "account_id": "46905237",
+                                            "mmr": 3120,
+                                            "discord": "moomincake",
+                                            "pos_pref": [
+                                                5,
+                                                4,
+                                                3,
+                                                2,
+                                                2
+                                            ],
+                                            "alts": [],
+                                            "country": "ZW",
+                                            "name": "moomin"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "name": "GladeFrede",
+                                    "players": [
+                                        {
+                                            "account_id": "40096638",
+                                            "mmr": 2792,
+                                            "discord": "gladefrede",
+                                            "pos_pref": [
+                                                2,
+                                                1,
+                                                3,
+                                                5,
+                                                5
+                                            ],
+                                            "alts": [],
+                                            "country": "DK",
+                                            "name": "GladeFrede"
+                                        },
+                                        {
+                                            "account_id": "132180151",
+                                            "mmr": 6084,
+                                            "discord": "muesli__",
+                                            "pos_pref": [
+                                                2,
+                                                1,
+                                                5,
+                                                1,
+                                                1
+                                            ],
+                                            "alts": [],
+                                            "country": null,
+                                            "name": "muesli_"
+                                        },
+                                        {
+                                            "account_id": "287978960",
+                                            "mmr": 5700,
+                                            "discord": "Cvaekt",
+                                            "pos_pref": [
+                                                5,
+                                                1,
+                                                1,
+                                                1,
+                                                1
+                                            ],
+                                            "alts": [],
+                                            "country": "FO",
+                                            "name": "Cvaekt "
+                                        },
+                                        {
+                                            "account_id": "188263974",
+                                            "mmr": 4791,
+                                            "discord": "sirowlofbooze",
+                                            "pos_pref": [
+                                                2,
+                                                4,
+                                                4,
+                                                2,
+                                                2
+                                            ],
+                                            "alts": [],
+                                            "country": "GB",
+                                            "name": "Owl"
+                                        },
+                                        {
+                                            "account_id": "350169818",
+                                            "mmr": 4004,
+                                            "discord": "cleptiq",
+                                            "pos_pref": [
+                                                1,
+                                                3,
+                                                4,
+                                                3,
+                                                5
+                                            ],
+                                            "alts": [],
+                                            "country": "SE",
+                                            "name": "ClepTiq"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "name": "Kimaliki",
+                                    "players": [
+                                        {
+                                            "account_id": "334408668",
+                                            "mmr": 2700,
+                                            "discord": "kimaliki",
+                                            "pos_pref": [
+                                                5,
+                                                2,
+                                                4,
+                                                3,
+                                                1
+                                            ],
+                                            "alts": [],
+                                            "country": "HR",
+                                            "name": "Kimaliki"
+                                        },
+                                        {
+                                            "account_id": "184601350",
+                                            "mmr": 7800,
+                                            "discord": "fmega_",
+                                            "pos_pref": [
+                                                4,
+                                                4,
+                                                4,
+                                                1,
+                                                1
+                                            ],
+                                            "alts": [],
+                                            "country": "IE",
+                                            "name": "f"
+                                        },
+                                        {
+                                            "account_id": "104880759",
+                                            "mmr": 5701,
+                                            "discord": "falls2767",
+                                            "pos_pref": [
+                                                5,
+                                                3,
+                                                5,
+                                                3,
+                                                1
+                                            ],
+                                            "alts": [
+                                                "219085046"
+                                            ],
+                                            "country": "PK",
+                                            "name": "falls"
+                                        },
+                                        {
+                                            "account_id": "118694488",
+                                            "mmr": 4928,
+                                            "discord": "Oisen5211",
+                                            "pos_pref": [
+                                                2,
+                                                1,
+                                                4,
+                                                5,
+                                                5
+                                            ],
+                                            "alts": [],
+                                            "country": "DK",
+                                            "name": "Oisen"
+                                        },
+                                        {
+                                            "account_id": "16570127",
+                                            "mmr": 2374,
+                                            "discord": "destin.faroda",
+                                            "pos_pref": [
+                                                3,
+                                                1,
+                                                2,
+                                                5,
+                                                4
+                                            ],
+                                            "alts": [],
+                                            "country": null,
+                                            "name": "Destin"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "name": "Saiprien",
+                                    "players": [
+                                        {
+                                            "account_id": "93755522",
+                                            "mmr": 6086,
+                                            "discord": "saiprien",
+                                            "pos_pref": [
+                                                2,
+                                                2,
+                                                3,
+                                                5,
+                                                5
+                                            ],
+                                            "alts": [],
+                                            "country": "RO",
+                                            "name": "Saiprien"
+                                        },
+                                        {
+                                            "account_id": "125847008",
+                                            "mmr": 5620,
+                                            "discord": "rinku7684",
+                                            "pos_pref": [
+                                                2,
+                                                5,
+                                                1,
+                                                2,
+                                                3
+                                            ],
+                                            "alts": [],
+                                            "country": null,
+                                            "name": "Rinku"
+                                        },
+                                        {
+                                            "account_id": "110747155",
+                                            "mmr": 5578,
+                                            "discord": "jamesth007",
+                                            "pos_pref": [
+                                                5,
+                                                2,
+                                                2,
+                                                1,
+                                                1
+                                            ],
+                                            "alts": [],
+                                            "country": "DE",
+                                            "name": "Jamesth007"
+                                        },
+                                        {
+                                            "account_id": "52672020",
+                                            "mmr": 3100,
+                                            "discord": "ojoj888",
+                                            "pos_pref": [
+                                                1,
+                                                3,
+                                                5,
+                                                4,
+                                                1
+                                            ],
+                                            "alts": [],
+                                            "country": "GB",
+                                            "name": "911emergency"
+                                        },
+                                        {
+                                            "account_id": "169606098",
+                                            "mmr": 3113,
+                                            "discord": "relod",
+                                            "pos_pref": [
+                                                2,
+                                                1,
+                                                2,
+                                                5,
+                                                5
+                                            ],
+                                            "alts": [],
+                                            "country": "CN",
+                                            "name": "reload"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "name": "Hfbvm",
+                                    "players": [
+                                        {
+                                            "account_id": "73573464",
+                                            "mmr": 3669,
+                                            "discord": "Hfbvm",
+                                            "pos_pref": [
+                                                1,
+                                                1,
+                                                1,
+                                                1,
+                                                1
+                                            ],
+                                            "alts": [],
+                                            "country": "SA",
+                                            "name": "Hfbvm"
+                                        },
+                                        {
+                                            "account_id": "121439102",
+                                            "mmr": 7080,
+                                            "discord": "jesus6382",
+                                            "pos_pref": [
+                                                1,
+                                                1,
+                                                1,
+                                                5,
+                                                1
+                                            ],
+                                            "alts": [],
+                                            "country": "DE",
+                                            "name": "*Jesus*Aka#Mohammed"
+                                        },
+                                        {
+                                            "account_id": "146542636",
+                                            "mmr": 5627,
+                                            "discord": "Reddydas",
+                                            "pos_pref": [
+                                                5,
+                                                1,
+                                                1,
+                                                1,
+                                                1
+                                            ],
+                                            "alts": [],
+                                            "country": "NL",
+                                            "name": "Reddydas"
+                                        },
+                                        {
+                                            "account_id": "48903560",
+                                            "mmr": 3553,
+                                            "discord": "thronplunder",
+                                            "pos_pref": [
+                                                5,
+                                                1,
+                                                2,
+                                                2,
+                                                3
+                                            ],
+                                            "alts": [],
+                                            "country": null,
+                                            "name": "thronplunder"
+                                        },
+                                        {
+                                            "account_id": "112374134",
+                                            "mmr": 3850,
+                                            "discord": "quefir",
+                                            "pos_pref": [
+                                                1,
+                                                5,
+                                                1,
+                                                3,
+                                                2
+                                            ],
+                                            "alts": [],
+                                            "country": "PL",
+                                            "name": "Quefir"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "name": "The Queen",
+                                    "players": [
+                                        {
+                                            "account_id": "130098742",
+                                            "mmr": 5280,
+                                            "discord": "bertiemason",
+                                            "pos_pref": [
+                                                2,
+                                                3,
+                                                2,
+                                                1,
+                                                1
+                                            ],
+                                            "alts": [],
+                                            "country": "BI",
+                                            "name": "The Queen"
+                                        },
+                                        {
+                                            "account_id": "63351306",
+                                            "mmr": 5633,
+                                            "discord": "marc3line",
+                                            "pos_pref": [
+                                                5,
+                                                1,
+                                                1,
+                                                1,
+                                                1
+                                            ],
+                                            "alts": [],
+                                            "country": "GB",
+                                            "name": "sock"
+                                        },
+                                        {
+                                            "account_id": "59881483",
+                                            "mmr": 6000,
+                                            "discord": "necroscope_",
+                                            "pos_pref": [
+                                                1,
+                                                1,
+                                                4,
+                                                5,
+                                                4
+                                            ],
+                                            "alts": [],
+                                            "country": "PL",
+                                            "name": "Necroscope"
+                                        },
+                                        {
+                                            "account_id": "144337030",
+                                            "mmr": 4125,
+                                            "discord": "skechers4870",
+                                            "pos_pref": [
+                                                2,
+                                                3,
+                                                5,
+                                                5,
+                                                5
+                                            ],
+                                            "alts": [],
+                                            "country": null,
+                                            "name": "Skechers"
+                                        },
+                                        {
+                                            "account_id": "82004048",
+                                            "mmr": 2565,
+                                            "discord": "moyo#8673",
+                                            "pos_pref": [
+                                                1,
+                                                1,
+                                                5,
+                                                4,
+                                                5
+                                            ],
+                                            "alts": [],
+                                            "country": null,
+                                            "name": "moyo"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "name": "ClemFandango",
+                                    "players": [
+                                        {
+                                            "account_id": "112287360",
+                                            "mmr": 5626,
+                                            "discord": "sam05911",
+                                            "pos_pref": [
+                                                4,
+                                                4,
+                                                5,
+                                                3,
+                                                1
+                                            ],
+                                            "alts": [],
+                                            "country": "GB",
+                                            "name": "ClemFandango"
+                                        },
+                                        {
+                                            "account_id": "86719611",
+                                            "mmr": 6100,
+                                            "discord": "imbasargarepa",
+                                            "pos_pref": [
+                                                1,
+                                                1,
+                                                3,
+                                                5,
+                                                5
+                                            ],
+                                            "alts": [],
+                                            "country": "RS",
+                                            "name": "imbasargarepa"
+                                        },
+                                        {
+                                            "account_id": "80985743",
+                                            "mmr": 5500,
+                                            "discord": "thefoxitself",
+                                            "pos_pref": [
+                                                2,
+                                                4,
+                                                3,
+                                                3,
+                                                2
+                                            ],
+                                            "alts": [],
+                                            "country": null,
+                                            "name": "a Fox"
+                                        },
+                                        {
+                                            "account_id": "80749349",
+                                            "mmr": 4734,
+                                            "discord": "cudapunyad",
+                                            "pos_pref": [
+                                                3,
+                                                3,
+                                                5,
+                                                4,
+                                                2
+                                            ],
+                                            "alts": [],
+                                            "country": "GB",
+                                            "name": "Cunny"
+                                        },
+                                        {
+                                            "account_id": "1102469941",
+                                            "mmr": 2391,
+                                            "discord": "poslednibuh",
+                                            "pos_pref": [
+                                                5,
+                                                3,
+                                                2,
+                                                2,
+                                                2
+                                            ],
+                                            "alts": [],
+                                            "country": null,
+                                            "name": "Bot Linda"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "name": "Alek",
+                                    "players": [
+                                        {
+                                            "account_id": "160138578",
+                                            "mmr": 1847,
+                                            "discord": "alekbowl",
+                                            "pos_pref": [
+                                                3,
+                                                1,
+                                                5,
+                                                4,
+                                                4
+                                            ],
+                                            "alts": [],
+                                            "country": "US",
+                                            "name": "Alek"
+                                        },
+                                        {
+                                            "account_id": "243172458",
+                                            "mmr": 7904,
+                                            "discord": "myangelnico",
+                                            "pos_pref": [
+                                                1,
+                                                5,
+                                                2,
+                                                5,
+                                                4
+                                            ],
+                                            "alts": [
+                                                "435608240"
+                                            ],
+                                            "country": "SE",
+                                            "name": "MyAngelNico"
+                                        },
+                                        {
+                                            "account_id": "207300381",
+                                            "mmr": 5340,
+                                            "discord": "AdaBagcibasi",
+                                            "pos_pref": [
+                                                1,
+                                                1,
+                                                1,
+                                                1,
+                                                5
+                                            ],
+                                            "alts": [],
+                                            "country": "RU",
+                                            "name": "AA"
+                                        },
+                                        {
+                                            "account_id": "366643158",
+                                            "mmr": 4150,
+                                            "discord": "KUBSKOUT",
+                                            "pos_pref": [
+                                                4,
+                                                1,
+                                                1,
+                                                5,
+                                                5
+                                            ],
+                                            "alts": [
+                                                "119288957"
+                                            ],
+                                            "country": "GB",
+                                            "name": "KUBSKOUT"
+                                        },
+                                        {
+                                            "account_id": "317992803",
+                                            "mmr": 4027,
+                                            "discord": "Thanos_MadTitan",
+                                            "pos_pref": [
+                                                3,
+                                                3,
+                                                3,
+                                                5,
+                                                5
+                                            ],
+                                            "alts": [],
+                                            "country": null,
+                                            "name": "Sparto"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "name": "Tora",
+                                    "players": [
+                                        {
+                                            "account_id": "265444200",
+                                            "mmr": 6190,
+                                            "discord": "dr.ardy8",
+                                            "pos_pref": [
+                                                4,
+                                                2,
+                                                5,
+                                                3,
+                                                4
+                                            ],
+                                            "alts": [],
+                                            "country": "GE",
+                                            "name": "Tora"
+                                        },
+                                        {
+                                            "account_id": "167275877",
+                                            "mmr": 6700,
+                                            "discord": "443801708854902786",
+                                            "pos_pref": [
+                                                3,
+                                                3,
+                                                4,
+                                                4,
+                                                4
+                                            ],
+                                            "alts": [],
+                                            "country": "DE",
+                                            "name": "Mango"
+                                        },
+                                        {
+                                            "account_id": "127733940",
+                                            "mmr": 5111,
+                                            "discord": "zaergaegyr",
+                                            "pos_pref": [
+                                                5,
+                                                2,
+                                                4,
+                                                4,
+                                                4
+                                            ],
+                                            "alts": [],
+                                            "country": null,
+                                            "name": "zaergaegyr"
+                                        },
+                                        {
+                                            "account_id": "1414822973",
+                                            "mmr": 4605,
+                                            "discord": "messi02755_98254",
+                                            "pos_pref": [
+                                                1,
+                                                1,
+                                                1,
+                                                5,
+                                                5
+                                            ],
+                                            "alts": [],
+                                            "country": "PK",
+                                            "name": "messi"
+                                        },
+                                        {
+                                            "account_id": "91974124",
+                                            "mmr": 1300,
+                                            "discord": "insalatina#2872",
+                                            "pos_pref": [
+                                                3,
+                                                1,
+                                                3,
+                                                4,
+                                                5
+                                            ],
+                                            "alts": [],
+                                            "country": "IT",
+                                            "name": "insalatissima"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "name": "G14",
+                                    "players": [
+                                        {
+                                            "account_id": "112287360",
+                                            "mmr": 5626,
+                                            "discord": "sam05911",
+                                            "pos_pref": [
+                                                4,
+                                                4,
+                                                5,
+                                                3,
+                                                1
+                                            ],
+                                            "alts": [],
+                                            "country": "GB",
+                                            "name": "G14"
+                                        },
+                                        {
+                                            "account_id": "161284532",
+                                            "mmr": 7460,
+                                            "discord": "zaop4",
+                                            "pos_pref": [
+                                                1,
+                                                1,
+                                                2,
+                                                5,
+                                                1
+                                            ],
+                                            "alts": [],
+                                            "country": null,
+                                            "name": "Zaop"
+                                        },
+                                        {
+                                            "account_id": "322474716",
+                                            "mmr": 5137,
+                                            "discord": "olly1612",
+                                            "pos_pref": [
+                                                1,
+                                                5,
+                                                4,
+                                                3,
+                                                2
+                                            ],
+                                            "alts": [],
+                                            "country": "GB",
+                                            "name": "Olly"
+                                        },
+                                        {
+                                            "account_id": "103457852",
+                                            "mmr": 4040,
+                                            "discord": "tritaith",
+                                            "pos_pref": [
+                                                3,
+                                                2,
+                                                4,
+                                                5,
+                                                5
+                                            ],
+                                            "alts": [],
+                                            "country": "DE",
+                                            "name": "TritAith"
+                                        },
+                                        {
+                                            "account_id": "72546781",
+                                            "mmr": 3112,
+                                            "discord": "fabrichter",
+                                            "pos_pref": [
+                                                2,
+                                                4,
+                                                4,
+                                                2,
+                                                1
+                                            ],
+                                            "alts": [],
+                                            "country": null,
+                                            "name": "furiouslama"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "name": "Kaksshi",
+                                    "players": [
+                                        {
+                                            "account_id": "349518239",
+                                            "mmr": 4200,
+                                            "discord": "Kakashi#7025",
+                                            "pos_pref": [
+                                                4,
+                                                5,
+                                                2,
+                                                4,
+                                                1
+                                            ],
+                                            "alts": [
+                                                "153283210"
+                                            ],
+                                            "country": "GB",
+                                            "name": "Kaksshi"
+                                        },
+                                        {
+                                            "account_id": "56404086",
+                                            "mmr": 6178,
+                                            "discord": "dominics",
+                                            "pos_pref": [
+                                                1,
+                                                1,
+                                                5,
+                                                1,
+                                                1
+                                            ],
+                                            "alts": [],
+                                            "country": "GB",
+                                            "name": "Dominic"
+                                        },
+                                        {
+                                            "account_id": "89873399",
+                                            "mmr": 4753,
+                                            "discord": "hungrybrowny",
+                                            "pos_pref": [
+                                                4,
+                                                5,
+                                                3,
+                                                3,
+                                                1
+                                            ],
+                                            "alts": [],
+                                            "country": "GB",
+                                            "name": "hungry"
+                                        },
+                                        {
+                                            "account_id": "177572049",
+                                            "mmr": 6224,
+                                            "discord": "Spicy#6291",
+                                            "pos_pref": [
+                                                1,
+                                                1,
+                                                4,
+                                                5,
+                                                1
+                                            ],
+                                            "alts": [],
+                                            "country": "DE",
+                                            "name": "Spicy"
+                                        },
+                                        {
+                                            "account_id": "345032134",
+                                            "mmr": 2240,
+                                            "discord": ".barbathos",
+                                            "pos_pref": [
+                                                2,
+                                                2,
+                                                4,
+                                                5,
+                                                5
+                                            ],
+                                            "alts": [],
+                                            "country": "TR",
+                                            "name": "Barbathos"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "name": "erie",
+                                    "players": [
+                                        {
+                                            "account_id": "160652614",
+                                            "mmr": 6900,
+                                            "discord": "terminallyEerie",
+                                            "pos_pref": [
+                                                1,
+                                                1,
+                                                1,
+                                                5,
+                                                5
+                                            ],
+                                            "alts": [],
+                                            "country": "TR",
+                                            "name": "erie"
+                                        },
+                                        {
+                                            "account_id": "235385167",
+                                            "mmr": 5728,
+                                            "discord": "jetamo38",
+                                            "pos_pref": [
+                                                1,
+                                                5,
+                                                1,
+                                                3,
+                                                1
+                                            ],
+                                            "alts": [],
+                                            "country": "CZ",
+                                            "name": "jetamo"
+                                        },
+                                        {
+                                            "account_id": "27997450",
+                                            "mmr": 5500,
+                                            "discord": ".mikel.",
+                                            "pos_pref": [
+                                                1,
+                                                1,
+                                                5,
+                                                1,
+                                                1
+                                            ],
+                                            "alts": [],
+                                            "country": "SE",
+                                            "name": "Mikel"
+                                        },
+                                        {
+                                            "account_id": "252657179",
+                                            "mmr": 4960,
+                                            "discord": "ruski2",
+                                            "pos_pref": [
+                                                1,
+                                                1,
+                                                1,
+                                                5,
+                                                3
+                                            ],
+                                            "alts": [],
+                                            "country": "GB",
+                                            "name": "Ruski"
+                                        },
+                                        {
+                                            "account_id": "328654348",
+                                            "mmr": 1506,
+                                            "discord": "mxr_mxr",
+                                            "pos_pref": [
+                                                1,
+                                                1,
+                                                4,
+                                                4,
+                                                2
+                                            ],
+                                            "alts": [],
+                                            "country": "NL",
+                                            "name": "MXR-"
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}
