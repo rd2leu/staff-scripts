@@ -9,23 +9,28 @@ from utilities import *
 ## input
 search = {
     'org': 'rd2l',
-    'season': '28',
-    'league': 'Sunday',
-    'division': '2'
+    'season': '29',
+    'league': 'Wednesday',
+    'division': '1'
     }
 
 timezone = 'CET'
-start_time_str = 'March 24 2024 - 16:00'
+start_time_str = 'August 07 2024 - 16:00'
 start_time = datetoseconds(start_time_str, 'CET')
 end_time = 2000000000
 
-bestof = 3
+bestof = 2
 force = True
 save = True
 
 # TODO: automate filling this
 series_scheduled = [
-    ('Kanto/Farro/Tom/Cursed One', 'greenman'),
+    ('The Queen', 'Saiprien'),
+    ('Xiniu', 'Bot Linda'),
+    ('Tora', 'erie'),
+    ('GladeFrede', 'Alek'),
+    ('hfbvm', 'G14'),
+    ('Kimaliki', 'Kakashi'),
     ]
 
 # teams
