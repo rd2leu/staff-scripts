@@ -68,5 +68,5 @@ def gen_map_text(match_id, force = False, **team):
     return template.format(*names1, *names2, shorttime(data['duration']), win)
 
 if __name__ == '__main__':
-    match_id = 7624198532
-    print(gen_map_text(match_id, team2 = 'dire'))
+    match_id = 7996993692
+    print(gen_map_text(match_id, team1 = 'dire'))
