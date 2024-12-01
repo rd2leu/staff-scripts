@@ -2,6 +2,7 @@ import numpy as np
 import pandas as pd
 import os
 
+# not pretty but it gets the job done
 with open(os.path.join('groups', 'div1.txt')) as f:
     div1 = f.read()
 with open(os.path.join('groups', 'div2.txt')) as f:
@@ -11,8 +12,11 @@ with open(os.path.join('groups', 'div3.txt')) as f:
 with open(os.path.join('groups', 'wed.txt')) as f:
     wed = f.read()
 
-week = 7 # change this
-div = div3 # and this
+with open(os.path.join('groups', 'shakira.txt')) as f:
+    shakira = f.read()
+
+week = 1 # change this
+div = shakira # and this
 
 data = div.split('{{Matchlist')[week]
 date = data.split('title=')[1].split('\n')[0].split('|')[0].rstrip('th').strip()

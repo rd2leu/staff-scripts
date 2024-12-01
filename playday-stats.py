@@ -9,13 +9,13 @@ from utilities import *
 ## input
 search = {
     'org': 'rd2l',
-    'season': '28',
-    'league': 'Sunday',
-    'division': '2'
+    'season': '29',
+    'league': 'Wednesday',
+    'division': '1'
     }
 
 timezone = 'CET'
-start_time_str = 'December 24 2023 - 16:00'
+start_time_str = 'January 01 2024 - 16:00'
 start_time = datetoseconds(start_time_str, 'CET')
 end_time = 2000000000
 

@@ -9,9 +9,9 @@ from utilities import *
 ## input
 search = {
     'org': 'rd2l',
-    'season': '28',
-    'league': 'Sunday', # Sunday Wednesday
-    'division': '2'
+    'season': '29',
+    'league': 'Wednesday', # Sunday Wednesday
+    'division': '1'
     }
 
 encoding = 'utf-16'
@@ -65,7 +65,7 @@ things = [
     #'uses_portal', # bugged
     'cosmetics_count', 'cosmetics_immortals'
     ]
-things = ['life_state_dead']
+things = ['life_state_dead', 'lotuses_stolen', 'trees_quelled', 'runes_6min']
     
 for thing in things:
     ids = stats.groupby('account_id')[thing].sum().sort_values(ascending = False)[:4]
@@ -87,7 +87,7 @@ things = [
     'kill_streak', 'blood_inflicted', 'lotuses_stolen', 'uses_high_five',
     'cosmetics_count', 'cosmetics_immortals'
     ]
-things = []
+things = ['max_mins_no_lh', 'used_armlet', 'used_enchanted_mango']
 
 for thing in things:
     print('Game with most', thing)
@@ -121,7 +121,7 @@ things = [
     'lotuses_stolen', 'uses_high_five',
     'cosmetics_count', 'cosmetics_immortals'
     ]
-things = []
+things = ['cosmetics_count', 'uses_high_five']
 
 for thing in things:
     print('Game with most total', thing)

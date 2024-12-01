@@ -93,11 +93,14 @@ def read_google_sheet(url, resolve_links = False):
             c = cell.value
             if hasattr(c, 'text'):
                 c = c.text.split('"')[1] # Moggoblin's formula thing
-            header += [c]
+            if c is not None:
+                header += [c]
         # update dataframe with hyperlinks when found
-        col_names = ['Dotabuff Link', 'Second account', 'Third account']
+        col_names = ['Dotabuff Link', 'Second account', 'Third account', 'Account Link']
         for col_name in col_names:
-            col_idx = header.index(col_name)
+            col_idx = find_matching(header, col_name)
+            if col_idx >= len(header):
+                continue
             col = next(c for i, c in enumerate(sheet.columns) if i == col_idx) # seek
             col_data = []
             for c in col:

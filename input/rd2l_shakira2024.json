@@ -1,0 +1,29 @@
+{
+    "name": "RD2L EU",
+	"region": "Europe West",
+    "id": 0,
+    "seasons": [
+        {
+            "name": "Sidecups 2024",
+            "id": 0,
+			"start-date": 0,
+			"end-date": 0,
+            "leagues": [
+                {
+                    "name": "Shakira Cup",
+                    "id": 16209,
+                    "type": "byob",
+                    "divisions": [
+                        {
+                            "name": "Division 1",
+                            "id": 1,
+                            "teamsheet": "https://docs.google.com/spreadsheets/d/1hJQZcHjUC7gB5CTi1JljR_Osb_3bCcQ5NG3qqR0JCa4/edit?gid=884679367#gid=884679367",
+							"draftsheet": "https://docs.google.com/spreadsheets/d/1hJQZcHjUC7gB5CTi1JljR_Osb_3bCcQ5NG3qqR0JCa4/edit?gid=884679367#gid=884679367",
+							"dsparser": 4
+                        }
+                    ]
+                }
+            ]
+        }
+	]
+}
