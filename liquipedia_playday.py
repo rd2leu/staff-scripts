@@ -9,23 +9,32 @@ from utilities import *
 ## input
 search = {
     'org': 'rd2l',
-    'season': '29',
-    'league': 'Sunday', # Wednesday Sunday
+    'season': 'Sidecups 2024',
+    'league': 'Shakira Cup', # Wednesday Sunday
     'division': '1'
     }
 
 timezone = 'CET'
-start_time_str = 'November 03 2024 - 16:00'
+start_time_str = 'December 01 2024 - 16:00'
 start_time = datetoseconds(start_time_str, 'CET')
 end_time = 2000000000
 
-bestof = 3
+bestof = 1
 force = True
 save = True
 
 # TODO: automate filling this
 series_scheduled = [
-    ('Blackjack', 'Aty'),
+    ('J7', 'Calli'),
+    ('Daj', 'Epona'),
+    ('Lekandor', 'G14'),
+    ('S1ght', 'AA'),
+    ('Regu', 'YellowPhysicist'),
+    ('J7', 'Daj'),
+    ('Epona', 'Lekandor'),
+    ('G14', 'YellowPhysicist'),
+    ('Calli', 'AA'),
+    ('Regu', 'S1ght'),
     ]
 
 # teams
@@ -37,6 +46,7 @@ encoding2 = 'utf16' # FIXME
 # read league info
 team_info_str = search['org'], search['season'], encoding2
 team_info_path = os.path.join('draft', '{}_s{}_{}.json'.format(*team_info_str))
+team_info_path = os.path.join('draft', '{}_shakira2024_{}.json'.format(search['org'], encoding2))
 
 with open(team_info_path, encoding = encoding) as f:
     season_info = json.load(f)
@@ -175,7 +185,7 @@ for ss in series_scheduled:
 print('\n\n\n')
 for i, txt in enumerate(series_texts):
     #print("|M{0}header=\n|M{0}=".format(i + 1) + txt)
-    print("|R3M{0}=".format(i + 1) + txt)
+    print("|M{0}=".format(i + 1) + txt)
 
 # save data
 if save:
