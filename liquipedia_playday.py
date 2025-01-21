@@ -15,7 +15,7 @@ search = {
     }
 
 timezone = 'CET'
-start_time_str = 'December 01 2024 - 16:00'
+start_time_str = 'December 15 2024 - 16:00'
 start_time = datetoseconds(start_time_str, 'CET')
 end_time = 2000000000
 
@@ -25,16 +25,16 @@ save = True
 
 # TODO: automate filling this
 series_scheduled = [
-    ('J7', 'Calli'),
-    ('Daj', 'Epona'),
-    ('Lekandor', 'G14'),
-    ('S1ght', 'AA'),
-    ('Regu', 'YellowPhysicist'),
-    ('J7', 'Daj'),
-    ('Epona', 'Lekandor'),
-    ('G14', 'YellowPhysicist'),
-    ('Calli', 'AA'),
-    ('Regu', 'S1ght'),
+    ('Calli', 'Epona'),
+    ('Daj', 'Lekandor'),
+    ('J7', 'S1ght'),
+    ('AA', 'YellowPhysicist'),
+    ('G14', 'Regu'),
+    ('Lekandor', 'S1ght'),
+    ('Epona', 'G14'),
+    ('Daj', 'YellowPhysicist'),
+    ('Regu', 'Calli'),
+    ('AA', 'J7'),
     ]
 
 # teams
