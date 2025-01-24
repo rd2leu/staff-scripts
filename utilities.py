@@ -6,6 +6,23 @@ import openpyxl
 from io import BytesIO
 from urllib.request import urlopen
 
+def shorttime(s):
+    """seconds to short time string"""
+    frmt = '%#Hh%#Mm%#Ss'
+    if s < 3600:
+        frmt = '%#Mm%#Ss'
+    return pd.to_datetime([s], unit = 's').strftime(frmt).values[0]
+
+def datestr(s, timezone = 'CET', frmt = None):
+    """seconds to date string"""
+    if frmt is None:
+        frmt = '%B %d, %Y - %H:%M'
+    return pd.to_datetime(s, unit = 's').tz_localize('UTC').tz_convert(timezone).strftime(frmt)
+
+def datetoseconds(datestr, timezone = 'CET'):
+    """date string to seconds"""
+    return int(pd.to_datetime([datestr]).tz_localize(timezone).tz_convert('UTC').values[0].astype(np.uint64) / 1000000000)
+
 def _partial_in(array, sub):
     for a in array:
         if sub in a:
@@ -117,6 +134,7 @@ def read_google_sheet(url, resolve_links = False):
             data[col_name] = col_data
         data.dropna(how = 'all', inplace = True)
         return data
+
 
 # find league info
 if __name__ == '__main__':

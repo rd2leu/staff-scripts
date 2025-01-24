@@ -1,3 +1,5 @@
+from d2tools.api import resolve_id
+
 def ishexdigit(txt):
     return all(c in '0123456789abcdef' for c in txt.lower())
 
@@ -8,32 +10,35 @@ def parse_account_id(txt):
     BASE = 'bcdfghjkmnpqrtvw'
 
     txt = txt.strip('" ')
+    txt = txt.rstrip('/')
+
+    dbstrs = [
+        'players/', 'player/',
+        'dotabuff.com/', 'stratz.com/', 'opendota.com/', # check this last for lost travelers
+        ]            
+    for dbstr in dbstrs:
+        if dbstr in txt:
+            idx1 = txt.find(dbstr) + len(dbstr)
+            idx2 = idx1
+            while True:
+                if idx2 == len(txt):
+                    break
+                if not txt[idx2].isdigit():
+                    break
+                idx2 += 1
+            return {'account': txt[idx1: idx2]}
 
     if txt.startswith('http://'):
         txt = 'https://' + txt[7:]
 
     if txt.startswith('https://'):
 
-        txt = txt.rstrip('/')
         if txt[8:12] == 'www.':
             txt = txt[:8] + txt[12:]
 
-        if 'players/' in txt:
-            idx1 = txt.find('players/')
-            for idx2 in range(idx1 + 8, len(txt)):
-                if not txt[idx2].isdigit():
-                    break
-            return {'account': txt[idx1 + 8: idx2]}
-
-        if 'player/' in txt:
-            idx1 = txt.find('player/')
-            for idx2 in range(idx1 + 7, len(txt)):
-                if not txt[idx2].isdigit():
-                    break
-            return {'account': txt[idx1 + 7: idx2]}
-
         if txt.startswith('https://steamcommunity.com/id/'):
-            return {'custom': txt[30:]}
+            steamid = resolve_id(txt[30:])
+            return {'account': str(int(steamid) - ID_0)}
 
         if txt.startswith('https://steamcommunity.com/user/'):
             txt = txt[32:].replace('-', '')
@@ -78,8 +83,18 @@ def parse_account_id(txt):
 
     return {'custom': txt}
 
+def extract_account_id(text):
+    return parse_account_id(text)['account']
+
+def extract_account_ids(text):
+    for sep in [';', ' ', '\t', '\n']:
+        text = text.replace(sep, ',')
+    return [parse_account_id(t)['account'] for t in text.split(',') if t]
+
 if __name__ == '__main__':
     tests = [
+        'https://www.dotabuff.com/players/99374795',
+        'https://www.dotabuff.com/players/99374795/',
         'https://stratz.com/player/99374795?trendsMatchCount=100',
         'https://www.dotabuff.com/esports/players/99374795-jh?team_id=8986317',
         'steam:110000105ec56cb',
