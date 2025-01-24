@@ -8,13 +8,13 @@ from utilities import datestr, season_info_get, season_info_get_teams
 ## input
 search = {
     'org': 'rd2l',
-    'season': 'Sidecups 2024',
-    'league': 'Shakira Cup', # Wednesday Sunday
+    'season': '30',
+    'league': 'Sunday', # Wednesday Sunday
     'division': '1'
     }
 
 timezone = 'CET'
-start_time_str = 'December 15 2024 - 16:00'
+start_time_str = 'January 26 2025 - 16:00'
 start_time = datetoseconds(start_time_str, 'CET')
 end_time = 2000000000
 
@@ -28,12 +28,6 @@ series_scheduled = [
     ('Daj', 'Lekandor'),
     ('J7', 'S1ght'),
     ('AA', 'YellowPhysicist'),
-    ('G14', 'Regu'),
-    ('Lekandor', 'S1ght'),
-    ('Epona', 'G14'),
-    ('Daj', 'YellowPhysicist'),
-    ('Regu', 'Calli'),
-    ('AA', 'J7'),
     ]
 
 # teams
@@ -45,7 +39,6 @@ encoding2 = 'utf16' # FIXME
 # read league info
 team_info_str = search['org'], search['season'], encoding2
 team_info_path = os.path.join('draft', '{}_s{}_{}.json'.format(*team_info_str))
-team_info_path = os.path.join('draft', '{}_shakira2024_{}.json'.format(search['org'], encoding2))
 
 with open(team_info_path, encoding = encoding) as f:
     season_info = json.load(f)
