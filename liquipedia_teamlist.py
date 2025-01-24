@@ -1,4 +1,5 @@
-import requests, json, time, os
+import os, json
+import requests, time
 import pandas as pd
 import numpy as np
 

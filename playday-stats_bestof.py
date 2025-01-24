@@ -1,10 +1,7 @@
 import os, json
 import pandas as pd
 import numpy as np
-import scipy.stats as st
-from d2tools.api import *
-from d2tools.utilities import *
-from utilities import *
+from utilities import season_info_get_teams
 
 ## input
 search = {

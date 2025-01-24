@@ -3,8 +3,9 @@ import pandas as pd
 import numpy as np
 
 from d2tools.api import *
-from d2tools.utilities import *
-from utilities import *
+from d2tools.utilities import rank2mmr
+from utilities import datestr, read_google_sheet
+from utilities2 import extract_account_id, extract_account_ids
 
 from nltk.corpus import stopwords
 from sklearn.feature_extraction.text import TfidfVectorizer
@@ -56,12 +57,12 @@ for season in rd2l['seasons']:
             # https://github.com/pandas-dev/pandas/issues/13439
             draft = read_google_sheet(division['draftsheet'], resolve_links = True)
 
-        draft['account_id'] = draft['Dotabuff Link'].apply(extract_account_id2)
-        draft['alts'] = draft[['Second account', 'Third account']].apply(list, axis = 1).astype(str).apply(extract_account_ids)
+        draft['account_id'] = draft['Dotabuff Link'].apply(extract_account_id)
+        alts = draft[['Second account', 'Third account']].fillna('').apply(' '.join, axis = 1)
+        draft['alts'] = alts.apply(extract_account_ids)
         draft['accounts'] = draft.apply(lambda x: x['alts'] + [x['account_id']], axis = 1)
         draft = draft[draft['Activity check'] == 'Yes'].reset_index(drop = True)
         draft = draft[['Timestamp', 'Discord ID', 'Name', 'account_id', 'alts', 'accounts', 'MMR']].copy()
-
 
         cols = [
             'mmr_estimate', 'mmr_estimate_2', 'nb_solo', 'nb_matches',

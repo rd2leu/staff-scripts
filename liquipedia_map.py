@@ -2,8 +2,7 @@ import os
 import pandas as pd
 import numpy as np
 
-from d2tools.api import *
-from d2tools.utilities import *
+from d2tools.api import get_match
 
 hero_stats_path = os.path.join('input', 'hero_stats2.csv')
 

@@ -20,14 +20,14 @@
                             "teamsheet": "https://docs.google.com/spreadsheets/d/1woSA1_5lFtkus2A4NhAtmvCbxR7obTA8pC6K5RJZSk8/edit?gid=522669012#gid=522669012",
 							"draftsheet_": "https://docs.google.com/spreadsheets/d/1woSA1_5lFtkus2A4NhAtmvCbxR7obTA8pC6K5RJZSk8/edit?gid=1298448049#gid=1298448049",
 							"draftsheet": "https://docs.google.com/spreadsheets/d/1woSA1_5lFtkus2A4NhAtmvCbxR7obTA8pC6K5RJZSk8/edit?gid=721784153#gid=721784153",
-							"dsparser": 4
+							"dsparser": 3
                         },
                         {
                             "name": "Division 2",
                             "id": 2,
                             "teamsheet": "https://docs.google.com/spreadsheets/d/1woSA1_5lFtkus2A4NhAtmvCbxR7obTA8pC6K5RJZSk8/edit?gid=881219222#gid=881219222",
 							"draftsheet": "https://docs.google.com/spreadsheets/d/1woSA1_5lFtkus2A4NhAtmvCbxR7obTA8pC6K5RJZSk8/edit?gid=721784153#gid=721784153",
-							"dsparser": 4
+							"dsparser": 3
                         }
                     ]
                 },
@@ -42,7 +42,7 @@
                             "teamsheet": "https://docs.google.com/spreadsheets/d/1iNo7wcGeERepbhmC8bAVEUIWQpp37BTgKF9qLMhjYLc/edit?gid=522669012#gid=522669012",
 							"draftsheet_": "https://docs.google.com/spreadsheets/d/1iNo7wcGeERepbhmC8bAVEUIWQpp37BTgKF9qLMhjYLc/edit?gid=1298448049#gid=1298448049",
 							"draftsheet": "https://docs.google.com/spreadsheets/d/1iNo7wcGeERepbhmC8bAVEUIWQpp37BTgKF9qLMhjYLc/edit?gid=721784153#gid=721784153",
-							"dsparser": 4
+							"dsparser": 3
                         }
                     ]
                 }

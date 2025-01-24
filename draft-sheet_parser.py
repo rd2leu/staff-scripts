@@ -3,14 +3,15 @@ import pandas as pd
 import numpy as np
 
 from d2tools.api import *
-from d2tools.utilities import *
-from utilities import *
+from d2tools.utilities import rank2mmr
+from utilities import datestr, read_google_sheet
+from utilities2 import extract_account_id, extract_account_ids
 
 from sklearn.cluster import DBSCAN as DBS
 
 INPUT_PATH = 'input'
 OUTPUT_PATH = 'draft'
-FNAME = 'rd2l_shakira2024'
+FNAME = 'rd2l_s30'
 
 """
 Sheet styles:
@@ -35,7 +36,6 @@ for season in rd2l['seasons']:
                 raise NotImplementedError('no parser for sheet style')
                 # crash here
 
-            sheet = read_google_sheet(division['teamsheet'])
             # parse draft sheet
             if dsparser in [0, 1, 2]:
                 draft = read_google_sheet(division['draftsheet'])
@@ -45,16 +45,18 @@ for season in rd2l['seasons']:
 
             if dsparser in [0, 1]:
                 # Owl sheets
-                draft['account_id'] = draft['Dotabuff link'].apply(extract_account_id2)
-                draft['alts'] = draft['Please list your alternate accounts'].apply(extract_account_ids)
+                draft['account_id'] = draft['Dotabuff link'].apply(extract_account_id)
+                alts = draft['Please list your alternate accounts'].fillna('')
+                draft['alts'] = alts.apply(extract_account_ids)
             elif dsparser in [2, 3]:
                 # Moggoblin sheets
-                draft['account_id'] = draft['Dotabuff Link'].apply(extract_account_id2)
-                draft['alts'] = draft[['Second account', 'Third account']].apply(list, axis = 1).astype(str).apply(extract_account_ids)
+                draft['account_id'] = draft['Dotabuff Link'].apply(extract_account_id)
+                alts = draft[['Second account', 'Third account']].fillna('').apply(' '.join, axis = 1)
+                draft['alts'] = alts.apply(extract_account_ids)
                 draft = draft[draft['Activity check'].isin(['Yes', 'yes'])].copy()
             elif dsparser in [4]:
                 # BYOB
-                draft['account_id'] = draft['Account Link'].apply(extract_account_id2)
+                draft['account_id'] = draft['Account Link'].apply(extract_account_id)
                 draft['alts'] = draft.apply(lambda x: [], axis = 1)
 
             draft['accounts'] = draft.apply(lambda x: x['alts'] + [x['account_id']], axis = 1)
@@ -83,41 +85,52 @@ for season in rd2l['seasons']:
                         {'name': draft.iloc[i: i + 5]['Group Contact'].values[0],
                          'players': [{k: v[j] for k, v in team.items()} for j in range(5)]
                          }]
+
             else:
+
+                # read team sheet
+                sheet = read_google_sheet(division['teamsheet'])
+                sheet.fillna('', inplace = True)
+
                 for i, row in sheet.iterrows():
                     for j, val in enumerate(row.iloc):
                         
                         if j < 3:
                             # skip first 3 columns
                             continue
-                        
-                        accs = extract_account_ids2(val)
-                        if accs:
-                            # cell contains a dotabuff link, save info
-                            info = {'account_id': accs[0]}
+                        if league['name'] == 'Wednesday' and j > 16:
+                            # TEMP: iggy was hiding in the sheets
+                            continue
 
-                            # basic info
-                            p = draft[draft['account_id'] == accs[0]].iloc[0]
-                            info['mmr'] = int(p['MMR'])
-                            info['discord'] = p['Discord ID']
-                            info['pos_pref'] = p[pos_idx: pos_idx + 5].values.astype(int).tolist()
-                            info['alts'] = p['alts']
+                        # cell contains a dotabuff link, save info
+                        if '.com/' not in val:
+                            continue
 
-                            # country
-                            info['country'] = get_player_data(p['account_id'])['country']
+                        acc = extract_account_id(val)
+                        info = {'account_id': acc}
 
-                            if league['type'] == 'auction':
-                                #coins = sheet.iloc[i, j - 1]
-                                coins = sheet.iloc[i, j + 1] # everybody's changing and I don't feel the same
-                                try:
-                                    coins = int(coins)
-                                except:
-                                    coins = 0
-                                info['name'] = sheet.iloc[i, j - 2]
-                                info['coins'] = coins
-                            elif league['type'] == 'linear':
-                                info['name'] = sheet.iloc[i, j - 2] # - 1 usually but -2 cz s28 spatzatura
-                            players[(i, j)] = info
+                        # basic info
+                        p = draft[draft['account_id'] == acc].iloc[0]
+                        info['mmr'] = int(p['MMR'])
+                        info['discord'] = p['Discord ID']
+                        info['pos_pref'] = p[pos_idx: pos_idx + 5].values.astype(int).tolist()
+                        info['alts'] = p['alts']
+
+                        # country
+                        info['country'] = get_player_data(p['account_id'])['country']
+
+                        if league['type'] == 'auction':
+                            #coins = sheet.iloc[i, j - 1]
+                            coins = sheet.iloc[i, j + 1] # everybody's changing and I don't feel the same
+                            try:
+                                coins = int(coins)
+                            except:
+                                coins = 0
+                            info['name'] = sheet.iloc[i, j - 2]
+                            info['coins'] = coins
+                        elif league['type'] == 'linear':
+                            info['name'] = sheet.iloc[i, j - 2] # - 1 usually but -2 cz s28 spatzatura
+                        players[(i, j)] = info
 
                 if players:
                     # group players by clustering the cells in the spreadsheet
