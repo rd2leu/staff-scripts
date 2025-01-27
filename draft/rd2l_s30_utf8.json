@@ -11,7 +11,7 @@
             "leagues": [
                 {
                     "name": "Sunday",
-                    "id": 17709,
+                    "id": 17710,
                     "type": "auction",
                     "divisions": [
                         {
@@ -1409,7 +1409,7 @@
                 },
                 {
                     "name": "Wednesday",
-                    "id": 17710,
+                    "id": 17709,
                     "type": "linear",
                     "divisions": [
                         {

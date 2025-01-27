@@ -3,6 +3,7 @@ import pandas as pd
 import numpy as np
 
 from d2tools.api import get_match
+from utilities import shorttime
 
 hero_stats_path = os.path.join('input', 'hero_stats2.csv')
 
@@ -88,5 +89,5 @@ def gen_map_text(match_id, force = False, **team):
     return template.format(*names1, *names2, shorttime(data['duration']), win)
 
 if __name__ == '__main__':
-    match_id = 7996993692
-    print(gen_map_text(match_id, team1 = 'dire'))
+    match_id = 8147119739
+    print(gen_map_text(match_id, team1 = 'radiant'))

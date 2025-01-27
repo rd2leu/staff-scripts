@@ -3,14 +3,14 @@ import pandas as pd
 import numpy as np
 from d2tools.api import get_league_matches
 from liquipedia_map import gen_map_text
-from utilities import datestr, season_info_get, season_info_get_teams
+from utilities import datetoseconds, datestr, season_info_get, season_info_get_teams
 
 ## input
 search = {
     'org': 'rd2l',
     'season': '30',
     'league': 'Sunday', # Wednesday Sunday
-    'division': '1'
+    'division': '2'
     }
 
 timezone = 'CET'
@@ -18,16 +18,20 @@ start_time_str = 'January 26 2025 - 16:00'
 start_time = datetoseconds(start_time_str, 'CET')
 end_time = 2000000000
 
-bestof = 1
+bestof = 2
 force = True
 save = True
 
 # TODO: automate filling this
 series_scheduled = [
-    ('Calli', 'Epona'),
-    ('Daj', 'Lekandor'),
-    ('J7', 'S1ght'),
-    ('AA', 'YellowPhysicist'),
+##    ('Calli', 'Jesus'),
+##    ('MiniTV', 'TheAmbush'),
+##    ('Johannespassion', 'Jeri'),
+##    ('Dominic', 'EaSyx_x'),
+    ('SEAPANDA', 'Catnip'),
+    ('canin', 'YOZh666'),
+    ('Hynips', 'Ordinary Banana'),
+    ('meniscus-', 'YellowPhysicist'),
     ]
 
 # teams
