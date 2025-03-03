@@ -14,7 +14,7 @@ search = {
     }
 
 timezone = 'CET'
-start_time_str = 'January 26 2025 - 16:00'
+start_time_str = 'March 2 2025 - 16:00'
 start_time = datetoseconds(start_time_str, 'CET')
 end_time = 2000000000
 
@@ -24,14 +24,10 @@ save = True
 
 # TODO: automate filling this
 series_scheduled = [
-##    ('Calli', 'Jesus'),
-##    ('MiniTV', 'TheAmbush'),
-##    ('Johannespassion', 'Jeri'),
-##    ('Dominic', 'EaSyx_x'),
-    ('SEAPANDA', 'Catnip'),
-    ('canin', 'YOZh666'),
-    ('Hynips', 'Ordinary Banana'),
-    ('meniscus-', 'YellowPhysicist'),
+    ('SEAPANDA', 'Ordinary Banana'),
+    ('canin', 'YellowPhysicist'),
+    ('Catnip', 'meniscus-'),
+    ('YOZh666', 'Hynips'),
     ]
 
 # teams

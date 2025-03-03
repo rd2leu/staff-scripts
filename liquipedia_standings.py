@@ -56,13 +56,12 @@ for t, res in results.items():
     results2[t] = {r: len(v) for r, v in res.items()}
 
 data = pd.DataFrame(results2).T
-data['map'] = 2 * data['win'] + 1 * data['tie']
+data['map'] = 2 * data['win'] + 1 * data['tie'] # games are BO2
 data.sort_values(['map', 'win', 'tie'], ascending = False, inplace = True)
 data = data.reset_index().rename(columns = {'index': 'team'})
 
-# ties
+# leaderboard ties
 reslist = data[['win', 'tie', 'lose']]
-
 dups = reslist.duplicated(keep = False)
 data['tied'] = reslist.duplicated(keep = False)
 
@@ -87,6 +86,8 @@ data.loc[data['tied'], 'pos'] = data.loc[data['tied'], 'ties']
 # tiebreakers
 if resolve_ties == True:
 
+    ## TODO: check head to head first
+
     # sum leaderboard ranks of teams above as points
     # resolve with the tied team with most points
     tiebreaker_points_factor = {
@@ -98,6 +99,7 @@ if resolve_ties == True:
 
     for pos, tie in ties.items():
         teams_above = data[data.index < pos]
+        print(pos, teams_above)
         tb_points = {}
         for team in tie:
             points = 0
@@ -144,7 +146,11 @@ if resolve_ties == True:
             # sorry for ugly pandas assignment
             idx = data[data['team'] == res['team']].index
             data.loc[idx, 'pos'] = res['pos']
+            data.loc[idx, 'tbp'] = res['tbp']
         data = data.sort_values('pos').reset_index(drop = True)
+
+data['pos'] = data['pos'] + 1
+print(data, end = '\n\n')
 
 header = """==Group Standings==
 {{box|start}}
@@ -163,7 +169,7 @@ for idx, row in data.iterrows():
     out += '{} |win_m={}|tie_m={}|lose_m={}|place={}'.format(*[
         row['team'],
         row['win'], row['tie'], row['lose'],
-        row['pos'] + 1,
+        row['pos'],
         ])
     if stay is not None:
         if stay == 'top_6':
