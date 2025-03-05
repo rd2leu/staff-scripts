@@ -36,7 +36,7 @@ for week in weeks:
     date = week.split('title=')[1].split('\n')[0].split('|')[0].rstrip('th').strip()
     for game in week.split('Match2')[1:]:
         # find team names
-        teams = [t.split('}}')[0].strip() for t in game.split('TeamOpponent|')[1:]]
+        teams = [t.split('|score=')[0].split('}}')[0].strip() for t in game.split('TeamOpponent|')[1:]]
         # find games score
         win = [int(g[0]) - 1 for g in game.split('winner=')[1:] if g[0].isdigit()]
         if len(win) == 2:
