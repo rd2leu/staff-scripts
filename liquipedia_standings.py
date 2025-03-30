@@ -5,7 +5,7 @@ import copy
 
 ## CONFIG
 
-resolve_ties = False
+resolve_ties = True
 
 # allows: None, 'up', 'stay', 'down', 'top_6'
 stay = 'top_6'

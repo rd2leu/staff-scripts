@@ -9,25 +9,22 @@ from utilities import datetoseconds, datestr, season_info_get, season_info_get_t
 search = {
     'org': 'rd2l',
     'season': '30',
-    'league': 'Wednesday', # Wednesday Sunday
+    'league': 'Sunday', # Wednesday Sunday
     'division': '1'
     }
 
 timezone = 'CET'
-start_time_str = 'March 5 2025 - 16:00'
+start_time_str = 'March 30 2025 - 16:00'
 start_time = datetoseconds(start_time_str, 'CET')
 end_time = 2000000000
 
-bestof = 2
+bestof = 3
 force = True
 save = True
 
 # TODO: automate filling this
 series_scheduled = [
-    ('Dominic', 'YOZh666'),
-    ('Epona', 'GladeFrede'),
-    ('Moggoblin', 'canin'),
-    ('BErt', 'Jay Heraldinho'),
+    ('Dominic', 'Calli'),
     ]
 
 # teams
@@ -177,7 +174,7 @@ for ss in series_scheduled:
 print('\n\n\n')
 for i, txt in enumerate(series_texts):
     #print("|M{0}header=\n|M{0}=".format(i + 1) + txt)
-    print("|M{0}=".format(i + 1) + txt)
+    print("|R3M{0}=".format(i + 1) + txt)
 
 # save data
 if save:

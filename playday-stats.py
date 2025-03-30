@@ -3,14 +3,14 @@ import pandas as pd
 import numpy as np
 import scipy.stats as st
 from d2tools.api import get_league_matches, get_match
-from utilities import datestr, season_info_get, season_info_get_teams
+from utilities import datestr, datetoseconds, season_info_get, season_info_get_teams
 
 ## input
 search = {
     'org': 'rd2l',
-    'season': '29',
-    'league': 'Wednesday',
-    'division': '1'
+    'season': '30',
+    'league': 'Sunday',
+    'division': '2'
     }
 
 timezone = 'CET'
@@ -129,23 +129,33 @@ def get_match_player_stats(match_id):
         consumables = [
             'tango', 'enchanted_mango', 'faerie_fire', 'tango_single',
             'famango', 'great_famango', 'greater_famango',
-            'flask', 'clarity'
+            'flask', 'clarity',
             ]
-
         purchase_log = pd.DataFrame(player['purchase_log'])    
         def keycount(df, values):
             return df[df['key'].isin(values)].count()[0]
         pstats.loc[a_id, 'bought_rapier'] = keycount(purchase_log, ['rapier'])
         pstats.loc[a_id, 'bought_consumables'] = keycount(purchase_log, consumables)
 
+        items = [
+            'tranquil_boots', 'travel_boots', 'travel_boots_2',
+            'phase_boots', 'boots', 'arcane_boots', 'power_treads',
+            'guardian_greaves', 'boots_of_bearing', 'force_boots',
+            'wind_lace', 'tpscroll', 'slippers', 'boots_of_elves',
+            ]
+        def keycount_exact(df, value):
+            return df[df['key'] == value].count()[0]
+        for item in items:
+            pstats.loc[a_id, 'bought_{}'.format(item)] = keycount_exact(purchase_log, item)
+
         item_uses = pd.DataFrame([player['item_uses']]).T.reset_index()
         item_uses.rename({'index': 'key'}, axis = 1, inplace = True)
         def keysum(df, values):
             return df[df['key'].isin(values)].sum()[0]
-
         items = [
             'blood_grenade', 'enchanted_mango', 'smoke_of_deceit',
-            'blink', 'armlet', 'revenants_brooch', 'pirate_hat'
+            'blink', 'armlet', 'revenants_brooch', 'pirate_hat',
+            'travel_boots', 'travel', 'travel_boots_2', 'tpscroll',
             ]
         for item in items:
             pstats.loc[a_id, 'used_{}'.format(item)] = keysum(item_uses, [item])

@@ -15,7 +15,7 @@ with open(os.path.join('groups', 'wed.txt')) as f:
 ##with open(os.path.join('groups', 'shakira.txt')) as f:
 ##    shakira = f.read()
 
-week = 6 # change this
+week = 7 # change this
 div = wed # and this
 
 data = div.split('{{Matchlist')[week]

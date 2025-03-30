@@ -6,8 +6,8 @@ from utilities import season_info_get_teams
 ## input
 search = {
     'org': 'rd2l',
-    'season': '29',
-    'league': 'Wednesday', # Sunday Wednesday
+    'season': '30',
+    'league': 'Sunday', # Sunday Wednesday
     'division': '1'
     }
 
@@ -60,10 +60,22 @@ things = [
     'trees_quelled', 'runes_bounty', 'runes_wisdom', 'runes_6min',
     'blood_inflicted', 'lotuses_stolen', 'uses_high_five',
     #'uses_portal', # bugged
-    'cosmetics_count', 'cosmetics_immortals'
+    'cosmetics_count', 'cosmetics_immortals',
+
+    'bought_tranquil_boots', 'bought_travel_boots', 'bought_travel_boots_2',
+    'bought_phase_boots', 'bought_boots', 'bought_arcane_boots', 'bought_power_treads',
+    'bought_guardian_greaves', 'bought_boots_of_bearing', 'bought_force_boots',
+    'bought_wind_lace', 'bought_tpscroll', 'bought_slippers', 'bought_boots_of_elves',
+
+    'used_travel', 'used_tpscroll',
     ]
 things = ['life_state_dead', 'lotuses_stolen', 'trees_quelled', 'runes_6min']
-    
+##things = ['kills', 'courier_kills', 'roshans_killed']
+##things = ['denies']
+##things = ['used_travel', 'tpscroll']
+##things = ['cosmetics_count']
+##things = ['cosmetics_count']
+
 for thing in things:
     ids = stats.groupby('account_id')[thing].sum().sort_values(ascending = False)[:4]
     plot_overall_stats('Most {}'.format(thing), ids.keys(), ids.values)
@@ -85,6 +97,8 @@ things = [
     'cosmetics_count', 'cosmetics_immortals'
     ]
 things = ['max_mins_no_lh', 'used_armlet', 'used_enchanted_mango']
+##things = ['denies']
+##things = ['cosmetics_count']
 
 for thing in things:
     print('Game with most', thing)
@@ -97,7 +111,8 @@ things = [
     'duration', 'obs_placed', 'sen_placed', 'camps_stacked',
     'roshans_killed', 'bought_rapier', 'kill_streak'
     ]
-things = ['kill_streak']
+##things = ['denies']
+##things = ['cosmetics_count']
 
 for thing in things:
     print('Game with most', thing)
@@ -119,6 +134,8 @@ things = [
     'cosmetics_count', 'cosmetics_immortals'
     ]
 things = ['cosmetics_count', 'uses_high_five']
+##things = ['denies']
+##things = ['cosmetics_count']
 
 for thing in things:
     print('Game with most total', thing)
