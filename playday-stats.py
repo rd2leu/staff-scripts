@@ -9,8 +9,8 @@ from utilities import datestr, datetoseconds, season_info_get, season_info_get_t
 search = {
     'org': 'rd2l',
     'season': '30',
-    'league': 'Sunday',
-    'division': '2'
+    'league': 'Wednesday',
+    'division': '1'
     }
 
 timezone = 'CET'

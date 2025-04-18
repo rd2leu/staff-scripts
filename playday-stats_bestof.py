@@ -7,7 +7,7 @@ from utilities import season_info_get_teams
 search = {
     'org': 'rd2l',
     'season': '30',
-    'league': 'Sunday', # Sunday Wednesday
+    'league': 'Wednesday', # Sunday Wednesday
     'division': '1'
     }
 
@@ -69,17 +69,17 @@ things = [
 
     'used_travel', 'used_tpscroll',
     ]
-things = ['life_state_dead', 'lotuses_stolen', 'trees_quelled', 'runes_6min']
+##things = ['life_state_dead', 'lotuses_stolen', 'trees_quelled', 'runes_6min']
 ##things = ['kills', 'courier_kills', 'roshans_killed']
 ##things = ['denies']
 ##things = ['used_travel', 'tpscroll']
-##things = ['cosmetics_count']
+##things = ['tower_damage']
 ##things = ['cosmetics_count']
 
 for thing in things:
     ids = stats.groupby('account_id')[thing].sum().sort_values(ascending = False)[:4]
     plot_overall_stats('Most {}'.format(thing), ids.keys(), ids.values)
-    
+  
 # most player thing in a game
 things = [
     'duration', 'obs_placed', 'sen_placed', 'camps_stacked', 'rune_pickups',
@@ -96,7 +96,7 @@ things = [
     'kill_streak', 'blood_inflicted', 'lotuses_stolen', 'uses_high_five',
     'cosmetics_count', 'cosmetics_immortals'
     ]
-things = ['max_mins_no_lh', 'used_armlet', 'used_enchanted_mango']
+##things = ['max_mins_no_lh', 'used_armlet', 'used_enchanted_mango']
 ##things = ['denies']
 ##things = ['cosmetics_count']
 
@@ -133,7 +133,7 @@ things = [
     'lotuses_stolen', 'uses_high_five',
     'cosmetics_count', 'cosmetics_immortals'
     ]
-things = ['cosmetics_count', 'uses_high_five']
+##things = ['cosmetics_count', 'uses_high_five']
 ##things = ['denies']
 ##things = ['cosmetics_count']
 
