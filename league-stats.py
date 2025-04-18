@@ -50,9 +50,10 @@ tickets_EU = {
 }
 
 timezone = 'CET'
-start_time_str = 'January 01 2023 - 01:00'
+start_time_str = 'March 01 2024 - 01:00'
 start_time = datetoseconds(start_time_str, 'CET')
-end_time = 2000000000
+end_time_str = 'April 01 2025 - 01:00'
+end_time = datetoseconds(end_time_str, 'CET')
 
 force = False
 
@@ -66,7 +67,7 @@ for league, league_ids in tickets_NA.items():
     for league_id in league_ids:
         matches = get_league_matches(league_id, force = force)
         for m in matches:
-            if m['start_time'] > start_time:
+            if start_time < m['start_time'] < end_time:
                 d = [league_id, league, 'NA', m['start_time'], m['match_id'], m['series_id']]
                 data = pd_append(data, d)
 
@@ -74,7 +75,7 @@ for league, league_ids in tickets_EU.items():
     for league_id in league_ids:
         matches = get_league_matches(league_id, force = force)
         for m in matches:
-            if m['start_time'] > start_time:
+            if start_time < m['start_time'] < end_time:
                 d = [league_id, league, 'EU', m['start_time'], m['match_id'], m['series_id']]
                 data = pd_append(data, d)
 
@@ -86,7 +87,7 @@ data = data.drop(['series_id'], axis = 1).reset_index(drop = True)
 data.to_csv('inhouse.csv', sep = ';')
 
 # plot
-frequency = '3M'
+frequency = '2M'
 
 dt = pd.to_datetime(data['start_time'], unit = 's', utc = True)
 data['Year'] = dt.dt.year
