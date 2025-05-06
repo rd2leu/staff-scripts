@@ -11,7 +11,7 @@ from sklearn.cluster import DBSCAN as DBS
 
 INPUT_PATH = 'input'
 OUTPUT_PATH = 'draft'
-FNAME = 'rd2l_s30'
+FNAME = 'rd2l_m16'
 
 """
 Sheet styles:
@@ -50,7 +50,9 @@ for season in rd2l['seasons']:
                 draft['alts'] = alts.apply(extract_account_ids)
             elif dsparser in [2, 3]:
                 # Moggoblin sheets
-                draft['account_id'] = draft['Dotabuff Link'].apply(extract_account_id)
+                link_col_options = ['dotabuff link', 'stratz link', 'account link']
+                link_col = next(c for c in draft.columns if c.lower() in link_col_options)
+                draft['account_id'] = draft[link_col].apply(extract_account_id)
                 alts = draft[['Second account', 'Third account']].fillna('').apply(' '.join, axis = 1)
                 draft['alts'] = alts.apply(extract_account_ids)
                 draft = draft[draft['Activity check'].isin(['Yes', 'yes'])].copy()
@@ -98,11 +100,12 @@ for season in rd2l['seasons']:
                         if j < 3:
                             # skip first 3 columns
                             continue
-                        if league['name'] == 'Wednesday' and j > 16:
-                            # TEMP: iggy was hiding in the sheets
-                            continue
+                        #if league['name'] == 'Wednesday' and j > 16:
+                        #    # TEMP: iggy was hiding in the sheets
+                        #    continue
 
                         # cell contains a dotabuff link, save info
+                        # TODO: check if valid account link or ID instead
                         if '.com/' not in val:
                             continue
 

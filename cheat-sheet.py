@@ -21,7 +21,7 @@ params = {'date': 180} # last 6 months
 # TODO: put a date in the cache for opendota requests
 
 update_mmrs = True
-update_info = True
+update_info = False
 retry = True
 save = True
 
@@ -194,8 +194,9 @@ for season in rd2l['seasons']:
                     draft.loc[i, 'top5_words'] = ' '.join([w for w in words[top] if w not in stops][:5])
                     draft.loc[i, 'key_words'] = ' '.join(words_flat)
                     draft.loc[i, 'nb_words'] = len(words)
-                    draft.loc[i, 'words_per_match'] = np.round(counts.sum() / draft.loc[i, 'nb_matches'], 2)
-                    # FIXME: words per match not great because not all matches are parsed by opendota
+                    if draft.loc[i, 'nb_matches'] is not None and draft.loc[i, 'nb_matches'] > 0:
+                        draft.loc[i, 'words_per_match'] = np.round(counts.sum() / draft.loc[i, 'nb_matches'], 2)
+                        # FIXME: words per match not great because not all matches are parsed by opendota
 
             # pings
             pings = []
