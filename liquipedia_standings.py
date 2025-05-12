@@ -8,7 +8,7 @@ import copy
 resolve_ties = True
 
 # allows: None, 'up', 'stay', 'down', 'top_6'
-stay = 'top_6'
+stay = 'stay'
 
 
 
@@ -16,7 +16,7 @@ stay = 'top_6'
 
 # read back liquipedia matches section and parse it
 # not super pretty but it works
-with open(os.path.join('groups', 'matches.txt')) as f:
+with open(os.path.join('groups', 'matches.txt'), encoding = 'utf-8') as f:
     matches = f.read()
 
 # table of results to fill in from liquipedia
@@ -34,21 +34,30 @@ weeks = matches.split('{{Matchlist')[1:]
 for week in weeks:
     # look for the date of each week
     date = week.split('title=')[1].split('\n')[0].split('|')[0].rstrip('th').strip()
-    for game in week.split('Match2')[1:]:
+    for game in week.split('Match')[1:]:
         # find team names
         teams = [t.split('|score=')[0].split('}}')[0].strip() for t in game.split('TeamOpponent|')[1:]]
         # find games score
         win = [int(g[0]) - 1 for g in game.split('winner=')[1:] if g[0].isdigit()]
-        if len(win) == 2:
-            # only count full data
-            if win[0] == win[1]:
-                winner = win[0]
+        wincount = {0: 0, 1: 0}
+        for w in win:
+            wincount[w] += 1
+        if len(win) >= 2: # at least BO2
+            # only count completed matches
+            if wincount[0] != wincount[1]:
+                # someone won
+                if wincount[0] > wincount[1]:
+                    winner = 0
+                else:
+                    winner = 1
                 loser = 1 - winner
                 add_result(results, teams[winner], 'win', teams[loser])
                 add_result(results, teams[loser], 'lose', teams[winner])
             else:
+                # tie
                 add_result(results, teams[0], 'tie', teams[1])
                 add_result(results, teams[1], 'tie', teams[0])
+        
 
 # sort results by map wins, then wins, then ties
 results2 = {}
@@ -165,11 +174,10 @@ footer = """{{GroupTableEnd}}
 
 out = header
 for idx, row in data.iterrows():
-    out += '{{GroupTableSlot|'
-    out += '{} |win_m={}|tie_m={}|lose_m={}|place={}'.format(*[
-        row['team'],
-        row['win'], row['tie'], row['lose'],
-        row['pos'],
+    out += '{{GroupTableSlot| {{Team|'
+    out += row['team'] + '}} '
+    out += '|win_m={}|tie_m={}|lose_m={}|place={}'.format(*[
+        row['win'], row['tie'], row['lose'], row['pos'],
         ])
     if stay is not None:
         if stay == 'top_6':

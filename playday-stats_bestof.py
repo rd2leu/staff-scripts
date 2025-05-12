@@ -6,19 +6,24 @@ from utilities import season_info_get_teams
 ## input
 search = {
     'org': 'rd2l',
-    'season': '30',
-    'league': 'Wednesday', # Sunday Wednesday
+    'tournament': 'mini', # mini main side shakira ...
+    'season': '16',
+    'league': '', # Wednesday Sunday
     'division': '1'
     }
 
 encoding = 'utf-16'
-encoding2 = 'utf16' # FIXME
 
 ## main
 
 # read league info
-team_info_str = search['org'], search['season'], encoding2
-team_info_path = os.path.join('draft', '{}_s{}_{}.json'.format(*team_info_str))
+ttag_lookup = {'main': 's', 'mini': 'm'}
+tour = search['tournament'].lower()
+ttag = ttag_lookup.get(tour, tour)
+encoding2 = encoding.replace('-', '')
+
+team_info_str = search['org'], ttag, search['season'], encoding2
+team_info_path = os.path.join('draft', '{}_{}{}_{}.json'.format(*team_info_str))
 
 with open(team_info_path, encoding = encoding) as f:
     season_info = json.load(f)

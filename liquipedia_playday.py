@@ -8,13 +8,14 @@ from utilities import datetoseconds, datestr, season_info_get, season_info_get_t
 ## input
 search = {
     'org': 'rd2l',
-    'season': '30',
-    'league': 'Wednesday', # Wednesday Sunday
-    'division': '1'
+    'tournament': 'mini', # mini main side shakira ...
+    'season': '16',
+    'league': '', # Wednesday Sunday
+    'division': '2'
     }
 
 timezone = 'CET'
-start_time_str = 'April 02 2025 - 16:00'
+start_time_str = 'May 11 2025 - 16:00'
 start_time = datetoseconds(start_time_str, 'CET')
 end_time = 2000000000
 
@@ -24,19 +25,24 @@ save = True
 
 # TODO: automate filling this
 series_scheduled = [
-    ('Dominic', 'GladeFrede'),
-    ('BErt', 'canin'),
+    ('Chaques', 'YellowPhysicist'),
+    ('Hynips', 'ClepTiq'),
+    ('Wiolarz', 'bernardhumperdink'),
     ]
 
 # teams
 encoding = 'utf-16'
-encoding2 = 'utf16' # FIXME
 
 ## main
 
 # read league info
-team_info_str = search['org'], search['season'], encoding2
-team_info_path = os.path.join('draft', '{}_s{}_{}.json'.format(*team_info_str))
+ttag_lookup = {'main': 's', 'mini': 'm'}
+tour = search['tournament'].lower()
+ttag = ttag_lookup.get(tour, tour)
+encoding2 = encoding.replace('-', '')
+
+team_info_str = search['org'], ttag, search['season'], encoding2
+team_info_path = os.path.join('draft', '{}_{}{}_{}.json'.format(*team_info_str))
 
 with open(team_info_path, encoding = encoding) as f:
     season_info = json.load(f)
@@ -97,7 +103,7 @@ for i, d in enumerate(data.groupby('series_name').agg(list).iloc):
     series_played[(team2, team1)] = series.copy()
 
 # start filling in text
-template1 = """{{{{Match2
+template1 = """{{{{Match
 |bestof={}
 |winner=
 |opponent1={{{{TeamOpponent|{}}}}}
@@ -175,7 +181,7 @@ for ss in series_scheduled:
 print('\n\n\n')
 for i, txt in enumerate(series_texts):
     #print("|M{0}header=\n|M{0}=".format(i + 1) + txt)
-    print("|R2M{0}=".format(i + 1) + txt)
+    print("|M{0}=".format(i + 1) + txt)
 
 # save data
 if save:
