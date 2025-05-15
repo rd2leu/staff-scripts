@@ -15,8 +15,8 @@ with open(os.path.join('groups', 'div2.txt'), encoding = 'utf-8') as f:
 ##with open(os.path.join('groups', 'shakira.txt'), encoding = 'utf-8') as f:
 ##    shakira = f.read()
 
-week = 1 # change this
-div = div2 # and this
+week = 2 # change this
+div = div1 # and this
 
 data = div.split('{{Matchlist')[week]
 date = data.split('title=')[1].split('\n')[0].split('|')[0].rstrip('th').strip()
