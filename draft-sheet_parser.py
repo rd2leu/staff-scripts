@@ -66,9 +66,10 @@ for season in rd2l['seasons']:
 
             pos_idx = draft.columns.searchsorted('Pos 1') + 1
             
-            ## search teamsheet for player cells
+            ## search teamsheet for teams
             players = {}
 
+            # BYOB
             if league['type'] == 'byob':
                 #draft.groupby('Group Contact')['Name'].agg(list)
                 # you can't trust people to write the same name
@@ -103,6 +104,7 @@ for season in rd2l['seasons']:
                     raise NotImplementedError('no parser for team sheet style')
                     # crash here
 
+                # search for player cells containing dotabuff link
                 if tsparser in [0]:
 
                     for i, row in sheet.iterrows():
@@ -156,6 +158,7 @@ for season in rd2l['seasons']:
                     else:
                         print('no players found')
 
+                # lookup team tables by position
                 elif tsparser in [1]:
 
                     teams = {}
