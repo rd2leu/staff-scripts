@@ -18,10 +18,7 @@
                             "name": "Division 1",
                             "id": 1,
                             "teamsheet": "https://docs.google.com/spreadsheets/d/1b9pL_VNAwCsztmGFGHBIR7Jn9IAf0E5qTITCdmGHUho/edit?gid=522669012#gid=522669012",
-                            "tsparser": 1,
-                            "draftsheet_": "https://docs.google.com/spreadsheets/d/1b9pL_VNAwCsztmGFGHBIR7Jn9IAf0E5qTITCdmGHUho/edit?gid=1298448049#gid=1298448049",
-                            "draftsheet": "https://docs.google.com/spreadsheets/d/1b9pL_VNAwCsztmGFGHBIR7Jn9IAf0E5qTITCdmGHUho/edit?gid=721784153#gid=721784153",
-                            "dsparser": 3,
+                            "signups": "https://docs.google.com/spreadsheets/d/1b9pL_VNAwCsztmGFGHBIR7Jn9IAf0E5qTITCdmGHUho/edit?gid=721784153#gid=721784153",
                             "teams": [
                                 {
                                     "name": "Unseelie",
@@ -40,7 +37,7 @@
                                             "alts": [],
                                             "country": "GB",
                                             "name": "Unseelie",
-                                            "coins": "89"
+                                            "coins": 89
                                         },
                                         {
                                             "account_id": "421257589",
@@ -56,7 +53,7 @@
                                             "alts": [],
                                             "country": "PK",
                                             "name": "ri",
-                                            "coins": "75"
+                                            "coins": 75
                                         },
                                         {
                                             "account_id": "310766287",
@@ -72,7 +69,7 @@
                                             "alts": [],
                                             "country": "SK",
                                             "name": "Cho",
-                                            "coins": "11"
+                                            "coins": 11
                                         },
                                         {
                                             "account_id": "315522915",
@@ -88,7 +85,7 @@
                                             "alts": [],
                                             "country": "GB",
                                             "name": "Dasher",
-                                            "coins": "1"
+                                            "coins": 1
                                         },
                                         {
                                             "account_id": "433060499",
@@ -104,7 +101,7 @@
                                             "alts": [],
                                             "country": "JP",
                                             "name": "Catnip",
-                                            "coins": "2"
+                                            "coins": 2
                                         }
                                     ]
                                 },
@@ -125,7 +122,7 @@
                                             "alts": [],
                                             "country": "FR",
                                             "name": "Exy-",
-                                            "coins": "94"
+                                            "coins": 94
                                         },
                                         {
                                             "account_id": "183938343",
@@ -141,7 +138,7 @@
                                             "alts": [],
                                             "country": "GB",
                                             "name": "backwardshello",
-                                            "coins": "50"
+                                            "coins": 50
                                         },
                                         {
                                             "account_id": "324942638",
@@ -157,7 +154,7 @@
                                             "alts": [],
                                             "country": "SK",
                                             "name": "mouceen",
-                                            "coins": "30"
+                                            "coins": 30
                                         },
                                         {
                                             "account_id": "89873399",
@@ -173,7 +170,7 @@
                                             "alts": [],
                                             "country": "GB",
                                             "name": "hungrybrowny",
-                                            "coins": "3"
+                                            "coins": 3
                                         },
                                         {
                                             "account_id": "79190405",
@@ -191,7 +188,7 @@
                                             ],
                                             "country": null,
                                             "name": "\u00c4ren",
-                                            "coins": "11"
+                                            "coins": 11
                                         }
                                     ]
                                 },
@@ -212,7 +209,7 @@
                                             "alts": [],
                                             "country": null,
                                             "name": "Aty",
-                                            "coins": "90"
+                                            "coins": 90
                                         },
                                         {
                                             "account_id": "854684906",
@@ -230,7 +227,7 @@
                                             ],
                                             "country": null,
                                             "name": "Drunken",
-                                            "coins": "30"
+                                            "coins": 30
                                         },
                                         {
                                             "account_id": "416118852",
@@ -246,7 +243,7 @@
                                             "alts": [],
                                             "country": "DE",
                                             "name": "pandapanther",
-                                            "coins": "35"
+                                            "coins": 35
                                         },
                                         {
                                             "account_id": "110881046",
@@ -262,7 +259,7 @@
                                             "alts": [],
                                             "country": "GB",
                                             "name": "jihapse",
-                                            "coins": "14"
+                                            "coins": 14
                                         },
                                         {
                                             "account_id": "150522382",
@@ -278,7 +275,7 @@
                                             "alts": [],
                                             "country": "DE",
                                             "name": "Luke",
-                                            "coins": "11"
+                                            "coins": 11
                                         }
                                     ]
                                 },
@@ -299,7 +296,7 @@
                                             "alts": [],
                                             "country": "NO",
                                             "name": "Leiya",
-                                            "coins": "90"
+                                            "coins": 90
                                         },
                                         {
                                             "account_id": "113312766",
@@ -317,7 +314,7 @@
                                             ],
                                             "country": "DK",
                                             "name": "play",
-                                            "coins": "61"
+                                            "coins": 61
                                         },
                                         {
                                             "account_id": "207300381",
@@ -335,7 +332,7 @@
                                             ],
                                             "country": "RU",
                                             "name": "AA",
-                                            "coins": "12"
+                                            "coins": 12
                                         },
                                         {
                                             "account_id": "443167959",
@@ -351,7 +348,7 @@
                                             "alts": [],
                                             "country": null,
                                             "name": "Ramddan yatoro",
-                                            "coins": "12"
+                                            "coins": 12
                                         },
                                         {
                                             "account_id": "80749349",
@@ -367,7 +364,7 @@
                                             "alts": [],
                                             "country": "GB",
                                             "name": "Cunny",
-                                            "coins": "5"
+                                            "coins": 5
                                         }
                                     ]
                                 },
@@ -388,7 +385,7 @@
                                             "alts": [],
                                             "country": "FO",
                                             "name": "Cvaekt",
-                                            "coins": "88"
+                                            "coins": 88
                                         },
                                         {
                                             "account_id": "293082908",
@@ -407,7 +404,7 @@
                                             ],
                                             "country": "DE",
                                             "name": "qjY",
-                                            "coins": "61"
+                                            "coins": 61
                                         },
                                         {
                                             "account_id": "125155223",
@@ -423,7 +420,7 @@
                                             "alts": [],
                                             "country": "TH",
                                             "name": "calli",
-                                            "coins": "18"
+                                            "coins": 18
                                         },
                                         {
                                             "account_id": "395439489",
@@ -439,7 +436,7 @@
                                             "alts": [],
                                             "country": "DE",
                                             "name": "Jibbo",
-                                            "coins": "5"
+                                            "coins": 5
                                         },
                                         {
                                             "account_id": "116643277",
@@ -455,7 +452,7 @@
                                             "alts": [],
                                             "country": "GB",
                                             "name": "FTG",
-                                            "coins": "4"
+                                            "coins": 4
                                         }
                                     ]
                                 },
@@ -476,7 +473,7 @@
                                             "alts": [],
                                             "country": "DE",
                                             "name": "DJDuese",
-                                            "coins": "80"
+                                            "coins": 80
                                         },
                                         {
                                             "account_id": "330535786",
@@ -492,7 +489,7 @@
                                             "alts": [],
                                             "country": "CN",
                                             "name": "frozen",
-                                            "coins": "30"
+                                            "coins": 30
                                         },
                                         {
                                             "account_id": "151702626",
@@ -508,7 +505,7 @@
                                             "alts": [],
                                             "country": "IQ",
                                             "name": "Disturbed Jawker",
-                                            "coins": "10"
+                                            "coins": 10
                                         },
                                         {
                                             "account_id": "121439102",
@@ -524,7 +521,7 @@
                                             "alts": [],
                                             "country": "DE",
                                             "name": "*Jesus*Aka#Mohammed",
-                                            "coins": "12"
+                                            "coins": 12
                                         },
                                         {
                                             "account_id": "135425789",
@@ -540,7 +537,7 @@
                                             "alts": [],
                                             "country": "HU",
                                             "name": "Valakii",
-                                            "coins": "28"
+                                            "coins": 28
                                         }
                                     ]
                                 },
@@ -561,7 +558,7 @@
                                             "alts": [],
                                             "country": null,
                                             "name": "Tsenme",
-                                            "coins": "101"
+                                            "coins": 101
                                         },
                                         {
                                             "account_id": "127038234",
@@ -577,7 +574,7 @@
                                             "alts": [],
                                             "country": "DE",
                                             "name": "Magma",
-                                            "coins": "23"
+                                            "coins": 23
                                         },
                                         {
                                             "account_id": "111886427",
@@ -593,7 +590,7 @@
                                             "alts": [],
                                             "country": "VA",
                                             "name": "Nappa",
-                                            "coins": "19"
+                                            "coins": 19
                                         },
                                         {
                                             "account_id": "127524729",
@@ -609,7 +606,7 @@
                                             "alts": [],
                                             "country": "AE",
                                             "name": "Aaz3",
-                                            "coins": "45"
+                                            "coins": 45
                                         },
                                         {
                                             "account_id": "149253098",
@@ -625,7 +622,7 @@
                                             "alts": [],
                                             "country": "SY",
                                             "name": "Jeri",
-                                            "coins": "14"
+                                            "coins": 14
                                         }
                                     ]
                                 },
@@ -646,7 +643,7 @@
                                             "alts": [],
                                             "country": "AL",
                                             "name": "prime skiter",
-                                            "coins": "71"
+                                            "coins": 71
                                         },
                                         {
                                             "account_id": "892939726",
@@ -664,7 +661,7 @@
                                             ],
                                             "country": "DE",
                                             "name": "Rasmus_=",
-                                            "coins": "63"
+                                            "coins": 63
                                         },
                                         {
                                             "account_id": "423698025",
@@ -680,7 +677,7 @@
                                             "alts": [],
                                             "country": "FR",
                                             "name": "Tinrell",
-                                            "coins": "3"
+                                            "coins": 3
                                         },
                                         {
                                             "account_id": "488559009",
@@ -696,7 +693,7 @@
                                             "alts": [],
                                             "country": "GB",
                                             "name": "pk",
-                                            "coins": "4"
+                                            "coins": 4
                                         },
                                         {
                                             "account_id": "374488452",
@@ -712,7 +709,7 @@
                                             "alts": [],
                                             "country": "GB",
                                             "name": "wayfarer",
-                                            "coins": "1"
+                                            "coins": 1
                                         }
                                     ]
                                 }
@@ -722,9 +719,7 @@
                             "name": "Division 2",
                             "id": 2,
                             "teamsheet": "https://docs.google.com/spreadsheets/d/1b9pL_VNAwCsztmGFGHBIR7Jn9IAf0E5qTITCdmGHUho/edit?gid=881219222#gid=881219222",
-                            "tsparser": 1,
-                            "draftsheet": "https://docs.google.com/spreadsheets/d/1b9pL_VNAwCsztmGFGHBIR7Jn9IAf0E5qTITCdmGHUho/edit?gid=721784153#gid=721784153",
-                            "dsparser": 3,
+                            "signups": "https://docs.google.com/spreadsheets/d/1b9pL_VNAwCsztmGFGHBIR7Jn9IAf0E5qTITCdmGHUho/edit?gid=721784153#gid=721784153",
                             "teams": [
                                 {
                                     "name": "Muko",
@@ -743,7 +738,7 @@
                                             "alts": [],
                                             "country": "EG",
                                             "name": "Muko",
-                                            "coins": ""
+                                            "coins": 0
                                         }
                                     ]
                                 },
@@ -764,7 +759,7 @@
                                             "alts": [],
                                             "country": "PL",
                                             "name": "Wiolarz",
-                                            "coins": ""
+                                            "coins": 0
                                         }
                                     ]
                                 },
@@ -785,7 +780,7 @@
                                             "alts": [],
                                             "country": "SE",
                                             "name": "Faith",
-                                            "coins": ""
+                                            "coins": 0
                                         }
                                     ]
                                 },
@@ -806,7 +801,7 @@
                                             "alts": [],
                                             "country": "GB",
                                             "name": "Lewis",
-                                            "coins": ""
+                                            "coins": 0
                                         }
                                     ]
                                 },
@@ -827,7 +822,7 @@
                                             "alts": [],
                                             "country": "GB",
                                             "name": "Drregron",
-                                            "coins": ""
+                                            "coins": 0
                                         }
                                     ]
                                 },
@@ -848,7 +843,7 @@
                                             "alts": [],
                                             "country": null,
                                             "name": "Lanfe4r",
-                                            "coins": ""
+                                            "coins": 0
                                         }
                                     ]
                                 },
@@ -871,7 +866,28 @@
                                             ],
                                             "country": null,
                                             "name": "Potentiallyyouruncle",
-                                            "coins": ""
+                                            "coins": 0
+                                        }
+                                    ]
+                                },
+                                {
+                                    "name": "ClapTiq",
+                                    "players": [
+                                        {
+                                            "account_id": "350169818",
+                                            "mmr": 3500,
+                                            "discord": "cleptiq",
+                                            "pos_pref": [
+                                                1,
+                                                1,
+                                                1,
+                                                1,
+                                                1
+                                            ],
+                                            "alts": [],
+                                            "country": "SE",
+                                            "name": "ClapTiq",
+                                            "coins": 0
                                         }
                                     ]
                                 }
@@ -888,10 +904,7 @@
                             "name": "Division 1",
                             "id": 1,
                             "teamsheet": "https://docs.google.com/spreadsheets/d/1TtG0bycln7oa7J6Juj7asEaYSINAFXM-YYeGOzm-Fes/edit?gid=522669012#gid=522669012",
-                            "tsparser": 1,
-                            "draftsheet_": "https://docs.google.com/spreadsheets/d/1TtG0bycln7oa7J6Juj7asEaYSINAFXM-YYeGOzm-Fes/edit?gid=1298448049#gid=1298448049",
-                            "draftsheet": "https://docs.google.com/spreadsheets/d/1TtG0bycln7oa7J6Juj7asEaYSINAFXM-YYeGOzm-Fes/edit?gid=721784153#gid=721784153",
-                            "dsparser": 3,
+                            "signups": "https://docs.google.com/spreadsheets/d/1TtG0bycln7oa7J6Juj7asEaYSINAFXM-YYeGOzm-Fes/edit?gid=721784153#gid=721784153",
                             "teams": []
                         }
                     ]

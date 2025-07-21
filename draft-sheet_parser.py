@@ -15,7 +15,6 @@ FNAME = 'rd2l_s31'
 
 """
 Sheet styles:
-0 unspecified, assume Owl sheets
 1 Owl sheets: < S27: no hyperlinks, alts in a single cell
 2 Moggoblin sheets: M14 S28: no hyperlinks, alts in "2nd account" "3rd account"
 3 Moggoblin sheets: M15 S29: dotabuff urls hyperlinked, alts in "2nd account" "3rd account"
@@ -29,48 +28,10 @@ for season in rd2l['seasons']:
     for league in season['leagues']:
         for division in league['divisions']:
 
-            dsparser = 0
-            if 'dsparser' in division:
-                dsparser = division['dsparser']
-            if dsparser > 4:
-                raise NotImplementedError('no parser for draft sheet style')
-                # crash here
-
-            ## parse draft sheet
-            if dsparser in [0, 1, 2]:
-                draft = read_google_sheet(division['draftsheet'])
-            elif dsparser in [3, 4]:
-                # hyperlinked cells for account url
-                draft = read_google_sheet(division['draftsheet'], resolve_links = True)
-            draft = draft[draft['Activity check'] == 'Yes']
-
-            if dsparser in [0, 1]:
-                # Owl sheets
-                draft['account_id'] = draft['Dotabuff link'].apply(extract_account_id)
-                alts = draft['Please list your alternate accounts'].fillna('')
-                draft['alts'] = alts.apply(extract_account_ids)
-            elif dsparser in [2, 3]:
-                # Moggoblin sheets
-                link_col_options = ['dotabuff link', 'stratz link', 'account link']
-                link_col = next(c for c in draft.columns if c.lower() in link_col_options)
-                draft['account_id'] = draft[link_col].apply(extract_account_id)
-                alts = draft[['Second account', 'Third account']].fillna('').apply(' '.join, axis = 1)
-                draft['alts'] = alts.apply(extract_account_ids)
-                draft = draft[draft['Activity check'].isin(['Yes', 'yes'])].copy()
-            elif dsparser in [4]:
-                # BYOB
-                draft['account_id'] = draft['Account Link'].apply(extract_account_id)
-                draft['alts'] = draft.apply(lambda x: [], axis = 1)
-
-            draft['accounts'] = draft.apply(lambda x: x['alts'] + [x['account_id']], axis = 1)
-
-            pos_idx = draft.columns.searchsorted('Pos 1') + 1
-            
-            ## search teamsheet for teams
-            players = {}
-
             # BYOB
             if league['type'] == 'byob':
+                draft['account_id'] = draft['Account Link'].apply(extract_account_id)
+                draft['alts'] = draft.apply(lambda x: [], axis = 1)
                 #draft.groupby('Group Contact')['Name'].agg(list)
                 # you can't trust people to write the same name
                 # so for now, group by index
@@ -90,109 +51,79 @@ for season in rd2l['seasons']:
                         {'name': draft.iloc[i: i + 5]['Group Contact'].values[0],
                          'players': [{k: v[j] for k, v in team.items()} for j in range(5)]
                          }]
-       
+
+            # regular sheets
             else:
 
-                # read team sheet
+                ## read player list
+                draft = read_google_sheet(division['signups'], resolve_links = True)
+                draft = draft[draft['Activity check'] == 'Yes'].copy()
+
+                # Owl and Moggoblin sheets ask for Dotabuff links for account ID
+                link_col_options = ['dotabuff link', 'stratz link', 'account link']
+                link_col = next(c for c in draft.columns if c.lower() in link_col_options) # get first match
+                draft['account_id'] = draft[link_col].apply(extract_account_id)
+
+                alts_col_options = ['second account', 'third account', 'please list your alternate accounts']
+                alts_cols = [c for c in draft.columns if c.lower() in alts_col_options]
+                alts = draft[alts_cols].fillna('').apply(' '.join, axis = 1)
+                draft['alts'] = alts.apply(extract_account_ids)
+
+                # cleanup
+                draft['accounts'] = draft.apply(lambda x: x['alts'] + [x['account_id']], axis = 1)
+                pos_idx = draft.columns.searchsorted('Pos 1') + 1
+                
+                ## search teamsheet for teams
                 sheet = read_google_sheet(division['teamsheet'])
                 sheet.fillna('', inplace = True)
 
-                tsparser = 0
-                if 'tsparser' in division:
-                    tsparser = division['tsparser']
-                if tsparser > 1:
-                    raise NotImplementedError('no parser for team sheet style')
-                    # crash here
+                teams = {}
+                for i, row in sheet.iterrows():
+                    for j, val in enumerate(row.iloc):
+                        if val == 'Coins':
+                            # team table has 'Coins' on top right corner
+                            # you might have to babysit these indexes if the sheet is different
+                            # ex: if hidden columns were moved around
+                            team_table = sheet.iloc[
+                                i + 1: i + 6, # 5 below
+                                [j - 3, j - 2, j] # 3 left, skip 1
+                                ]
+                            team = []
+                            # match the players by name, fill player info
+                            for _, (name, mmr, coins) in team_table.iterrows():
+                                if name == '':
+                                    continue
+                                info = {}
+                                p = draft[draft['Name'] == name].iloc[0]
+                                info['account_id'] = p['account_id']
+                                info['mmr'] = int(mmr) # int(p['MMR'])
+                                info['discord'] = p['Discord ID']
+                                info['pos_pref'] = p[pos_idx: pos_idx + 5].values.astype(int).tolist()
+                                info['alts'] = p['alts']
+                                info['country'] = get_player_data(p['account_id'])['country']
+                                info['name'] = name
+                                if league['type'] == 'auction':
+                                    try:
+                                        coins = int(coins)
+                                    except:
+                                        coins = 0
+                                    info['coins'] = coins
+                                # add player to team
+                                team += [info]
 
-                # search for player cells containing dotabuff link
-                if tsparser in [0]:
+                            if len(team) > 0:
+                                # team has players, add it
+                                teams[team[0]['name']] = team
+                            else:
+                                print('no players found')
 
-                    for i, row in sheet.iterrows():
-                        for j, val in enumerate(row.iloc):
-                            
-                            if j < 3:
-                                # skip first 3 columns
-                                continue
-                            #if league['name'] == 'Wednesday' and j > 16:
-                            #    # TEMP: iggy was hiding in the sheets
-                            #    continue
+                # json-ing
+                teams2 = [{'name': tn, 'players': p} for tn, p in teams.items()]
 
-                            # cell contains a dotabuff link, save info
-                            # TODO: check if valid account link or ID instead
-                            if '.com/' not in val:
-                                continue
-
-                            acc = extract_account_id(val)
-                            info = {'account_id': acc}
-
-                            # basic info
-                            p = draft[draft['account_id'] == acc].iloc[0]
-                            info['mmr'] = int(p['MMR'])
-                            info['discord'] = p['Discord ID']
-                            info['pos_pref'] = p[pos_idx: pos_idx + 5].values.astype(int).tolist()
-                            info['alts'] = p['alts']
-
-                            # country
-                            info['country'] = get_player_data(p['account_id'])['country']
-
-                            if league['type'] == 'auction':
-                                #coins = sheet.iloc[i, j - 1]
-                                coins = sheet.iloc[i, j + 1] # everybody's changing and I don't feel the same
-                                try:
-                                    coins = int(coins)
-                                except:
-                                    coins = 0
-                                info['name'] = sheet.iloc[i, j - 2]
-                                info['coins'] = coins
-                            elif league['type'] == 'linear':
-                                info['name'] = sheet.iloc[i, j - 2] # - 1 usually but -2 cz s28 spatzatura
-                            players[(i, j)] = info
-
-                    if players:
-                        # group players by clustering the cells in the spreadsheet
-                        cell_positions = np.array(list(players.keys()))
-                        cell_clusters = DBS(eps = 2).fit(cell_positions).labels_
-                        team_clusters = {t: cell_positions[np.where(cell_clusters == t)[0]] for t in np.unique(cell_clusters)}
-                        teams = {t: [players[tuple(p)] for p in team] for t, team in team_clusters.items()}
-                        teams2 = [{'name': p[0]['name'], 'players': p} for _, p in teams.items()]
-                    else:
-                        print('no players found')
-
-                # lookup team tables by position
-                elif tsparser in [1]:
-
-                    teams = {}
-                    for i, row in sheet.iterrows():
-                        for j, val in enumerate(row.iloc):
-                            if val == 'Coins':
-                                # team table has 'Coins' on top right corner
-                                team_table = sheet.iloc[i + 1: i + 6, [j - 3, j - 2, j]]
-                                team = []
-                                for _, (name, mmr, coins) in team_table.iterrows():
-                                    if name == '':
-                                        continue
-                                    info = {}
-                                    p = draft[draft['Name'] == name].iloc[0]
-                                    info['account_id'] = p['account_id']
-                                    info['mmr'] = int(mmr) # int(p['MMR'])
-                                    info['discord'] = p['Discord ID']
-                                    info['pos_pref'] = p[pos_idx: pos_idx + 5].values.astype(int).tolist()
-                                    info['alts'] = p['alts']
-                                    info['country'] = get_player_data(p['account_id'])['country']
-                                    info['name'] = name
-                                    if league['type'] == 'auction':
-                                        info['coins'] = coins
-                                    # add player to team
-                                    team += [info]
-
-                                if len(team) > 0:
-                                    # team has players, add it
-                                    teams[team[0]['name']] = team
-                                print(team)
-                    teams2 = [{'name': p[0]['name'], 'players': p} for _, p in teams.items()]
-
-            print(season['name'], league['name'], division['name'])
+            # save it
             division['teams'] = teams2
+            print('DONE:', season['name'], league['name'], division['name'])
+ 
 
 # save data
 with open(os.path.join(OUTPUT_PATH, FNAME + '_utf8.json'), 'w', encoding = 'utf-8') as f:
