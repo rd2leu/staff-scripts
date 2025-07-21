@@ -1,0 +1,55 @@
+{
+    "name": "RD2L EU",
+	"region": "Europe West",
+    "id": 0,
+    "seasons": [
+        {
+            "name": "Season 31",
+            "id": 0,
+			"start-date": 0,
+			"end-date": 0,
+            "leagues": [
+                {
+                    "name": "Sunday",
+                    "id": 18397,
+                    "type": "auction",
+                    "divisions": [
+                        {
+                            "name": "Division 1",
+                            "id": 1,
+                            "teamsheet": "https://docs.google.com/spreadsheets/d/1b9pL_VNAwCsztmGFGHBIR7Jn9IAf0E5qTITCdmGHUho/edit?gid=522669012#gid=522669012",
+							"tsparser": 1,
+							"draftsheet_": "https://docs.google.com/spreadsheets/d/1b9pL_VNAwCsztmGFGHBIR7Jn9IAf0E5qTITCdmGHUho/edit?gid=1298448049#gid=1298448049",
+							"draftsheet": "https://docs.google.com/spreadsheets/d/1b9pL_VNAwCsztmGFGHBIR7Jn9IAf0E5qTITCdmGHUho/edit?gid=721784153#gid=721784153",
+							"dsparser": 3
+                        },
+                        {
+                            "name": "Division 2",
+                            "id": 2,
+                            "teamsheet": "https://docs.google.com/spreadsheets/d/1b9pL_VNAwCsztmGFGHBIR7Jn9IAf0E5qTITCdmGHUho/edit?gid=881219222#gid=881219222",
+							"tsparser": 1,
+							"draftsheet": "https://docs.google.com/spreadsheets/d/1b9pL_VNAwCsztmGFGHBIR7Jn9IAf0E5qTITCdmGHUho/edit?gid=721784153#gid=721784153",
+							"dsparser": 3
+                        }
+                    ]
+                },
+                {
+                    "name": "Wednesday",
+                    "id": 18398,
+                    "type": "linear",
+                    "divisions": [
+                        {
+                            "name": "Division 1",
+                            "id": 1,
+                            "teamsheet": "https://docs.google.com/spreadsheets/d/1TtG0bycln7oa7J6Juj7asEaYSINAFXM-YYeGOzm-Fes/edit?gid=522669012#gid=522669012",
+							"tsparser": 1,
+							"draftsheet_": "https://docs.google.com/spreadsheets/d/1TtG0bycln7oa7J6Juj7asEaYSINAFXM-YYeGOzm-Fes/edit?gid=1298448049#gid=1298448049",
+							"draftsheet": "https://docs.google.com/spreadsheets/d/1TtG0bycln7oa7J6Juj7asEaYSINAFXM-YYeGOzm-Fes/edit?gid=721784153#gid=721784153",
+							"dsparser": 3
+                        }
+                    ]
+                }
+            ]
+        }
+	]
+}

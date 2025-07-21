@@ -14,14 +14,14 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 
 INPUT_PATH = 'input'
 OUTPUT_PATH = 'sheets'
-FNAME = 'rd2l_s30'
+FNAME = 'rd2l_s31'
 
 # match history search parameters
 params = {'date': 180} # last 6 months
 # TODO: put a date in the cache for opendota requests
 
 update_mmrs = True
-update_info = False
+update_info = True
 retry = True
 save = True
 
@@ -57,11 +57,12 @@ for season in rd2l['seasons']:
             # https://github.com/pandas-dev/pandas/issues/13439
             draft = read_google_sheet(division['draftsheet'], resolve_links = True)
 
+        draft = draft[draft['Activity check'] == 'Yes'].reset_index(drop = True)
+
         draft['account_id'] = draft['Dotabuff Link'].apply(extract_account_id)
         alts = draft[['Second account', 'Third account']].fillna('').apply(' '.join, axis = 1)
         draft['alts'] = alts.apply(extract_account_ids)
         draft['accounts'] = draft.apply(lambda x: x['alts'] + [x['account_id']], axis = 1)
-        draft = draft[draft['Activity check'] == 'Yes'].reset_index(drop = True)
         draft = draft[['Timestamp', 'Discord ID', 'Name', 'account_id', 'alts', 'accounts', 'MMR']].copy()
 
         cols = [
