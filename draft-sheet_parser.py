@@ -57,7 +57,7 @@ for season in rd2l['seasons']:
 
                 ## read player list
                 draft = read_google_sheet(division['signups'], resolve_links = True)
-                draft = draft[draft['Activity check'] == 'Yes'].copy()
+                draft = draft[draft['Activity check'].isin(['Yes', 'yes'])].copy() # sometimes people edit this field by hand
 
                 # Owl and Moggoblin sheets ask for Dotabuff links for account ID
                 link_col_options = ['dotabuff link', 'stratz link', 'account link']
@@ -80,17 +80,26 @@ for season in rd2l['seasons']:
                 teams = {}
                 for i, row in sheet.iterrows():
                     for j, val in enumerate(row.iloc):
-                        if val == 'Coins':
+                        if val == 'Player':
+                            # team table has 'Player' on top left corner
                             # team table has 'Coins' on top right corner
                             # you might have to babysit these indexes if the sheet is different
                             # ex: if hidden columns were moved around
+                            header = sheet.iloc[i, j: j + 4].to_list()
+                            header = [h.lower() for h in header]
+                            # sometimes the 'Player' keyword is repeated, skip what is not a table
+                            if 'mmr' not in header:
+                                continue
                             team_table = sheet.iloc[
                                 i + 1: i + 6, # 5 below
-                                [j - 3, j - 2, j] # 3 left, skip 1
+                                j: j + 4 # 4 right (ignore 3rd)
                                 ]
                             team = []
                             # match the players by name, fill player info
-                            for _, (name, mmr, coins) in team_table.iterrows():
+                            for k, player_row in team_table.iterrows():
+                                name = player_row[header.index('player')]
+                                mmr = player_row[header.index('mmr')]
+                                # don't add empty rows (not yet filled)
                                 if name == '':
                                     continue
                                 info = {}
@@ -103,6 +112,7 @@ for season in rd2l['seasons']:
                                 info['country'] = get_player_data(p['account_id'])['country']
                                 info['name'] = name
                                 if league['type'] == 'auction':
+                                    coins = player_row[header.index('coins')]
                                     try:
                                         coins = int(coins)
                                     except:
@@ -115,7 +125,7 @@ for season in rd2l['seasons']:
                                 # team has players, add it
                                 teams[team[0]['name']] = team
                             else:
-                                print('no players found')
+                                print('No players found in team (hidden?)')
 
                 # json-ing
                 teams2 = [{'name': tn, 'players': p} for tn, p in teams.items()]
