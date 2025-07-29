@@ -25,3 +25,4 @@ print(date, '2025')
 for d in data.split('Match')[1:]:
     teams = [t.split('}}')[0].strip() for t in d.split('TeamOpponent|')[1:]]
     print('    (\'', teams[0], '\', \'', teams[1], '\'),', sep = '')
+

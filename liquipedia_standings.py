@@ -11,7 +11,7 @@ resolve_ties = True # calculate tiebreaker points based on score vs teams above
 check_map_result = True # slightly more points for ex, a 2-0 win than 2-1
 
 # allows: None, 'up', 'stay', 'down', 'top_6'
-stay = 'stay'
+stay = 'top_6'
 
 
 

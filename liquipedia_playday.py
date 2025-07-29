@@ -8,28 +8,32 @@ from utilities import datetoseconds, datestr, season_info_get, season_info_get_t
 ## input
 search = {
     'org': 'rd2l',
-    'tournament': 'mini', # mini main side shakira ...
-    'season': '16',
-    'league': '', # Wednesday Sunday
-    'division': '1'
+    'tournament': 'main', # mini main side shakira ...
+    'season': '31',
+    'league': 'Sunday', # Wednesday Sunday
+    'division': '2'
     }
 
 timezone = 'CET'
-start_time_str = 'May 14 2025 - 16:00'
+start_time_str = 'July 27 2025 - 16:00'
 start_time = datetoseconds(start_time_str, 'CET')
 end_time = 2000000000
 
-bestof = 3
+bestof = 2
 force = True
 save = True
 
 # TODO: automate filling this
 series_scheduled = [
-    ('ElNiño', 'FTG'),
-    ('play', 'Miiew'),
-    ('BErt', 'JB^'),
-    ('Marty', 'Jeri')
+    ('Muko', 'ClapTiq'),
+    ('Faith', 'Lanfe4r'),
+    ('Drregron', 'Lewis'),
+    ('Potentiallyyouruncle', 'Wiolarz')
     ]
+
+# Unseelie prime skiter Tsenme Exy- Aty DJDuese Cvaekt Leiya
+# Muko ClapTiq Faith Lanfe4r Drregron Lewis Potentiallyyouruncle Wiolarz
+#
 
 # teams
 encoding = 'utf-16'
