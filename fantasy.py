@@ -216,7 +216,7 @@ result['timestamp'] = draft.iloc[:, 0]
 for i in range(1, 6):
     result[f'pick_{i}'] = draft.iloc[:, i]
     result[f'pts_{i}'] = ppts.iloc[:, i]
-result['total'] = result.iloc[:, [3, 5, 7, 9, 11]].sum(axis = 1)
+result['total'] = result.iloc[:, [3, 5, 7, 9, 11]].sum(axis = 1).round(3)
 
 if save:
     result.to_csv(os.path.join('fantasy', 'participants', fname))
