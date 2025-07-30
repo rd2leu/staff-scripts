@@ -122,6 +122,7 @@ for match_id in data['match_id']:
             fstats.loc[a_id, k] = player.get(k, 0) * v
 
     fstats['deaths'] += 3
+    fstats['deaths'] = fstats['deaths'].apply(lambda x: max(x, 0))
     fstats['total'] = fstats[fantasy_table.keys()].sum(axis = 1)
     fstats.to_csv(os.path.join('fantasy', 'matches', 'fantasy_{}.csv'.format(match_id)))
     fstats['match_id'] = match_id
