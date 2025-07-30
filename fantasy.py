@@ -172,6 +172,16 @@ for t in teams:
          accs = [p['account_id']] + p['alts']
          player_pool[player] = accs
 
+# get accounts of participant teammates if they are playing
+teammates = {}
+for part in participant_picks:
+    name = part.lower().strip()
+    if name in player_pool:
+        acc_id = player_pool[name][0]
+        for team_name, accs in team_acc.items():
+            if acc_id in accs:
+                teammates[name] = accs
+
 # match names with accounts
 participant_picks_account_ids = {}
 for part, picks in participant_picks.items():
@@ -195,7 +205,11 @@ for part, picks in participant_picks.items():
 # find how many points each participant pick got
 participant_points = {}
 for part, account_ids in participant_picks_account_ids.items():
-    fpoints = [] # collect for each player entry
+    # give 0 points if you picked your teammate
+    name = part.lower().strip()
+    tmates = teammates.get(name, [])
+    # collect for each player entry
+    fpoints = []
     for accounts in account_ids:
         fpts = [] # sum for each account
         for a in accounts:
@@ -203,6 +217,9 @@ for part, account_ids in participant_picks_account_ids.items():
                 fpts += [fplayers.loc[int(a)]['total']]
         if len(fpts) == 0:
             print('player', accounts, 'did not play')
+            fpts = [0]
+        if any([a in tmates for a in accounts]):            
+            print('participant', part, 'picked his teammate', accounts)
             fpts = [0]
         fpoints += [sum(fpts)]
     participant_points[part] = fpoints
