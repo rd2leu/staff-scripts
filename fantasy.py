@@ -69,7 +69,21 @@ teams = []
 for division in search['divisions']:
     teams += season_info_get_teams(season_info, division = division, **search)
 
-team_acc = {t['name']: [a for p in t['players'] for a in [p['account_id']] + p['alts']] for t in teams}
+team_acc = {}
+for t in teams:
+    accs = []
+    for p in t['players']:
+        accs += [p['account_id']]
+        accs += p['alts']
+    team_acc[t['name']] = accs
+
+# account ID to name lookup
+acc_names = {}
+for t in teams:
+    for p in t['players']:
+        acc_names[p['account_id']] = p['name']
+        for a in p['alts']:
+            acc_names[a] = p['name']
 
 # get league matches
 matches = get_league_matches(league_id, force = force)
@@ -144,6 +158,7 @@ fdata = fdata[best_n]
 ftk = list(fantasy_table.keys()) + ['total']
 fplayers = fdata.groupby('account_id')[ftk].apply(sum)
 fplayers = fplayers.round(3)
+fplayers['name'] = fplayers.index.astype(str).map(acc_names.get)
 
 # save player fantasy data
 fname = 's{}_{}_w{}.csv'.format(

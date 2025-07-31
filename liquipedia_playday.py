@@ -10,8 +10,8 @@ search = {
     'org': 'rd2l',
     'tournament': 'main', # mini main side shakira ...
     'season': '31',
-    'league': 'Sunday', # Wednesday Sunday
-    'division': '2'
+    'league': 'Wednesday', # Wednesday Sunday
+    'division': '1'
     }
 
 timezone = 'CET'
@@ -25,15 +25,15 @@ save = True
 
 # TODO: automate filling this
 series_scheduled = [
-    ('Muko', 'ClapTiq'),
-    ('Faith', 'Lanfe4r'),
-    ('Drregron', 'Lewis'),
-    ('Potentiallyyouruncle', 'Wiolarz')
+    ('Kiritoya-', 'canin'),
+    ('Beno', 'FTG'),
+    ('Jam Apple YNWA', 'baul'),
+    ('Wiolarz', 'Lanfe4r')
     ]
 
 # Unseelie prime skiter Tsenme Exy- Aty DJDuese Cvaekt Leiya
 # Muko ClapTiq Faith Lanfe4r Drregron Lewis Potentiallyyouruncle Wiolarz
-#
+# Kiritoya- canin Beno FTG Jam Apple YNWA baul Wiolarz Lanfe4r
 
 # teams
 encoding = 'utf-16'
