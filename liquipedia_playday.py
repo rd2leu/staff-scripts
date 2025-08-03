@@ -10,12 +10,12 @@ search = {
     'org': 'rd2l',
     'tournament': 'main', # mini main side shakira ...
     'season': '31',
-    'league': 'Wednesday', # Wednesday Sunday
+    'league': 'Sunday', # Wednesday Sunday
     'division': '1'
     }
 
 timezone = 'CET'
-start_time_str = 'July 27 2025 - 16:00'
+start_time_str = 'August 03 2025 - 16:00'
 start_time = datetoseconds(start_time_str, 'CET')
 end_time = 2000000000
 
@@ -25,10 +25,10 @@ save = True
 
 # TODO: automate filling this
 series_scheduled = [
-    ('Kiritoya-', 'canin'),
-    ('Beno', 'FTG'),
-    ('Jam Apple YNWA', 'baul'),
-    ('Wiolarz', 'Lanfe4r')
+    ('Unseelie', 'Aty'),
+    ('Leiya', 'Tsenme'),
+    ('Exy-', 'prime skiter'),
+    ('Cvaekt', 'DJDuese')
     ]
 
 # Unseelie prime skiter Tsenme Exy- Aty DJDuese Cvaekt Leiya

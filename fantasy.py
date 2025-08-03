@@ -30,7 +30,7 @@ fantasy_table = {
 }
 
 fantasy_keep_bestof = 2 # if BO3, keep 2 best games
-week = 1
+week = 2
 
 # extra settings
 
@@ -125,9 +125,33 @@ data = pd.DataFrame(np.array(data)[np.unique(filtered)].tolist())
 data = data[(data['start_time'] > start_time) & (data['start_time'] < end_time)]
 data['series_name'] = data.apply(lambda x: ', '.join(sorted([x['radiant_team_name'], x['dire_team_name']])), axis = 1)
 
+print()
+
+series_played = {}
+for i, d in enumerate(data.groupby('series_name').agg(list).iloc):
+    series = pd.DataFrame({k: d[k] for k in d.index})
+    series.sort_values('start_time', inplace = True)
+    team1 = series.iloc[0]['dire_team_name'] # order not important for now
+    team2 = series.iloc[0]['radiant_team_name']
+    if (team1, team2) in series_scheduled:
+        series_played[(team1, team2)] = series.copy()
+    elif (team2, team1) in series_scheduled:
+        series_played[(team2, team1)] = series.copy()
+    else:
+        print('WARN:', 'unscheduled match', team1, 'vs', team2)
+
+for ss in series_scheduled:
+    if ss not in series_played:
+        print('WARN:', ss[0], 'vs', ss[1], 'was not played')
+
+if len(series_played) == 0:
+    print('ERROR: no scheduled match was played (wrong week?)')
+
+data2 = pd.concat(series_played.values())
+
 # get fantasy stats for each match and save to file
 fstats_all = []
-for match_id in data['match_id']:
+for match_id in data2['match_id']:
     fstats = pd.DataFrame()
     match = get_match(match_id)
     for idx, player in enumerate(match['players']):
@@ -172,6 +196,13 @@ if save:
 # read participant picks for this week
 draft = pd.read_csv(os.path.join('fantasy', 'draft', fname))
 
+# extra space, multiple responses, keep latest
+draft['Name'] = draft['Name'].apply(str.strip)
+draft['name2'] = draft['Name'].apply(str.lower)
+draft['ts'] = pd.to_datetime(draft['Tidsstempel'], format = '%d/%m/%Y %H.%M.%S')
+draft = draft.groupby('name2').apply(lambda x: x.loc[x['ts'].idxmax()])
+draft = draft.reset_index(drop = True).drop(['name2', 'ts'], axis = 1)
+
 participant_picks = {}
 for idx, row in draft.iterrows():
     name = row['Name']
@@ -214,7 +245,7 @@ for part, picks in participant_picks.items():
                     found = True
                     break
         if not found:
-            print('Missing', pick, 'for', part)
+            print('WARN:', 'missing', pick, 'for', part)
     participant_picks_account_ids[part] = account_ids
 
 # find how many points each participant pick got
@@ -231,10 +262,10 @@ for part, account_ids in participant_picks_account_ids.items():
             if int(a) in fplayers.index:
                 fpts += [fplayers.loc[int(a)]['total']]
         if len(fpts) == 0:
-            print('player', accounts, 'did not play')
+            print('INFO:', 'player', accounts, acc_names[accounts[0]], 'did not play')
             fpts = [0]
         if any([a in tmates for a in accounts]):            
-            print('participant', part, 'picked his teammate', accounts)
+            print('INFO:', 'participant', part, 'picked his teammate', accounts, acc_names[accounts[0]])
             fpts = [0]
         fpoints += [sum(fpts)]
     participant_points[part] = fpoints
