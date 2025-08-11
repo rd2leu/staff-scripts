@@ -9,6 +9,7 @@ from sklearn.preprocessing import MinMaxScaler
 
 resolve_ties = True # calculate tiebreaker points based on score vs teams above
 check_map_result = True # slightly more points for ex, a 2-0 win than 2-1
+count_wins = False # count 1-0-0 as better than 0-2-0
 
 # allows: None, 'up', 'stay', 'down', 'top_6'
 stay = 'top_6'
@@ -82,11 +83,14 @@ for t, res in results.items():
 
 data = pd.DataFrame(results2).T
 data['map'] = 2 * data['win'] + 1 * data['tie'] # games are BO2
-data.sort_values(['map', 'win', 'tie'], ascending = False, inplace = True)
+decider = ['map', 'win', 'tie']
+if count_wins == False:
+    decider = ['map']
+data.sort_values(decider, ascending = False, inplace = True)
 data = data.reset_index().rename(columns = {'index': 'team'})
 
 # leaderboard ties
-reslist = data[['win', 'tie', 'lose']]
+reslist = data[decider]
 dups = reslist.duplicated(keep = False)
 data['tied'] = reslist.duplicated(keep = False)
 
