@@ -30,7 +30,7 @@ fantasy_table = {
 }
 
 fantasy_keep_bestof = 2 # if BO3, keep 2 best games
-week = 3
+week = 4
 
 # extra settings
 
@@ -50,7 +50,7 @@ series_scheduled = []
 for division in search['divisions']:
     series_scheduled += schedule_get_matches(week, division = division, **search)
 
-print(*series_scheduled, sep = '\n')
+print(*series_scheduled, sep = ',\n    ')
 
 # read league info
 ttag_lookup = {'main': 's', 'mini': 'm'}

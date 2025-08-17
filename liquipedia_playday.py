@@ -11,24 +11,23 @@ search = {
     'tournament': 'main', # mini main side shakira ...
     'season': '31',
     'league': 'Sunday', # Wednesday Sunday
-    'division': '2'
+    'division': '1'
     }
 
 timezone = 'CET'
-start_time_str = 'August 10 2025 - 16:00'
+start_time_str = 'August 17 2025 - 16:00'
 start_time = datetoseconds(start_time_str, 'CET')
 end_time = 2000000000
 
-bestof = 2
+bestof = 3
 force = True
 save = True
 
 # TODO: automate filling this
 series_scheduled = [
-    ('Muko', 'Lewis'),
-    ('Faith', 'Wiolarz'),
-    ('Lanfe4r', 'ClapTiq'),
-    ('Drregron', 'Potentiallyyouruncle'),
+    ('Leiya', 'Aty'),
+    ('prime skiter', 'Tsenme'),
+    ('Exy-', 'Unseelie'),
     ]
 
 # Unseelie prime skiter Tsenme Exy- Aty DJDuese Cvaekt Leiya
