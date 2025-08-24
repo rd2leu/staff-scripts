@@ -30,7 +30,7 @@ fantasy_table = {
 }
 
 fantasy_keep_bestof = 2 # if BO3, keep 2 best games
-week = 4
+week = 5
 
 # extra settings
 
@@ -197,6 +197,7 @@ if save:
 
 # read participant picks for this week
 draft = pd.read_csv(os.path.join('fantasy', 'draft', fname))
+draft = draft.fillna('')
 
 # extra space, multiple responses, keep latest
 draft['Name'] = draft['Name'].apply(str.strip)
@@ -236,7 +237,11 @@ for part, picks in participant_picks.items():
     account_ids = []
     for pick in picks:
         found = False
-        if pick in player_pool:
+        if pick == '':
+            # empty response
+            account_ids += [['']]
+            found = True            
+        elif pick in player_pool:
             account_ids += [player_pool[pick]]
             found = True
         elif '/' in pick:
@@ -261,7 +266,10 @@ for part, account_ids in participant_picks_account_ids.items():
     for accounts in account_ids:
         fpts = [] # sum for each account
         for a in accounts:
-            if int(a) in fplayers.index:
+            if a == '':
+                # empty response gets 0 pts
+                fpts += [0]
+            elif int(a) in fplayers.index:
                 fpts += [fplayers.loc[int(a)]['total']]
         if len(fpts) == 0:
             print('INFO:', 'player', accounts, acc_names[accounts[0]], 'did not play')

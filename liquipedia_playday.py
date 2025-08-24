@@ -15,7 +15,7 @@ search = {
     }
 
 timezone = 'CET'
-start_time_str = 'August 17 2025 - 16:00'
+start_time_str = 'August 24 2025 - 16:00'
 start_time = datetoseconds(start_time_str, 'CET')
 end_time = 2000000000
 
@@ -25,9 +25,8 @@ save = True
 
 # TODO: automate filling this
 series_scheduled = [
-    ('Leiya', 'Aty'),
-    ('prime skiter', 'Tsenme'),
-    ('Exy-', 'Unseelie'),
+    ('Aty', 'Tsenme'),
+    ('Leiya', 'Exy-'),
     ]
 
 # Unseelie prime skiter Tsenme Exy- Aty DJDuese Cvaekt Leiya
@@ -38,6 +37,8 @@ series_scheduled = [
 encoding = 'utf-16'
 
 ## main
+
+force_update_match_data = False
 
 # read league info
 ttag_lookup = {'main': 's', 'mini': 'm'}
@@ -170,7 +171,7 @@ for ss in series_scheduled:
                 team1_side = 'dire'
             # try to get Map
             try:
-                text += gen_map_text(match_id, team1 = team1_side)
+                text += gen_map_text(match_id, team1 = team1_side, force = force_update_match_data)
             except:
                 text += '\n' + template3
         else:
