@@ -31,6 +31,7 @@ fantasy_table = {
 
 fantasy_keep_bestof = 2 # if BO3, keep 2 best games
 week = 5
+dont_allow_teammates = True # 0 points if the player is on your team
 
 # extra settings
 
@@ -274,7 +275,7 @@ for part, account_ids in participant_picks_account_ids.items():
         if len(fpts) == 0:
             print('INFO:', 'player', accounts, acc_names[accounts[0]], 'did not play')
             fpts = [0]
-        if any([a in tmates for a in accounts]):            
+        if dont_allow_teammates and any([a in tmates for a in accounts]):            
             print('INFO:', 'participant', part, 'picked his teammate', accounts, acc_names[accounts[0]])
             fpts = [0]
         fpoints += [sum(fpts)]
