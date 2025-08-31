@@ -11,11 +11,11 @@ search = {
     'tournament': 'main', # mini main side shakira ...
     'season': '31',
     'league': 'Sunday', # Wednesday Sunday
-    'division': '1'
+    'division': '2'
     }
 
 timezone = 'CET'
-start_time_str = 'August 24 2025 - 16:00'
+start_time_str = 'August 31 2025 - 16:00'
 start_time = datetoseconds(start_time_str, 'CET')
 end_time = 2000000000
 
@@ -25,8 +25,8 @@ save = True
 
 # TODO: automate filling this
 series_scheduled = [
-    ('Aty', 'Tsenme'),
-    ('Leiya', 'Exy-'),
+    #('Tsenme', 'Exy-'),
+    ('Lewis', 'Wiolarz'),
     ]
 
 # Unseelie prime skiter Tsenme Exy- Aty DJDuese Cvaekt Leiya

@@ -30,8 +30,8 @@ fantasy_table = {
 }
 
 fantasy_keep_bestof = 2 # if BO3, keep 2 best games
-week = 5
-dont_allow_teammates = True # 0 points if the player is on your team
+week = 6
+dont_allow_teammates = False # 0 points if the player is on your team
 
 # extra settings
 
