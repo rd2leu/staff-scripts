@@ -14,7 +14,7 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 
 INPUT_PATH = 'input'
 OUTPUT_PATH = 'sheets'
-FNAME = 'rd2l_s31'
+FNAME = 'rd2l_s32'
 
 # match history search parameters
 params = {'date': 180} # last 6 months
@@ -47,23 +47,28 @@ with open(os.path.join(INPUT_PATH, FNAME + '.json'), 'r') as f:
     rd2l = json.load(f)
 
 for season in rd2l['seasons']:
-    for league in season['leagues']:
+    for league in season['leagues'][:]:
         division = league['divisions'][0]
 
-        if 'dsparser' not in division or division['dsparser'] < 3:
-            draft = read_google_sheet(division['draftsheet'])
-        else:
-            # dotabuff links are now hyperlinks
-            # https://github.com/pandas-dev/pandas/issues/13439
-            draft = read_google_sheet(division['draftsheet'], resolve_links = True)
+        ## read player list
+        draft = read_google_sheet(division['signups'], resolve_links = True)
+        draft = draft[draft['Activity check'].isin(['Yes', 'yes'])].copy() # sometimes people edit this field by hand
 
-        draft = draft[draft['Activity check'] == 'Yes'].reset_index(drop = True)
+        # Owl and Moggoblin sheets ask for Dotabuff links for account ID
+        link_col_options = ['dotabuff link', 'stratz link', 'account link']
+        link_col = next(c for c in draft.columns if c.lower() in link_col_options) # get first match
+        draft['account_id'] = draft[link_col].apply(extract_account_id)
 
-        draft['account_id'] = draft['Dotabuff Link'].apply(extract_account_id)
-        alts = draft[['Second account', 'Third account']].fillna('').apply(' '.join, axis = 1)
+        alts_col_options = ['second account', 'third account', 'please list your alternate accounts']
+        alts_cols = [c for c in draft.columns if c.lower() in alts_col_options]
+        alts = draft[alts_cols].fillna('').apply(' '.join, axis = 1)
         draft['alts'] = alts.apply(extract_account_ids)
+
+        # cleanup
         draft['accounts'] = draft.apply(lambda x: x['alts'] + [x['account_id']], axis = 1)
+
         draft = draft[['Timestamp', 'Discord ID', 'Name', 'account_id', 'alts', 'accounts', 'MMR']].copy()
+        draft = draft.reset_index(drop = True)
 
         cols = [
             'mmr_estimate', 'mmr_estimate_2', 'nb_solo', 'nb_matches',
@@ -127,7 +132,7 @@ for season in rd2l['seasons']:
                 draft.loc[i, 'nb_matches'] = len(matches)
                 
                 # versatility
-                heroes = [m['hero_id'] for m in matches]
+                heroes = [m['hero_id'] for m in matches if m['hero_id']]
                 u, c = np.unique(heroes, return_counts = True)
                 top3 = u[np.argsort(c)][::-1][:3]
                 draft.loc[i, 'top3_heroes'] = ', '.join([hero_name(h) for h in top3])
