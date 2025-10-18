@@ -4,14 +4,14 @@ import numpy as np
 
 from d2tools.api import *
 from d2tools.utilities import rank2mmr
-from utilities import datestr, read_google_sheet
+from utilities import datestr, read_google_sheet, rindex
 from utilities2 import extract_account_id, extract_account_ids
 
 from sklearn.cluster import DBSCAN as DBS
 
 INPUT_PATH = 'input'
 OUTPUT_PATH = 'draft'
-FNAME = 'rd2l_s31'
+FNAME = 'rd2l_s32'
 
 """
 Sheet styles:
@@ -95,12 +95,13 @@ for season in rd2l['seasons']:
                                 j: j + 4 # 4 right (ignore 3rd)
                                 ]
                             team = []
+                            print(pd.DataFrame(team_table.values, columns = header))
                             # match the players by name, fill player info
                             for k, player_row in team_table.iterrows():
-                                name = player_row[header.index('player')]
+                                name = player_row[rindex(header, 'player')]
                                 mmr = player_row[header.index('mmr')]
                                 # don't add empty rows (not yet filled)
-                                if name == '':
+                                if name == '' or mmr == '':
                                     continue
                                 info = {}
                                 p = draft[draft['Name'] == name].iloc[0]
@@ -133,10 +134,8 @@ for season in rd2l['seasons']:
             # save it
             division['teams'] = teams2
             print('DONE:', season['name'], league['name'], division['name'])
- 
+
 
 # save data
-with open(os.path.join(OUTPUT_PATH, FNAME + '_utf8.json'), 'w', encoding = 'utf-8') as f:
-    json.dump(rd2l, f, indent = 4)
-with open(os.path.join(OUTPUT_PATH, FNAME + '_utf16.json'), 'w', encoding = 'utf-16') as f:
+with open(os.path.join(OUTPUT_PATH, FNAME + '.json'), 'w', encoding = 'utf-16') as f:
     json.dump(rd2l, f, indent = 4, ensure_ascii = False)
