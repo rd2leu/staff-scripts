@@ -12,7 +12,7 @@ search = {
     'tournament': 'main', # mini main side shakira ...
     'season': '32',
     'league': 'Sunday', # Wednesday Sunday
-    'division': '1'
+    'division': '3'
     }
 
 timezone = 'CET'
@@ -35,8 +35,7 @@ series_scheduled += schedule_get_matches(week, **search)
 #
 #
 
-print(*series_scheduled, sep = ',\n    ')
-
+print('Schedule:', *series_scheduled, sep = ',\n    ')
 
 ## main
 
