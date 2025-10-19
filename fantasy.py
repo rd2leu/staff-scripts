@@ -42,8 +42,6 @@ end_time = 2000000000
 force = True
 save = True
 
-encoding = 'utf-16'
-
 ## main
 
 # read schedule for series
@@ -57,12 +55,11 @@ print(*series_scheduled, sep = ',\n    ')
 ttag_lookup = {'main': 's', 'mini': 'm'}
 tour = search['tournament'].lower()
 ttag = ttag_lookup.get(tour, tour)
-encoding2 = encoding.replace('-', '')
 
-team_info_str = search['org'], ttag, search['season'], encoding2
-team_info_path = os.path.join('draft', '{}_{}{}_{}.json'.format(*team_info_str))
+team_info_str = search['org'], ttag, search['season']
+team_info_path = os.path.join('draft', '{}_{}{}.json'.format(*team_info_str))
 
-with open(team_info_path, encoding = encoding) as f:
+with open(team_info_path, encoding = 'utf-16') as f:
     season_info = json.load(f)
 
 league_id = season_info_get(season_info, seasons = search['season'], leagues = search['league'])['id']

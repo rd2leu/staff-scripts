@@ -4,37 +4,39 @@ import numpy as np
 from d2tools.api import get_league_matches
 from liquipedia_map import gen_map_text
 from utilities import datetoseconds, datestr, season_info_get, season_info_get_teams
+from schedule import schedule_get_matches
 
 ## input
 search = {
     'org': 'rd2l',
     'tournament': 'main', # mini main side shakira ...
-    'season': '31',
+    'season': '32',
     'league': 'Sunday', # Wednesday Sunday
-    'division': '2'
+    'division': '1'
     }
 
 timezone = 'CET'
-start_time_str = 'August 31 2025 - 16:00'
+start_time_str = 'October 19 2025 - 16:00'
 start_time = datetoseconds(start_time_str, 'CET')
 end_time = 2000000000
 
-bestof = 3
+week = 1
+bestof = 2
 force = True
 save = True
 
-# TODO: automate filling this
+# you can add series manually here
 series_scheduled = [
-    #('Tsenme', 'Exy-'),
-    ('Lewis', 'Wiolarz'),
     ]
+series_scheduled += schedule_get_matches(week, **search)
 
-# Unseelie prime skiter Tsenme Exy- Aty DJDuese Cvaekt Leiya
-# Muko ClapTiq Faith Lanfe4r Drregron Lewis Potentiallyyouruncle Wiolarz
-# Kiritoya- canin Beno FTG Jam Apple YNWA baul Wiolarz Lanfe4r
+#
+#
+#
+#
 
-# teams
-encoding = 'utf-16'
+print(*series_scheduled, sep = ',\n    ')
+
 
 ## main
 
@@ -44,12 +46,11 @@ force_update_match_data = False
 ttag_lookup = {'main': 's', 'mini': 'm'}
 tour = search['tournament'].lower()
 ttag = ttag_lookup.get(tour, tour)
-encoding2 = encoding.replace('-', '')
 
-team_info_str = search['org'], ttag, search['season'], encoding2
-team_info_path = os.path.join('draft', '{}_{}{}_{}.json'.format(*team_info_str))
+team_info_str = search['org'], ttag, search['season']
+team_info_path = os.path.join('draft', '{}_{}{}.json'.format(*team_info_str))
 
-with open(team_info_path, encoding = encoding) as f:
+with open(team_info_path, encoding = 'utf-16') as f:
     season_info = json.load(f)
 
 league_id = season_info_get(season_info, seasons = search['season'], leagues = search['league'])['id']

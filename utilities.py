@@ -6,6 +6,11 @@ import openpyxl
 from io import BytesIO
 from urllib.request import urlopen
 
+def alphanumeric(n = 8):
+    d = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'
+    d = list(d)
+    return ''.join(np.random.choice(d, n))
+
 def shorttime(s):
     """seconds to short time string"""
     frmt = '%#Hh%#Mm%#Ss'
@@ -22,6 +27,12 @@ def datestr(s, timezone = 'CET', frmt = None):
 def datetoseconds(datestr, timezone = 'CET'):
     """date string to seconds"""
     return int(pd.to_datetime([datestr]).tz_localize(timezone).tz_convert('UTC').values[0].astype(np.uint64) / 1000000000)
+
+def rindex(lst, value):
+    lst.reverse()
+    i = lst.index(value)
+    lst.reverse()
+    return len(lst) - i - 1
 
 def _partial_in(array, sub):
     for a in array:

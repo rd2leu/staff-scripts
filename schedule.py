@@ -12,19 +12,17 @@ from utilities import season_info_get
 
 def schedule_get_matches(week, season = None, league = None, division = None, **kwargs):
 
-    encoding = 'utf-16'
     org = kwargs.get('org', 'rd2l').lower()
 
     # read league info
     ttag_lookup = {'main': 's', 'mini': 'm'}
     tour = kwargs.get('tournament', 'main').lower()
     ttag = ttag_lookup.get(tour, tour)
-    encoding2 = encoding.replace('-', '')
 
-    schedule_str = org, ttag, season, encoding2
-    schedule_path = os.path.join('schedule', '{}_{}{}_{}.json'.format(*schedule_str))
+    schedule_str = org, ttag, season
+    schedule_path = os.path.join('schedule', '{}_{}{}.json'.format(*schedule_str))
 
-    with open(schedule_path, encoding = encoding) as f:
+    with open(schedule_path, encoding = 'utf-16') as f:
         schedule_info = json.load(f)
 
     schedule = season_info_get(

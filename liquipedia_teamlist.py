@@ -5,9 +5,9 @@ import numpy as np
 
 INPUT_PATH = 'draft'
 OUTPUT_PATH = ''
-FNAME = 'rd2l_s31'
+FNAME = 'rd2l_s32'
 
-with open(os.path.join(INPUT_PATH, FNAME + '_utf16.json'), 'r', encoding = 'utf-16') as f:
+with open(os.path.join(INPUT_PATH, FNAME + '.json'), 'r', encoding = 'utf-16') as f:
     rd2l = json.load(f)
 
 # liquipedia teams
