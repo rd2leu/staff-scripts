@@ -19,7 +19,6 @@ start_time = 'October 22 2025 - 20:00' # first match day and time
 weeks = 5 # number of groupstage weeks
 split = 1 # split into n groups # TODO
 bestof = 2
-save = False # TODO
 
 # datetime settings
 timezone = 'CET'
@@ -145,8 +144,3 @@ full_text = template5.format('{{box|break|padding=2em}}\n'.join(full_text))
 print(full_text)
 pyperclip.copy(full_text)
 print('Copied to clicpboard!')
-
-# save schedule
-# read .json and update with playdays[:weeks]
-if save:
-    data.save
