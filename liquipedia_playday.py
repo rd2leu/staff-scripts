@@ -12,16 +12,16 @@ search = {
     'tournament': 'main', # mini main side shakira ...
     'season': '32',
     'league': 'Sunday', # Wednesday Sunday
-    'division': '3'
+    'division': '1'
     }
 
 timezone = 'CET'
-start_time_str = 'October 19 2025 - 16:00'
+start_time_str = 'December 07 2025 - 16:00'
 start_time = datetoseconds(start_time_str, 'CET')
 end_time = 2000000000
 
-week = 1
-bestof = 2
+week = 8
+bestof = 3
 force = True
 save = True
 
@@ -93,6 +93,7 @@ for i in range(len(matches)):
 
 # group matches by date and teams
 data = pd.DataFrame(np.array(data)[np.unique(filtered)].tolist())
+data = data.fillna('')
 data = data[(data['start_time'] > start_time) & (data['start_time'] < end_time)]
 data['series_name'] = data.apply(lambda x: ', '.join(sorted([x['radiant_team_name'], x['dire_team_name']])), axis = 1)
 
@@ -186,7 +187,7 @@ for ss in series_scheduled:
 print('\n\n\n')
 for i, txt in enumerate(series_texts):
     #print("|M{0}header=\n|M{0}=".format(i + 1) + txt)
-    print("|M{0}=".format(i + 1) + txt)
+    print("|R2M{0}=".format(i + 1) + txt)
 
 # save data
 if save:

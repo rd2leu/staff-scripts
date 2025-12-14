@@ -7,7 +7,7 @@ from sklearn.preprocessing import MinMaxScaler
 
 ## CONFIG
 
-resolve_ties = True # calculate tiebreaker points based on score vs teams above
+resolve_ties = False # calculate tiebreaker points based on score vs teams above
 check_map_result = True # slightly more points for ex, a 2-0 win than 2-1
 count_wins = False # count 1-0-0 as better than 0-2-0
 
@@ -208,6 +208,9 @@ if resolve_ties == True:
         data = data.sort_values('pos').reset_index(drop = True)
 
         print('')
+
+else:
+    data.loc[data['tied'], 'pos'] += 1
 
 print('Final table:')
 data['pos'] = data['pos']

@@ -6,13 +6,11 @@ from utilities import season_info_get_teams
 ## input
 search = {
     'org': 'rd2l',
-    'tournament': 'mini', # mini main side shakira ...
-    'season': '16',
-    'league': '', # Wednesday Sunday
+    'tournament': 'main', # mini main side shakira ...
+    'season': '32',
+    'league': 'Sunday', # Wednesday Sunday
     'division': '1'
     }
-
-encoding = 'utf-16'
 
 ## main
 
@@ -20,12 +18,11 @@ encoding = 'utf-16'
 ttag_lookup = {'main': 's', 'mini': 'm'}
 tour = search['tournament'].lower()
 ttag = ttag_lookup.get(tour, tour)
-encoding2 = encoding.replace('-', '')
 
-team_info_str = search['org'], ttag, search['season'], encoding2
-team_info_path = os.path.join('draft', '{}_{}{}_{}.json'.format(*team_info_str))
+team_info_str = search['org'], ttag, search['season']
+team_info_path = os.path.join('draft', '{}_{}{}.json'.format(*team_info_str))
 
-with open(team_info_path, encoding = encoding) as f:
+with open(team_info_path, encoding = 'utf-16') as f:
     season_info = json.load(f)
 
 teams = season_info_get_teams(season_info, **search)
@@ -82,7 +79,8 @@ things = [
 ##things = ['cosmetics_count']
 
 for thing in things:
-    ids = stats.groupby('account_id')[thing].sum().sort_values(ascending = False)[:4]
+    grp = stats.groupby('account_id')
+    ids = grp[thing].sum().sort_values(ascending = False).iloc[:10]
     plot_overall_stats('Most {}'.format(thing), ids.keys(), ids.values)
   
 # most player thing in a game
@@ -107,7 +105,7 @@ things = [
 
 for thing in things:
     print('Game with most', thing)
-    top = stats.loc[stats[thing].sort_values(ascending = False)[:5].index]
+    top = stats.loc[stats[thing].sort_values(ascending = False).iloc[:8].index]
     top['name'] = top['account_id'].apply(get_player_name)
     print(top[['match_id', 'name', 'series_name', 'win', thing]], end = '\n\n')
 
@@ -116,15 +114,37 @@ things = [
     'duration', 'obs_placed', 'sen_placed', 'camps_stacked',
     'roshans_killed', 'bought_rapier', 'kill_streak'
     ]
+things = [
+    'duration', 'obs_placed', 'sen_placed', 'camps_stacked', 'rune_pickups',
+    'firstblood_claimed', 'teamfight_participation', 'towers_killed',
+    'roshans_killed', 'stuns', 'pings', 'hero_id', 'kills', 'deaths',
+    'assists', 'last_hits', 'denies', 'gold_per_min', 'xp_per_min',
+    'net_worth', 'hero_damage', 'tower_damage', 'hero_healing', 'kda',
+    'neutral_kills', 'courier_kills', 'observer_kills', 'ancient_kills',
+    'buyback_count', 'life_state_dead', 'max_hero_hit', 'max_mins_no_lh',
+    'avg_obs_dur', 'repeated_obs', 'bought_rapier', 'bought_consumables',
+    'used_blood_grenade', 'used_enchanted_mango', 'used_smoke_of_deceit',
+    'used_blink', 'used_armlet', 'used_revenants_brooch', 'used_pirate_hat',
+    'trees_quelled', 'runes_bounty', 'runes_wisdom', 'runes_6min',
+    'kill_streak', 'blood_inflicted', 'lotuses_stolen', 'uses_high_five',
+    'cosmetics_count', 'cosmetics_immortals'
+    ]
 ##things = ['denies']
 ##things = ['cosmetics_count']
 
 for thing in things:
     print('Game with most', thing)
     grp = stats.groupby('match_id')
-    top = grp[thing].max().sort_values(ascending = False)[:3]
-    res = grp[['series_name', 'account_id', 'win', 'dire_team_name', 'radiant_team_name', 'isRadiant']].first().loc[top.index]
-    res[thing] = top
+    #top = grp[thing].max().sort_values(ascending = False).iloc[:3]
+    #res = grp[['series_name', 'account_id', 'win', 'dire_team_name', 'radiant_team_name', 'isRadiant']].first().loc[top.index]
+    #res[thing] = top
+    top = stats.loc[grp[thing].idxmax().dropna().astype(int)]
+    top = top.sort_values(by = thing, ascending = False).iloc[:20]
+    res = top[[
+        'series_name', 'account_id', 'win',
+        'dire_team_name', 'radiant_team_name',
+        'isRadiant', thing
+        ]].copy()
     res['win'] = res['win'].astype(bool)
     res['name'] = res['account_id'].apply(get_player_name)
     res['winner'] = res.apply(lambda x: x['dire_team_name'] if (x['isRadiant'] ^ x['win']) else x['radiant_team_name'], axis = 1)
@@ -145,7 +165,7 @@ things = [
 for thing in things:
     print('Game with most total', thing)
     grp = stats.groupby('match_id')
-    top = grp[thing].sum().sort_values(ascending = False)[:3]
+    top = grp[thing].sum().sort_values(ascending = False).iloc[:5]
     res = grp[['series_name', 'win', 'dire_team_name', 'radiant_team_name', 'isRadiant']].first().loc[top.index]
     res[thing] = top
     res['win'] = res['win'].astype(bool)

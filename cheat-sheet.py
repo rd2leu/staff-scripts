@@ -20,10 +20,11 @@ FNAME = 'rd2l_s32'
 params = {'date': 180} # last 6 months
 # TODO: put a date in the cache for opendota requests
 
-update_mmrs = True
-update_info = True
-retry = True
-save = True
+update_mmrs = False
+update_info = False
+update_privacy = True
+retry = False
+save = False
 
 
 # hero stats
@@ -232,7 +233,7 @@ for season in rd2l['seasons']:
                 pass
 
             # account privacy
-            priv_st = [get_matches(account_id = a, force = update_info)['result']['status'] for a in accs]
+            priv_st = [get_matches(account_id = a, force = update_privacy)['result']['status'] for a in accs]
             priv = [s == 15 for s in priv_st]
             if all(priv):
                 draft.loc[i, 'privacy'] = 'private'

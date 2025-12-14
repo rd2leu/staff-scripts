@@ -8,21 +8,20 @@ from utilities import datestr, datetoseconds, season_info_get, season_info_get_t
 ## input
 search = {
     'org': 'rd2l',
-    'tournament': 'mini',
-    'season': '16',
-    'league': '',
+    'tournament': 'main', # mini main side shakira ...
+    'season': '32',
+    'league': 'Sunday', # Wednesday Sunday
     'division': '1'
     }
 
 timezone = 'CET'
-start_time_str = 'January 01 2024 - 16:00'
+start_time_str = 'October 01 2025 - 16:00'
 start_time = datetoseconds(start_time_str, 'CET')
 end_time = 2000000000
 
 bestof = 3
 force = False
 
-encoding = 'utf-16'
 
 ## main
 
@@ -30,12 +29,11 @@ encoding = 'utf-16'
 ttag_lookup = {'main': 's', 'mini': 'm'}
 tour = search['tournament'].lower()
 ttag = ttag_lookup.get(tour, tour)
-encoding2 = encoding.replace('-', '')
 
-team_info_str = search['org'], ttag, search['season'], encoding2
-team_info_path = os.path.join('draft', '{}_{}{}_{}.json'.format(*team_info_str))
+team_info_str = search['org'], ttag, search['season']
+team_info_path = os.path.join('draft', '{}_{}{}.json'.format(*team_info_str))
 
-with open(team_info_path, encoding = encoding) as f:
+with open(team_info_path, encoding = 'utf-16') as f:
     season_info = json.load(f)
 
 league_id = season_info_get(season_info, seasons = search['season'], leagues = search['league'])['id']
@@ -77,8 +75,11 @@ for i in range(len(matches)):
         data[i]['{}_team_name'.format(v)] = name
         filtered += [i]
 
-# group matches by date and teams
+# group matches by teams
 data = pd.DataFrame(np.array(data)[np.unique(filtered)].tolist())
+data = data.dropna(axis = 0).copy() # sometimes standins add false matches
+
+# sort by date
 data = data[(data['start_time'] > start_time) & (data['start_time'] < end_time)]
 data['series_name'] = data.apply(lambda x: ' vs '.join(sorted([x['radiant_team_name'], x['dire_team_name']])), axis = 1)
 
@@ -225,8 +226,14 @@ def get_match_player_stats(match_id):
 
 
 ## get all match player stats and merge
-match_ids = data['match_id'].drop_duplicates()
-pstats = pd.concat([get_match_player_stats(m) for m in match_ids])
+mdata = data[['match_id', 'radiant_team_name', 'dire_team_name']]
+mdata = mdata.drop_duplicates().copy()
+pstats = []
+for idx, (m, rn, dn) in mdata.iterrows():
+    mstats = get_match_player_stats(m)
+    mstats['team'] = mstats['isRadiant'].apply(lambda x: rn if x else dn)
+    pstats += [mstats]
+pstats = pd.concat(pstats)
 pstats = pstats.reset_index().rename({'index': 'account_id'}, axis = 1)
 div_stats = pd.merge(data, pstats, on = 'match_id', how = 'outer')
 
