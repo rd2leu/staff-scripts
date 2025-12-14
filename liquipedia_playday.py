@@ -16,11 +16,11 @@ search = {
     }
 
 timezone = 'CET'
-start_time_str = 'December 07 2025 - 16:00'
+start_time_str = 'December 14 2025 - 16:00'
 start_time = datetoseconds(start_time_str, 'CET')
 end_time = 2000000000
 
-week = 8
+week = 9
 bestof = 3
 force = True
 save = True
@@ -187,7 +187,7 @@ for ss in series_scheduled:
 print('\n\n\n')
 for i, txt in enumerate(series_texts):
     #print("|M{0}header=\n|M{0}=".format(i + 1) + txt)
-    print("|R2M{0}=".format(i + 1) + txt)
+    print("|R3M{0}=".format(i + 1) + txt)
 
 # save data
 if save:
