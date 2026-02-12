@@ -10,15 +10,15 @@ from schedule import schedule_get_matches
 search = {
     'org': 'rd2l',
     'tournament': 'main', # mini main side shakira ...
-    'season': '32',
-    'league': 'Sunday', # Wednesday Sunday
+    'season': '33',
+    'league': 'Wednesday', # Wednesday Sunday
     'division': '1'
     }
 
-start_time = 'October 22 2025 - 20:00' # first match day and time
-weeks = 5 # number of groupstage weeks
+start_time = 'February 11 2026 - 20:00' # first match day and time
+weeks = 1 # number of groupstage weeks
 split = 1 # split into n groups # TODO
-bestof = 2
+bestof = 3
 
 # datetime settings
 timezone = 'CET'
@@ -144,3 +144,5 @@ full_text = template5.format('{{box|break|padding=2em}}\n'.join(full_text))
 print(full_text)
 pyperclip.copy(full_text)
 print('Copied to clicpboard!')
+
+## TODO: export to json or print something to copy paste in schedule.json

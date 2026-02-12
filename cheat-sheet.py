@@ -14,7 +14,7 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 
 INPUT_PATH = 'input'
 OUTPUT_PATH = 'sheets'
-FNAME = 'rd2l_s32'
+FNAME = 'rd2l_s33'
 
 # match history search parameters
 params = {'date': 180} # last 6 months
@@ -24,7 +24,7 @@ update_mmrs = False
 update_info = False
 update_privacy = True
 retry = False
-save = False
+save = True
 
 
 # hero stats

@@ -11,7 +11,7 @@ from sklearn.cluster import DBSCAN as DBS
 
 INPUT_PATH = 'input'
 OUTPUT_PATH = 'draft'
-FNAME = 'rd2l_s32'
+FNAME = 'rd2l_s33'
 
 """
 Sheet styles:
