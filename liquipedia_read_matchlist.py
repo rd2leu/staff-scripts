@@ -27,7 +27,7 @@ weeks = raw.split('{{Matchlist')
 text2 = []
 for w, week in enumerate(weeks[1:]):
     date = week.split('title=')[1].split('\n')[0].split('|')[0].strip()
-    print(date, '2025')
+    print(date, '2026')
     text3 = []
     for d in week.split('Match')[1:]:
         teams = [t.split('}}')[0].strip() for t in d.split('TeamOpponent|')[1:]]

@@ -11,14 +11,14 @@ search = {
     'org': 'rd2l',
     'tournament': 'main', # mini main side shakira ...
     'season': '33',
-    'league': 'Wednesday', # Wednesday Sunday
-    'division': '1'
+    'league': 'Sunday', # Wednesday Sunday
+    'division': '3'
     }
 
 start_time = 'February 11 2026 - 20:00' # first match day and time
-weeks = 1 # number of groupstage weeks
+weeks = 5 # number of groupstage weeks
 split = 1 # split into n groups # TODO
-bestof = 3
+bestof = 2
 
 # datetime settings
 timezone = 'CET'
@@ -96,6 +96,7 @@ template5 = """==Matches==
 {}{{{{box|end}}}}"""
 
 full_text = []
+schedule = []
 for w, p in enumerate(playdays[:weeks]):
     week = w + 1
     series = [tuple(s) for s in zip(p[::2], p[1::2])]
@@ -108,7 +109,6 @@ for w, p in enumerate(playdays[:weeks]):
     series_texts = []
     for k, ss in enumerate(series):
     
-        series = None
         text = '|M{0}header=\n|M{0}='.format(k + 1)
 
         # team info
@@ -133,6 +133,17 @@ for w, p in enumerate(playdays[:weeks]):
 
         series_texts += [text]
 
+    schedule += [{
+        'week': week,
+        'matches': [
+                {
+                    'left_top': s[0],
+                    'right_bot': s[1],
+                }
+            for s in series
+            ]
+        }]
+
     # print it
     suffix = { 1 : 'st', 2 : 'nd', 3 : 'rd' }.get(dt.day % 10, 'th')
     playday_date = dt.strftime('%B %d').replace(' 0', ' ') + suffix
@@ -143,6 +154,7 @@ full_text = template5.format('{{box|break|padding=2em}}\n'.join(full_text))
 
 print(full_text)
 pyperclip.copy(full_text)
-print('Copied to clicpboard!')
+print('Liquipedia text copied to clicpboard!')
 
-## TODO: export to json or print something to copy paste in schedule.json
+print('Below is the .json export')
+print(json.dumps(schedule, indent = 4))
