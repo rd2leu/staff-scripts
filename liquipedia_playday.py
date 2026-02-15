@@ -1,6 +1,7 @@
 import os, json
 import pandas as pd
 import numpy as np
+import pyperclip
 from d2tools.api import get_league_matches
 from liquipedia_map import gen_map_text
 from utilities import datetoseconds, datestr, season_info_get, season_info_get_teams
@@ -11,17 +12,17 @@ search = {
     'org': 'rd2l',
     'tournament': 'main', # mini main side shakira ...
     'season': '33',
-    'league': 'Wednesday', # Wednesday Sunday
-    'division': '1'
+    'league': 'Sunday', # Wednesday Sunday
+    'division': '3'
     }
 
 timezone = 'CET'
-start_time_str = 'February 11 2026 - 16:00'
+start_time_str = 'February 15 2026 - 16:00'
 start_time = datetoseconds(start_time_str, 'CET')
 end_time = 2000000000
 
 week = 1
-bestof = 3
+bestof = 2
 force = True
 save = True
 
@@ -184,10 +185,15 @@ for ss in series_scheduled:
     series_texts += [text]
 
 # print it
-print('\n\n\n')
+full_text = ''
 for i, txt in enumerate(series_texts):
-    #print("|M{0}header=\n|M{0}=".format(i + 1) + txt)
-    print("|M{0}=".format(i + 1) + txt)
+    #'|M{0}header=\n|M{0}={1}\n'
+    full_text += '|M{0}={1}\n'.format(i + 1, txt)
+
+print('\n\n\n')
+print(full_text)
+pyperclip.copy(full_text[:-1])
+print('Liquipedia text copied to clicpboard!')
 
 # save data
 if save:
