@@ -180,7 +180,7 @@ best_n = fdata.groupby('account_id')['total'].transform(is_top_n, fantasy_keep_b
 fdata = fdata[best_n]
 
 ftk = list(fantasy_table.keys()) + ['total']
-fplayers = fdata.groupby('account_id')[ftk].apply(sum)
+fplayers = fdata.groupby('account_id')[ftk].sum()
 fplayers = fplayers.round(3)
 fplayers['name'] = fplayers.index.astype(str).map(acc_names.get)
 

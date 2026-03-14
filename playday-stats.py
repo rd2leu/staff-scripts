@@ -125,7 +125,7 @@ def get_match_player_stats(match_id):
         pstats.loc[a_id, 'repeated_obs'] = None
         if len(obs) > 0:
             obs_alive = obs.groupby('ehandle')['time'].apply(np.diff)
-            obs_alive = obs_alive[obs_alive.apply(len).astype(bool)]
+            obs_alive = obs_alive[obs_alive.len().astype(bool)]
             if len(obs_alive) > 0:
                 pstats.loc[a_id, 'avg_obs_dur'] = obs_alive.mean()[0]
             obs_loc = obs[obs['type'] == 'obs_log'].groupby(['key'])['key'].count()
