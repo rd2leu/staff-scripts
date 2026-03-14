@@ -26,7 +26,10 @@ def datestr(s, timezone = 'CET', frmt = None):
 
 def datetoseconds(datestr, timezone = 'CET'):
     """date string to seconds"""
-    return int(pd.to_datetime([datestr]).tz_localize(timezone).tz_convert('UTC').values[0].astype(np.uint64) / 1000000000)
+    # https://pandas.pydata.org/docs/whatsnew/v3.0.0.html#datetime-timedelta-resolution-inference
+    timestamp = pd.to_datetime([datestr])
+    timestamp = timestamp.tz_localize(timezone).tz_convert('UTC')[0]
+    return int(timestamp.value / 1000000000)
 
 def rindex(lst, value):
     lst.reverse()
