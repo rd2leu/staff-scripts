@@ -12,17 +12,17 @@ search = {
     'org': 'rd2l',
     'tournament': 'main', # mini main side shakira ...
     'season': '33',
-    'league': 'Sunday', # Wednesday Sunday
-    'division': '3'
+    'league': 'Wednesday', # Wednesday Sunday
+    'division': '1'
     }
 
 timezone = 'CET'
-start_time_str = 'March 08 2026 - 16:00'
+start_time_str = 'March 25 2026 - 16:00'
 start_time = datetoseconds(start_time_str, 'CET')
 end_time = 2000000000
 
-week = 4
-bestof = 2
+week = 7
+bestof = 3
 force = True
 save = True
 
@@ -188,7 +188,7 @@ for ss in series_scheduled:
 full_text = ''
 for i, txt in enumerate(series_texts):
     #'|M{0}header=\n|M{0}={1}\n'
-    full_text += '|M{0}={1}\n'.format(i + 1, txt)
+    full_text += '|R1M{0}={1}\n'.format(i + 1, txt)
 
 print('\n\n\n')
 print(full_text)

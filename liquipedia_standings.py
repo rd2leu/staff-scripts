@@ -7,7 +7,7 @@ from sklearn.preprocessing import MinMaxScaler
 
 ## CONFIG
 
-resolve_ties = False # calculate tiebreaker points based on score vs teams above
+resolve_ties = True # calculate tiebreaker points based on score vs teams above
 check_map_result = True # slightly more points for ex, a 2-0 win than 2-1
 count_wins = False # count 1-0-0 as better than 0-2-0
 
@@ -202,7 +202,7 @@ if resolve_ties == True:
         for i, res in tbpt.iterrows():
             # sorry for ugly pandas assignment
             idx = data[data['team'] == res['team']].index
-            data.loc[idx, 'pos'] = res['pos']
+            data.loc[idx, 'pos'] = res['pos'] # todo: add dtype
             data.loc[idx, 'tbp'] = res['tbp']
             data.loc[idx, 'pos_'] = res['pos_']
         data = data.sort_values('pos').reset_index(drop = True)
