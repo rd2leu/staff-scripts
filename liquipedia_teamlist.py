@@ -5,24 +5,32 @@ import numpy as np
 
 INPUT_PATH = 'draft'
 OUTPUT_PATH = ''
-FNAME = 'rd2l_s33'
+FNAME = 'rd2l_m17'
 
 with open(os.path.join(INPUT_PATH, FNAME + '.json'), 'r', encoding = 'utf-16') as f:
     rd2l = json.load(f)
 
 # liquipedia teams
-template = """{{{{TeamCard
-|team={}
-|preview=
+begin = '{{TeamParticipants|showplayerinfo=true\n'
+end = '\n}}'
+
+template = """
+|{{{{Opponent|{0}
+|aliases={0}
+|players={{{{Persons
+{1}
+}}}}
 |ref=
 |image=
-{}{}
-}}}}"""
+|notes={{{{Notes
+{2}
+}}}}
+}}}}
+"""
 
-px = '|p{0}flag={1}|p{0}={2}|p{0}id={3}|p{0}preview=https://www.dotabuff.com/players/{3}'
-db = '{{{{cite web|url=https://www.dotabuff.com/players/{}|title={} {}}}}}'
-
-teamsep = '\n{{box|break|padding=2em}}\n'
+px = '|{{{{Person|role={0}|flag={1}|{2}|id={3}}}}}'
+nt = '|{{{{Notes|{0}}}}}'
+db = '{{{{cite web|url=https://www.opendota.com/players/{0}|title={1}}}}}'
 
 def team_roles(team, g = 2):
     """assign roles to players by preference and mmr"""
@@ -52,22 +60,25 @@ def team_roles(team, g = 2):
 def liquipedia_team_str(team):
     roles = team_roles(team)
     px_fill = []
-    db_fill = []
+    nt_fill = []
     for role in range(5):
         player = team['players'][roles[role]]
-        px_fill += [px.format(role + 1, player['country'], player['name'], player['account_id'])]
-        db_text = ''
+        name = player['name']
+        country = player['country']
+        acc = player['account_id']
+        px_fill += [px.format(role + 1, country, name, acc)]
+        db_fill = [db.format(acc, name)]
         for k, a in enumerate(player['alts']):
-            db_text += db.format(a, player['name'], k + 2)
-        if db_text != '':
-            db_fill += [db_text]
-    inotes = ''
-    if len(db_fill) > 0:
-        inotes = '\n|inotes=' + ' '.join(db_fill)
-    return template.format(team['name'], '\n'.join(px_fill), inotes)
+            name2 = f'{name} {k + 2}'
+            db_fill += [db.format(a, name2)]
+        db_text = ''.join(db_fill)
+        nt_fill += [nt.format(db_text)]
+    px_text = '\n'.join(px_fill)
+    nt_text = '\n'.join(nt_fill)
+    return template.format(team['name'], px_text, nt_text)
 
 def liquipedia_teams_str(teams):
-    return teamsep.join([liquipedia_team_str(team) for team in teams])
+    return begin + ''.join([liquipedia_team_str(team) for team in teams]) + end
 
 for season in rd2l['seasons']:
     for league in season['leagues']:
