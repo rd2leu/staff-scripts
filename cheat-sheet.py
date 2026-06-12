@@ -14,7 +14,7 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 
 INPUT_PATH = 'input'
 OUTPUT_PATH = 'sheets'
-FNAME = 'rd2l_s33'
+FNAME = 'rd2l_m17'
 
 # match history search parameters
 params = {'date': 180} # last 6 months
