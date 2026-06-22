@@ -10,18 +10,18 @@ from schedule import schedule_get_matches
 ## input
 search = {
     'org': 'rd2l',
-    'tournament': 'main', # mini main side shakira ...
-    'season': '33',
-    'league': 'Wednesday', # Wednesday Sunday
+    'tournament': 'mini', # mini main side shakira ...
+    'season': '17',
+    'league': '', # Wednesday Sunday
     'division': '1'
     }
 
 timezone = 'CET'
-start_time_str = 'March 25 2026 - 16:00'
+start_time_str = 'June 14 2026 - 16:00'
 start_time = datetoseconds(start_time_str, 'CET')
 end_time = 2000000000
 
-week = 7
+week = 1
 bestof = 3
 force = True
 save = True
@@ -76,7 +76,17 @@ sides = {0: 'radiant', 1: 'dire'}
 for i in range(len(matches)):
     for k, v in sides.items():
 
-        data[i]['{}_team_accs'.format(v)] = ', '.join(str(a) for a in players[i][k])
+        # check if match is valid by the number of teams and players
+        pi = players[i]
+        mid = matches[i]['match_id']
+        if len(pi) != 2:
+            print('Not enough teams!', mid)
+            continue
+        if len(pi[0]) != 5 and len(pi[1]) != 5:
+            print('Not enough players!', mid)
+            continue
+
+        data[i]['{}_team_accs'.format(v)] = ', '.join(str(a) for a in pi[k])
 
         try:
             name = find_team(players[i][k], 3)['name']
@@ -188,7 +198,7 @@ for ss in series_scheduled:
 full_text = ''
 for i, txt in enumerate(series_texts):
     #'|M{0}header=\n|M{0}={1}\n'
-    full_text += '|R1M{0}={1}\n'.format(i + 1, txt)
+    full_text += '|M{0}={1}\n'.format(i + 1, txt)
 
 print('\n\n\n')
 print(full_text)
@@ -197,7 +207,8 @@ print('Liquipedia text copied to clicpboard!')
 
 # save data
 if save:
-    fname = 's{}_{}_div{}_{}.csv'.format(
+    fname = '{}{}_{}_div{}_{}.csv'.format(
+        ttag,
         search['season'],
         search['league'][:3].lower(),
         search['division'],
