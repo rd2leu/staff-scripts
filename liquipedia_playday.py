@@ -17,11 +17,11 @@ search = {
     }
 
 timezone = 'CET'
-start_time_str = 'June 14 2026 - 16:00'
+start_time_str = 'June 28 2026 - 16:00'
 start_time = datetoseconds(start_time_str, 'CET')
 end_time = 2000000000
 
-week = 1
+week = 5
 bestof = 3
 force = True
 save = True
@@ -198,7 +198,7 @@ for ss in series_scheduled:
 full_text = ''
 for i, txt in enumerate(series_texts):
     #'|M{0}header=\n|M{0}={1}\n'
-    full_text += '|M{0}={1}\n'.format(i + 1, txt)
+    full_text += '|M{0}header=\n|M{0}={1}\n'.format(i + 1, txt)
 
 print('\n\n\n')
 print(full_text)
