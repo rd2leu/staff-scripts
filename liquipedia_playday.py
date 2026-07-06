@@ -17,11 +17,11 @@ search = {
     }
 
 timezone = 'CET'
-start_time_str = 'June 28 2026 - 16:00'
+start_time_str = 'July 05 2026 - 16:00'
 start_time = datetoseconds(start_time_str, 'CET')
 end_time = 2000000000
 
-week = 5
+week = 7
 bestof = 3
 force = True
 save = True
