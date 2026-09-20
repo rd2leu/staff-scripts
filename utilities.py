@@ -127,7 +127,11 @@ def read_google_sheet(url, resolve_links = False):
             if c is not None:
                 header += [c]
         # update dataframe with hyperlinks when found
-        col_names = ['Dotabuff Link', 'Second account', 'Third account', 'Account Link', 'Stratz Link', 'Opendota Link']
+        col_names = [
+            'Dotabuff Link', 'Second account', 'Third account',
+            'Account Link', 'Stratz Link', 'Opendota Link',
+            'Screenshot',
+            ]
         for col_name in col_names:
             col_idx = find_matching(header, col_name)
             if col_idx >= len(header):
