@@ -11,7 +11,7 @@
             "leagues": [
                 {
                     "name": "Sunday",
-                    "id": 0,
+                    "id": 20381,
                     "type": "auction",
                     "divisions": [
                         {
@@ -23,20 +23,14 @@
                         {
                             "name": "Division 2",
                             "id": 2,
-                            "teamsheet": "https://docs.google.com/spreadsheets/d/1J3NXGiKVLDFqaZsIEidsWFCUTE_Ty57x5HlWN9iu37g/edit?gid=881219222#gid=881219222",
-							"signups": "https://docs.google.com/spreadsheets/d/1J3NXGiKVLDFqaZsIEidsWFCUTE_Ty57x5HlWN9iu37g/edit?gid=721784153#gid=721784153"
-                        },
-                        {
-                            "name": "Division 3",
-                            "id": 3,
-                            "teamsheet": "https://docs.google.com/spreadsheets/d/1J3NXGiKVLDFqaZsIEidsWFCUTE_Ty57x5HlWN9iu37g/edit?gid=450056611#gid=450056611",
+                            "teamsheet": "https://docs.google.com/spreadsheets/d/1J3NXGiKVLDFqaZsIEidsWFCUTE_Ty57x5HlWN9iu37g/edit?gid=1060481023#gid=1060481023",
 							"signups": "https://docs.google.com/spreadsheets/d/1J3NXGiKVLDFqaZsIEidsWFCUTE_Ty57x5HlWN9iu37g/edit?gid=721784153#gid=721784153"
                         }
                     ]
                 },
-                {
+				{
                     "name": "Wednesday",
-                    "id": 0,
+                    "id": 20391,
                     "type": "linear",
                     "divisions": [
                         {

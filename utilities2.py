@@ -15,7 +15,7 @@ def parse_account_id(txt):
     dbstrs = [
         'players/', 'player/',
         'dotabuff.com/', 'stratz.com/', 'opendota.com/', # check this last for lost travelers
-        ]            
+        ]
     for dbstr in dbstrs:
         if dbstr in txt:
             idx1 = txt.find(dbstr) + len(dbstr)
@@ -26,7 +26,7 @@ def parse_account_id(txt):
                 if not txt[idx2].isdigit():
                     break
                 idx2 += 1
-            return {'account': txt[idx1: idx2]}
+            return parse_account_id(txt[idx1: idx2]) # run it again
 
     if txt.startswith('http://'):
         txt = 'https://' + txt[7:]
@@ -95,6 +95,7 @@ if __name__ == '__main__':
     tests = [
         'https://www.dotabuff.com/players/99374795',
         'https://www.dotabuff.com/players/99374795/',
+        'https://dotabuff.com/players/76561198059640523',
         'https://stratz.com/player/99374795?trendsMatchCount=100',
         'https://www.dotabuff.com/esports/players/99374795-jh?team_id=8986317',
         'steam:110000105ec56cb',

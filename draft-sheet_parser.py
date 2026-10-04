@@ -11,7 +11,7 @@ from sklearn.cluster import DBSCAN as DBS
 
 INPUT_PATH = 'input'
 OUTPUT_PATH = 'draft'
-FNAME = 'rd2l_m17'
+FNAME = 'rd2l_s34'
 
 """
 Sheet styles:
@@ -72,6 +72,7 @@ for season in rd2l['seasons']:
                 # cleanup
                 draft['accounts'] = draft.apply(lambda x: x['alts'] + [x['account_id']], axis = 1)
                 pos_idx = draft.columns.searchsorted('Pos 1') + 1
+                draft['Name'] = draft['Name'].astype(str)
                 
                 ## search teamsheet for teams
                 sheet = read_google_sheet(division['teamsheet'])
@@ -134,6 +135,7 @@ for season in rd2l['seasons']:
             # save it
             division['teams'] = teams2
             print('DONE:', season['name'], league['name'], division['name'])
+            print()
 
 
 # save data

@@ -5,7 +5,7 @@ import numpy as np
 
 INPUT_PATH = 'draft'
 OUTPUT_PATH = ''
-FNAME = 'rd2l_m17'
+FNAME = 'rd2l_s34'
 
 with open(os.path.join(INPUT_PATH, FNAME + '.json'), 'r', encoding = 'utf-16') as f:
     rd2l = json.load(f)

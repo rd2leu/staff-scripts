@@ -18,7 +18,7 @@ params = {'date': 180} # last 6 months
 # TODO: put a date in the cache for opendota requests
 
 update_mmrs = False
-update_info = True
+update_info = False
 update_privacy = True
 retry = False
 save = True
@@ -39,7 +39,7 @@ for season in rd2l['seasons']:
 draft = pd.concat(sheets)
 
 # Activity check
-#draft = draft[draft['Activity check'].isin(['Yes', 'yes'])].copy() # sometimes people edit this field by hand
+draft = draft[draft['Activity check'].isin(['Yes', 'yes'])].copy() # sometimes people edit this field by hand
 
 # Owl and Moggoblin sheets ask for Dotabuff links for account ID
 link_col_options = ['dotabuff link', 'stratz link', 'account link']
