@@ -10,18 +10,18 @@ from schedule import schedule_get_matches
 ## input
 search = {
     'org': 'rd2l',
-    'tournament': 'mini', # mini main side shakira ...
-    'season': '17',
-    'league': '', # Wednesday Sunday
+    'tournament': 'main', # mini main side shakira ...
+    'season': '34',
+    'league': 'Wednesday', # Wednesday Sunday
     'division': '1'
     }
 
 timezone = 'CET'
-start_time_str = 'July 05 2026 - 16:00'
+start_time_str = 'October 28 2026 - 16:00'
 start_time = datetoseconds(start_time_str, 'CET')
 end_time = 2000000000
 
-week = 7
+week = 4
 bestof = 3
 force = True
 save = True
