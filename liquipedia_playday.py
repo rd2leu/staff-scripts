@@ -12,17 +12,18 @@ search = {
     'org': 'rd2l',
     'tournament': 'main', # mini main side shakira ...
     'season': '34',
-    'league': 'Wednesday', # Wednesday Sunday
-    'division': '1'
+    'league': 'Sunday', # Wednesday Sunday
+    'division': '2'
     }
 
 timezone = 'CET'
-start_time_str = 'October 28 2026 - 16:00'
+start_time_str = 'November 22 2026 - 16:00'
 start_time = datetoseconds(start_time_str, 'CET')
 end_time = 2000000000
 
-week = 4
+week = 8
 bestof = 3
+playoff_round = 1 # use 0 for groups
 force = True
 save = True
 
@@ -194,11 +195,16 @@ for ss in series_scheduled:
     text += '}}'
     series_texts += [text]
 
+pr = ''
+if playoff_round > 0:
+    pr = 'R' + str(playoff_round)
+
 # print it
 full_text = ''
 for i, txt in enumerate(series_texts):
+    m = i + 1
     #'|M{0}header=\n|M{0}={1}\n'
-    full_text += '|M{0}header=\n|M{0}={1}\n'.format(i + 1, txt)
+    full_text += f'|{pr}M{m}header=\n|{pr}M{m}={txt}\n'
 
 print('\n\n\n')
 print(full_text)
